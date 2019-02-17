@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>transitions</title>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js"></script>
+  </head>
+  <body>
+    <!-- FLIP 動畫不僅可以實現單列過渡，多維網格也同樣可以過渡-->
+    <style>
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        width: 238px;
+        margin-top: 10px;
+      }
+      .cell {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 25px;
+        height: 25px;
+        border: 1px solid #aaa;
+        margin-right: -1px;
+        margin-bottom: -1px;
+      }
+      .cell:nth-child(3n) {
+        margin-right: 0;
+      }
+      .cell:nth-child(27n) {
+        margin-bottom: 0;
+      }
+      .cell-move {
+        transition: transform 1s;
+      }
+    </style>
+
+    <div id="sudoku-demo" class="demo">
+      <h1>Lazy Sudoku</h1>
+      <p>Keep hitting the shuffle button until you win.</p>
+
+      <button @click="shuffle">
+        Shuffle
+      </button>
+      <transition-group name="cell" tag="div" class="container">
+        <div v-for="cell in cells" :key="cell.id" class="cell">
+          {{ cell.number }}
+        </div>
+      </transition-group>
+    </div>
+
+    <script>
+      new Vue({
+        el: "#sudoku-demo",
+        data: {
+          cells: Array.apply(null, { length: 81 }).map(function(_, index) {
+            //console.log(index, (index % 9) + 1 );
+            return {
+              id: index,
+              number: (index % 9) + 1
+            };
+          })
+        },
+        methods: {
+          shuffle: function() {
+            this.cells = _.shuffle(this.cells);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

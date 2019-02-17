@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>transitions</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <!-- CSS 過渡-->
+    <style>
+      /* 可以設置不同的進入和離開動畫 */
+      /* 設置持續時間和動畫函數 */
+      .slide-fade-enter-active {
+        transition: all 0.3s ease;
+      }
+      .slide-fade-leave-active {
+        transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+      }
+      .slide-fade-enter, .slide-fade-leave-to
+      /* .slide-fade-leave-active for below version 2.1.8 */ {
+        transform: translateX(10px);
+        opacity: 0;
+      }
+    </style>
+
+    <div id="example-1">
+      <button @click="show = !show">
+        Toggle render
+      </button>
+      <transition name="slide-fade">
+        <p v-if="show">hello</p>
+      </transition>
+    </div>
+
+    <script>
+      new Vue({
+        el: "#example-1",
+        data: {
+          show: true
+        }
+      });
+    </script>
+  </body>
+</html>

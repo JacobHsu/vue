@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>transitions</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <!--Vue 提供了 transition 的封裝組件，在下列情形中，可以給任何元素和組件添加進入/離開過渡-->
+    <!--當插入或刪除包含在 transition 組件中的元素時，自動嗅探目標元素是否應用了 CSS 過渡或動畫，如果是，在恰當的時機添加/刪除 CSS 類名。-->
+    <style>
+      .fade-enter-active,
+      .fade-leave-active {
+        transition: opacity 0.5s;
+      }
+      .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+        opacity: 0;
+      }
+    </style>
+
+    <div id="demo">
+      <button v-on:click="show = !show">
+        Toggle
+      </button>
+      <transition name="fade">
+        <p v-if="show">hello</p>
+      </transition>
+    </div>
+
+    <script>
+      new Vue({
+        el: "#demo",
+        data: {
+          show: true
+        }
+      });
+    </script>
+  </body>
+</html>
