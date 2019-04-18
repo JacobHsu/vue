@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Vue生命週期 | Vue.js</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Vue執行了一連串工作，包含在原始資料加料、建立Vue Instance、編譯樣板、綁定資料等，隨著資料新增修改，週而復始直到刪除，稱為生命週期(Lifecycle)。 從開始創建、初始化數據、編譯模板、掛載Dom→渲染、更新→渲染、卸載等一系列過程 在他做這些工作的時機點前後，提供你客製化的空間，稱為Hook(如圖上白底紅字的部分)。     生命週期鉤子 組件狀態 最佳實踐     befor">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue生命週期">
+<meta property="og:url" content="https://github.com/JacobHsu/vue/2019/04/18/lifecycle/index.html">
+<meta property="og:site_name" content="Vue.js">
+<meta property="og:description" content="Vue執行了一連串工作，包含在原始資料加料、建立Vue Instance、編譯樣板、綁定資料等，隨著資料新增修改，週而復始直到刪除，稱為生命週期(Lifecycle)。 從開始創建、初始化數據、編譯模板、掛載Dom→渲染、更新→渲染、卸載等一系列過程 在他做這些工作的時機點前後，提供你客製化的空間，稱為Hook(如圖上白底紅字的部分)。     生命週期鉤子 組件狀態 最佳實踐     befor">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://cn.vuejs.org/images/lifecycle.png">
+<meta property="og:updated_time" content="2019-04-18T01:57:58.577Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue生命週期">
+<meta name="twitter:description" content="Vue執行了一連串工作，包含在原始資料加料、建立Vue Instance、編譯樣板、綁定資料等，隨著資料新增修改，週而復始直到刪除，稱為生命週期(Lifecycle)。 從開始創建、初始化數據、編譯模板、掛載Dom→渲染、更新→渲染、卸載等一系列過程 在他做這些工作的時機點前後，提供你客製化的空間，稱為Hook(如圖上白底紅字的部分)。     生命週期鉤子 組件狀態 最佳實踐     befor">
+<meta name="twitter:image" content="https://cn.vuejs.org/images/lifecycle.png">
+  
+    <link rel="alternate" href="/vue/atom.xml" title="Vue.js" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/vue/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/vue/" id="logo">Vue.js</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/vue/">Home</a>
+        
+          <a class="main-nav-link" href="/vue/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/vue/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/JacobHsu/vue"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-lifecycle" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/vue/2019/04/18/lifecycle/" class="article-date">
+  <time datetime="2019-04-18T01:57:58.577Z" itemprop="datePublished">2019-04-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Vue生命週期
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Vue執行了一連串工作，包含在原始資料加料、建立Vue Instance、編譯樣板、綁定資料等，隨著資料新增修改，週而復始直到刪除，稱為生命週期(Lifecycle)。</p>
+<p>從開始創建、初始化數據、編譯模板、掛載Dom→渲染、更新→渲染、卸載等一系列過程</p>
+<p>在他做這些工作的時機點前後，提供你客製化的空間，稱為<code>Hook</code>(如圖上白底紅字的部分)。</p>
+<p><img src="https://cn.vuejs.org/images/lifecycle.png" alt="lifecycle"></p>
+<table>
+<thead>
+<tr>
+<th>生命週期鉤子</th>
+<th style="text-align:center">組件狀態</th>
+<th style="text-align:right">最佳實踐</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>beforeCreate</td>
+<td style="text-align:center">實例初始化之後，數據與事件配置之前</td>
+<td style="text-align:right">初始化非響應式變量</td>
+</tr>
+<tr>
+<td>created</td>
+<td style="text-align:center">已將data和methods掛載vue到實例上，未掛載到DOM</td>
+<td style="text-align:right">可初始化ajax請求，頁面的初始化</td>
+</tr>
+<tr>
+<td>beforeMount</td>
+<td style="text-align:center">模板編譯完成，但未掛載，無法讀取DOM</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>mounted</td>
+<td style="text-align:center">實例掛載到DOM上，此時可以通過DOM API獲取到DOM節點</td>
+<td style="text-align:right">常用於獲取VNode信息和操作，ajax請求</td>
+</tr>
+<tr>
+<td>beforeupdate</td>
+<td style="text-align:center">響應式數據更新時調用</td>
+<td style="text-align:right">適合在更新之前訪問現有的DOM，比如手動移除已添加的事件監聽器</td>
+</tr>
+<tr>
+<td>updated</td>
+<td style="text-align:center">當組件響應式變量變更時調用，可執行依賴於DOM的操作</td>
+<td style="text-align:right">避免在這個鉤子函數中操作數據，可能陷入死循環</td>
+</tr>
+<tr>
+<td>beforeDestroy</td>
+<td style="text-align:center">實例銷毀之前調用</td>
+<td style="text-align:right">常用於銷毀定時器、解綁全局事件、銷毀插件對象等操作</td>
+</tr>
+<tr>
+<td>destroyed</td>
+<td style="text-align:center">實例銷毀後調用，調用後，Vue 實例指示的所有東西都會解綁定，所有的事件監聽器會被移除，所有的子實例也會被銷毀</td>
+</tr>
+</tbody>
+</table>
+<p>資料在created以後才存取得到(意味別把資料初始化跟ajax寫在beforeCreate)<br>created階段的ajax請求與mounted請求的區別：<br>前者頁面視圖未出現，如果請求信息過多，頁面會長時間處於白屏狀態<br>如果要對 DOM 做動作，記得要在 mounted 掛鉤中，它如同 onload 事件，或是 jQuery 中的 ready()  </p>
+<table>
+<thead>
+<tr>
+<th>生命週期鉤子</th>
+<th style="text-align:center">組件狀態</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>beforeCreate</td>
+<td style="text-align:center">不能訪問到data、computed、watch、methods上的方法和數據</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>created</td>
+<td style="text-align:center">可訪問方法和數據，不能訪問到$el屬性，$ref屬性內容為空數組</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>beforeMount</td>
+<td style="text-align:center">在掛載開始之前被調用`，找到對應的template，並編譯成render函數</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>mounted</td>
+<td style="text-align:center">$ref屬性可以訪問</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>beforeupdate</td>
+<td style="text-align:center">發生在虛擬DOM打補丁之前</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>updated</td>
+<td style="text-align:center">虛擬 DOM 重新渲染和打補丁之後調用</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>beforeDestroy</td>
+<td style="text-align:center">這一步，實例仍然完全可用，this仍能獲取到實例</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>destroyed</td>
+<td style="text-align:center">所有的子實例會被銷毀</td>
+</tr>
+</tbody>
+</table>
+<p>初始化組件時，僅執行了beforeCreate/Created/beforeMount/mounted四個鉤子函數</p>
+<p>當改變data中定義的變量（響應式變量）時，會執行beforeUpdate/updated鉤子函數</p>
+<p>當切換組件（當前組件未緩存）時，會執行beforeDestory/destroyed鉤子函數</p>
+<p>初始化和銷毀時的生命鉤子函數均只會執行一次，  beforeUpdate/updated可多次執行</p>
+<p><a href="https://jsbin.com/melanen/edit?html,js,console,output" target="_blank" rel="noopener">https://jsbin.com/melanen/edit?html,js,console,output</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    a: <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">== beforeCreate ==</span><br><span class="line"><span class="keyword">this</span>.a: <span class="literal">undefined</span></span><br><span class="line"><span class="keyword">this</span>.$el: <span class="literal">undefined</span></span><br><span class="line"></span><br><span class="line">== created ==</span><br><span class="line"><span class="keyword">this</span>.a: <span class="number">1</span></span><br><span class="line"><span class="keyword">this</span>.$el: <span class="literal">undefined</span></span><br><span class="line"></span><br><span class="line">== mounted ==</span><br><span class="line"><span class="keyword">this</span>.a: <span class="number">1</span></span><br><span class="line"><span class="keyword">this</span>.$el: [object HTMLDivElement]</span><br></pre></td></tr></table></figure>
+<p><code>beforeCreate</code>時，資料和元素掛載都還沒被建立<br><code>created</code>時，資料已經可以取得了，但元素掛載還沒<br><code>mounted</code>時，全部都被建立了，如果你想改變 DOM 或資料，可以在這裡做，因為它還沒被瀏覽器「畫」出來，必須直到<br><code>updated</code> 執行時，才會把最終的結果畫在瀏覽器上被看到。</p>
+<h3 id="父子組件的生命週期"><a href="#父子組件的生命週期" class="headerlink" title="父子組件的生命週期"></a>父子組件的生命週期</h3><p>1.僅當子組件完成掛載後，父組件才會掛載<br>2.當子組件完成掛載後，父組件會主動執行一次  3.beforeUpdate/updated鉤子函數（僅首次）<br>4.父子組件在data變化中是分別監控的，但是在更新props中的數據是關聯的（可實踐）<br>銷毀父組件時，先將子組件銷毀後才會銷毀父組件  </p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p><a href="https://vuejs.org/v2/guide/instance.html#Lifecycle-Diagram" target="_blank" rel="noopener">Lifecycle Diagram</a><br><a href="https://juejin.im/entry/5aee8fbb518825671952308c" target="_blank" rel="noopener">https://juejin.im/entry/5aee8fbb518825671952308c</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/lifecycle/" data-id="cjum0bnmh0002bcsbhfgj5xw4" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/vue/2019/04/18/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+    <a href="/vue/2019/04/18/pit/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">vue的坑</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/04/">April 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/vue/2019/04/18/keep-alive/">keep-alive</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/04/18/optimization/">Optimization</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/04/18/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/04/18/lifecycle/">Vue生命週期</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/04/18/pit/">vue的坑</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Jacob Hsu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/vue/" class="mobile-nav-link">Home</a>
+  
+    <a href="/vue/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/vue/fancybox/jquery.fancybox.css">
+  <script src="/vue/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/vue/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>keep-alive | Vue.js</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在使用vue + vue-router開發SPA的時候，有沒有遇到過這樣的情況：當我們在列表頁和詳情頁之間切換的時候，如果列表頁不做緩存，會導致每次從詳情頁返回時，列表頁都會重新加載。 keep-alive實現頁面緩存方法一：123456789101112131415161718routes:[&amp;#123;    path: &apos;/search&apos;,    name: &apos;search&apos;,    com">
+<meta property="og:type" content="article">
+<meta property="og:title" content="keep-alive">
+<meta property="og:url" content="https://github.com/JacobHsu/vue/2019/04/18/keep-alive/index.html">
+<meta property="og:site_name" content="Vue.js">
+<meta property="og:description" content="在使用vue + vue-router開發SPA的時候，有沒有遇到過這樣的情況：當我們在列表頁和詳情頁之間切換的時候，如果列表頁不做緩存，會導致每次從詳情頁返回時，列表頁都會重新加載。 keep-alive實現頁面緩存方法一：123456789101112131415161718routes:[&amp;#123;    path: &apos;/search&apos;,    name: &apos;search&apos;,    com">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-04-18T02:07:46.589Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="keep-alive">
+<meta name="twitter:description" content="在使用vue + vue-router開發SPA的時候，有沒有遇到過這樣的情況：當我們在列表頁和詳情頁之間切換的時候，如果列表頁不做緩存，會導致每次從詳情頁返回時，列表頁都會重新加載。 keep-alive實現頁面緩存方法一：123456789101112131415161718routes:[&amp;#123;    path: &apos;/search&apos;,    name: &apos;search&apos;,    com">
+  
+    <link rel="alternate" href="/vue/atom.xml" title="Vue.js" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/vue/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/vue/" id="logo">Vue.js</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/vue/">Home</a>
+        
+          <a class="main-nav-link" href="/vue/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/vue/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/JacobHsu/vue"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-keep-alive" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/vue/2019/04/18/keep-alive/" class="article-date">
+  <time datetime="2019-04-18T01:59:26.661Z" itemprop="datePublished">2019-04-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      keep-alive
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在使用<code>vue + vue-router</code>開發SPA的時候，有沒有遇到過這樣的情況：當我們在列表頁和詳情頁之間切換的時候，如果列表頁不做緩存，會導致每次從詳情頁返回時，列表頁都會重新加載。</p>
+<h3 id="keep-alive實現頁面緩存"><a href="#keep-alive實現頁面緩存" class="headerlink" title="keep-alive實現頁面緩存"></a>keep-alive實現頁面緩存</h3><h4 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">routes:[&#123;</span><br><span class="line">    path: <span class="string">'/search'</span>,</span><br><span class="line">    name: <span class="string">'search'</span>,</span><br><span class="line">    component: search,</span><br><span class="line">    meta: &#123;</span><br><span class="line">        title: <span class="string">'搜索列表頁'</span>,</span><br><span class="line">        keepAlive: <span class="literal">true</span> <span class="comment">// 標記列表頁需要被緩存</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line">&#123;</span><br><span class="line">    path: <span class="string">'/detail'</span>,</span><br><span class="line">    name: <span class="string">'detail'</span>,</span><br><span class="line">    component: detail,</span><br><span class="line">    meta: &#123;</span><br><span class="line">        title: <span class="string">'詳情頁'</span>,</span><br><span class="line">        <span class="comment">// 詳情頁不需要做緩存，所以不加keepAlive標記</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;]</span><br></pre></td></tr></table></figure>
+<p>由於<code>&lt;keep-alive&gt;</code>組件不支持v-if指令，所以我們在App.vue中採用兩個<code>&lt;router-view&gt;</code>的寫法，通過當前路由的keepAlive字段來判斷是否對頁面進行緩存：  </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">    &lt;keep-alive&gt;</span><br><span class="line">        &lt;router-view v-<span class="keyword">if</span>=<span class="string">"$route.meta.keepAlive"</span> /&gt;</span><br><span class="line">    &lt;<span class="regexp">/keep-alive&gt;</span></span><br><span class="line"><span class="regexp">    &lt;router-view v-if="!$route.meta.keepAlive" /</span>&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h4><p>使用<code>&lt;keep-alive&gt;</code>提供的 <code>exclude</code> 或者 <code>include</code> 選項，<br>此處我們使用 <code>exclude</code> ，在App.vue中：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">    &lt;keep-alive exclude=<span class="string">"detail"</span>&gt;</span><br><span class="line">        &lt;router-view /&gt;</span><br><span class="line">    &lt;<span class="regexp">/keep-alive&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>div&gt;</span><br></pre></td></tr></table></figure>
+<p>這麼寫就代表了在項目中除了name為detail的頁面組件外(<code>exclude</code>)，其餘頁面都將進行緩存。  </p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a href="https://juejin.im/post/5cb060b2e51d456e7618a69a?utm_source=gold_browser_extension" target="_blank" rel="noopener">keep-alive + vuex 让缓存的页面灵活起来</a>  </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/keep-alive/" data-id="cjum0bnn20007bcsbpmm9la3r" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/vue/2019/04/18/optimization/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Optimization</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/04/">April 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/vue/2019/04/18/keep-alive/">keep-alive</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/04/18/optimization/">Optimization</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/04/18/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/04/18/lifecycle/">Vue生命週期</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/04/18/pit/">vue的坑</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Jacob Hsu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/vue/" class="mobile-nav-link">Home</a>
+  
+    <a href="/vue/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/vue/fancybox/jquery.fancybox.css">
+  <script src="/vue/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/vue/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

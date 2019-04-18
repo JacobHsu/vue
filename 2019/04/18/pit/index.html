@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>vue的坑 | Vue.js</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Vue 不能檢測對象屬性的添加或刪除https://jsbin.com/mayehetobu/1/edit?html,console,output123456789101112131415161718192021222324252627&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html lang=&quot;en-US&quot;&amp;gt;&amp;lt;head&amp;gt;  &amp;lt;title&amp;gt;My Vue.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue的坑">
+<meta property="og:url" content="https://github.com/JacobHsu/vue/2019/04/18/pit/index.html">
+<meta property="og:site_name" content="Vue.js">
+<meta property="og:description" content="Vue 不能檢測對象屬性的添加或刪除https://jsbin.com/mayehetobu/1/edit?html,console,output123456789101112131415161718192021222324252627&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html lang=&quot;en-US&quot;&amp;gt;&amp;lt;head&amp;gt;  &amp;lt;title&amp;gt;My Vue.js">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://cn.vuejs.org/images/data.png">
+<meta property="og:updated_time" content="2019-04-18T01:57:58.577Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vue的坑">
+<meta name="twitter:description" content="Vue 不能檢測對象屬性的添加或刪除https://jsbin.com/mayehetobu/1/edit?html,console,output123456789101112131415161718192021222324252627&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html lang=&quot;en-US&quot;&amp;gt;&amp;lt;head&amp;gt;  &amp;lt;title&amp;gt;My Vue.js">
+<meta name="twitter:image" content="https://cn.vuejs.org/images/data.png">
+  
+    <link rel="alternate" href="/vue/atom.xml" title="Vue.js" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/vue/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/vue/" id="logo">Vue.js</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/vue/">Home</a>
+        
+          <a class="main-nav-link" href="/vue/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/vue/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/JacobHsu/vue"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-pit" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/vue/2019/04/18/pit/" class="article-date">
+  <time datetime="2019-04-18T01:57:58.577Z" itemprop="datePublished">2019-04-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      vue的坑
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Vue-不能檢測對象屬性的添加或刪除"><a href="#Vue-不能檢測對象屬性的添加或刪除" class="headerlink" title="Vue 不能檢測對象屬性的添加或刪除"></a>Vue 不能檢測對象屬性的添加或刪除</h2><p><a href="https://jsbin.com/mayehetobu/1/edit?html,console,output" target="_blank" rel="noopener">https://jsbin.com/mayehetobu/1/edit?html,console,output</a><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en-US"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;title&gt;My Vue.js App&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">  &lt;script src="https:/</span><span class="regexp">/cdn.jsdelivr.net/</span>vue/latest/vue.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;/head&gt;</span></span><br><span class="line"><span class="string">&lt;body&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;div id="</span>app<span class="string">"&gt;</span></span><br><span class="line"><span class="string">    &#123;&#123; message &#125;&#125;</span></span><br><span class="line"><span class="string">&lt;/div&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;script type="</span>text/javascript<span class="string">"&gt;</span></span><br><span class="line"><span class="string">    new Vue(&#123;</span></span><br><span class="line"><span class="string">      el: '#app',</span></span><br><span class="line"><span class="string">      data: &#123;</span></span><br><span class="line"><span class="string">        message: ''</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    &#125;);</span></span><br><span class="line"><span class="string">    // `vm.message` 是響應的</span></span><br><span class="line"><span class="string">    // 之後設置 `message`</span></span><br><span class="line"><span class="string">    vm.message = 'Hello!'</span></span><br><span class="line"><span class="string">    // `vm.message` 是非響應的</span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>Vue 不允許在已經創建的實例上動態添加新的根級響應式屬性 (root-level reactive property)。<br>然而它可以使用 <code>Vue.set(object, key, value)</code> 方法將響應屬性添加到嵌套的對象上：</p>
+<p><a href="https://jsbin.com/nujomojovo/edit?html,output" target="_blank" rel="noopener">https://jsbin.com/nujomojovo/edit?html,output</a><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">    &lt;p&gt;&#123;&#123;obj&#125;&#125;&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">      obj: &#123;&#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    mounted() &#123;</span><br><span class="line">      <span class="comment">//想要動態添加對象的屬性並且頁面能更新到</span></span><br><span class="line">      <span class="keyword">this</span>.obj.a = <span class="number">1111</span>  <span class="comment">//瀏覽器什麼都沒渲染出來</span></span><br><span class="line">      <span class="keyword">this</span>.$<span class="keyword">set</span>(this.obj,'a',1) // 方法一 &#123; <span class="string">"a"</span>: <span class="number">1</span> &#125;</span><br><span class="line">      <span class="keyword">this</span>.obj = <span class="built_in">Object</span>.assign(&#123;&#125;, <span class="keyword">this</span>.obj,&#123;<span class="attr">a</span>:<span class="number">2</span>&#125;)  <span class="comment">//方法二 可以添加多個屬性 //&#123; "a": 2 &#125;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><a href="https://juejin.im/post/5aa89ab9f265da238b7db328" target="_blank" rel="noopener">https://juejin.im/post/5aa89ab9f265da238b7db328</a>  </p>
+<p><a href="https://jsbin.com/mayehetobu/1/edit?html,console,output" target="_blank" rel="noopener">https://jsbin.com/mayehetobu/1/edit?html,console,output</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">    &#123;&#123; message &#125;&#125;</span><br><span class="line">     dog &#123;&#123; counter.dog &#125;&#125;, cat &#123;&#123; counter.cat &#125;&#125;, penguin &#123;&#123; counter.penguin &#125;&#125;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;script type="text/</span>javascript<span class="string">"&gt;</span></span><br><span class="line"><span class="string">    new Vue(&#123;</span></span><br><span class="line"><span class="string">      el: '#app',</span></span><br><span class="line"><span class="string">      data: &#123;</span></span><br><span class="line"><span class="string">        message: '',</span></span><br><span class="line"><span class="string">        counter: &#123;</span></span><br><span class="line"><span class="string">            // 一開始沒有註冊 penguine，只註冊了 dog 和 cat</span></span><br><span class="line"><span class="string">            dog: 0,</span></span><br><span class="line"><span class="string">            cat: 0</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">      &#125;,</span></span><br><span class="line"><span class="string">      created() &#123;</span></span><br><span class="line"><span class="string">        // 在 created 的時候才建立 penguine 順便設值為 0</span></span><br><span class="line"><span class="string">        // 使用 $set 動態新增響應式組件</span></span><br><span class="line"><span class="string">        this.$set(this.counter, "</span>penguin<span class="string">", 1);</span></span><br><span class="line"><span class="string">      &#125;,</span></span><br><span class="line"><span class="string">      updated() &#123;</span></span><br><span class="line"><span class="string">        // 讓我們可以知道組件有被更新</span></span><br><span class="line"><span class="string">        console.log("</span>view updated<span class="string">");</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    &#125;);</span></span><br><span class="line"><span class="string">    //之後設置 `message`</span></span><br><span class="line"><span class="string">    vm.message = 'Hello!';</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p>物件部分：<a href="https://pjchender.blogspot.com/2017/05/vue-vue-reactivity.html" target="_blank" rel="noopener">一開始沒有被註冊到的物件不會響應式更新</a>  </p>
+<p>ref: <a href="https://cn.vuejs.org/v2/guide/reactivity.html" target="_blank" rel="noopener">深入響應式原理</a>  </p>
+<p>是其非侵入性的響應式系統。數據模型僅僅是普通的 JavaScript 對象。<br>而當你修改它們時，視圖會進行更新。這使得狀態管理非常簡單直接  </p>
+<p><img src="https://cn.vuejs.org/images/data.png" alt="Alt reactivity"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/pit/" data-id="cjum0bnmj0003bcsbf2s62xfc" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/vue/2019/04/18/lifecycle/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Vue生命週期
+        
+      </div>
+    </a>
+  
+  
+    <a href="/vue/2019/04/18/vue_vs_react/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Vue與React</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/04/">April 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/vue/2019/04/18/keep-alive/">keep-alive</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/04/18/optimization/">Optimization</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/04/18/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/04/18/lifecycle/">Vue生命週期</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/04/18/pit/">vue的坑</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Jacob Hsu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/vue/" class="mobile-nav-link">Home</a>
+  
+    <a href="/vue/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/vue/fancybox/jquery.fancybox.css">
+  <script src="/vue/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/vue/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

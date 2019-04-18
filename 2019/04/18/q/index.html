@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Question | Vue.js</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="v-show 與 v-if 區別v-show是css切換，v-if是完整的銷毀和重新創建。v-if=‘false’ v-if是條件渲染，當false的時候不會渲染使用 頻繁切換時用v-show，運行時較少改變時用v-if 計算屬性(computed)和 watch 的區別區別來源於用法，只是需要動態值，那就用計算屬性；需要知道值的改變後執行業務邏輯，才用 watch當有一些數據需要隨著另外一些數據">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Question">
+<meta property="og:url" content="https://github.com/JacobHsu/vue/2019/04/18/q/index.html">
+<meta property="og:site_name" content="Vue.js">
+<meta property="og:description" content="v-show 與 v-if 區別v-show是css切換，v-if是完整的銷毀和重新創建。v-if=‘false’ v-if是條件渲染，當false的時候不會渲染使用 頻繁切換時用v-show，運行時較少改變時用v-if 計算屬性(computed)和 watch 的區別區別來源於用法，只是需要動態值，那就用計算屬性；需要知道值的改變後執行業務邏輯，才用 watch當有一些數據需要隨著另外一些數據">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-04-18T01:57:58.577Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Question">
+<meta name="twitter:description" content="v-show 與 v-if 區別v-show是css切換，v-if是完整的銷毀和重新創建。v-if=‘false’ v-if是條件渲染，當false的時候不會渲染使用 頻繁切換時用v-show，運行時較少改變時用v-if 計算屬性(computed)和 watch 的區別區別來源於用法，只是需要動態值，那就用計算屬性；需要知道值的改變後執行業務邏輯，才用 watch當有一些數據需要隨著另外一些數據">
+  
+    <link rel="alternate" href="/vue/atom.xml" title="Vue.js" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/vue/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/vue/" id="logo">Vue.js</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/vue/">Home</a>
+        
+          <a class="main-nav-link" href="/vue/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/vue/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/JacobHsu/vue"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-q" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/vue/2019/04/18/q/" class="article-date">
+  <time datetime="2019-04-18T01:57:58.577Z" itemprop="datePublished">2019-04-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Question
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="v-show-與-v-if-區別"><a href="#v-show-與-v-if-區別" class="headerlink" title="v-show 與 v-if 區別"></a>v-show 與 v-if 區別</h3><p><code>v-show</code>是css切換，<code>v-if</code>是完整的銷毀和重新創建。<br>v-if=‘false’ v-if是條件渲染，當false的時候不會渲染<br>使用 頻繁切換時用<code>v-show</code>，運行時較少改變時用v-if</p>
+<h3 id="計算屬性-computed-和-watch-的區別"><a href="#計算屬性-computed-和-watch-的區別" class="headerlink" title="計算屬性(computed)和 watch 的區別"></a>計算屬性(computed)和 watch 的區別</h3><p>區別來源於用法，只是需要動態值，那就用計算屬性；需要知道值的改變後執行業務邏輯，才用 watch<br>當有一些數據需要隨著另外一些數據變化時，建議使用computed。<br>當有一個通用的響應數據變化的時候，要執行一些業務邏輯或異步操作的時候建議使用watcher  </p>
+<p>computed 是一個對象時，有get和set兩個選項<br>computed 和 methods 有什麼區別？ methods是一個方法，它可以接受參數，而computed不能，computed是可以緩存的，methods不會。<br>computed 是否能依賴其它組件的數據？ computed可以依賴其他computed，甚至是其他組件的data</p>
+<h3 id="組件中-data-為什麼是函數"><a href="#組件中-data-為什麼是函數" class="headerlink" title="組件中 data 為什麼是函數"></a>組件中 data 為什麼是函數</h3><p>為什麼組件中的 data 必須是一個函數，然後 return 一個對象，而 new Vue 實例裡，data 可以直接是一個對象？</p>
+<p>因為<strong>組件是用來復用的</strong>，JS 裡對象是引用關係，這樣作用域沒有隔離，而 new Vue 的實例，是不會被復用的，因此不存在引用對象的問題。</p>
+<h3 id="在動態組件上使用-keep-alive"><a href="#在動態組件上使用-keep-alive" class="headerlink" title="在動態組件上使用 keep-alive"></a>在動態組件上使用 keep-alive</h3><p>多標籤的界面中使用 is 特性來切換不同的組件</p>
+<p>當在這些組件之間切換的時候，你有時會想保持這些組件的狀態，以<strong>避免反覆重渲染導致的性能問題</strong></p>
+<p>我們更希望那些標籤的組件實例能夠被在它們<strong>第一次被創建的時候緩存下來</strong>。為瞭解決這個問題，我們可以用一個 <keep-alive> 元素將其動態組件包裹起來。</keep-alive></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 失活的組件將會被緩存！--&gt;</span><br><span class="line">&lt;keep-alive&gt;</span><br><span class="line">  &lt;component v-bind:is=<span class="string">"currentTabComponent"</span>&gt;&lt;/component&gt;</span><br><span class="line">&lt;<span class="regexp">/keep-alive&gt;</span></span><br></pre></td></tr></table></figure>
+<p><a href="https://cn.vuejs.org/v2/guide/components-dynamic-async.html#在动态组件上使用-keep-alive" target="_blank" rel="noopener">https://cn.vuejs.org/v2/guide/components-dynamic-async.html#在动态组件上使用-keep-alive</a></p>
+<h3 id="Render函數-怎樣理解單向數據流"><a href="#Render函數-怎樣理解單向數據流" class="headerlink" title="Render函數 怎樣理解單向數據流"></a>Render函數 怎樣理解單向數據流</h3><p>這個概念出現在組件通信。<br>父組件是通過 <code>prop</code> 把數據傳遞到子組件的，但是這個 prop 只能由父組件修改，子組件不能修改，否則會報錯。<br>子組件想修改時，只能通過<code>$emit</code> 派發一個自定義事件，父組件接收到後，由父組件修改。<br>一般來說，對於子組件想要更改父組件狀態的場景，可以有兩種方案：<br>在子組件的 data 中拷貝一份 prop，data 是可以修改的，但 prop 不能</p>
+<h3 id="生命週期"><a href="#生命週期" class="headerlink" title="生命週期"></a>生命週期</h3><p><em>創建前後</em> beforeCreate/created<br>在beforeCreate 階段，vue實例的掛載元素el和數據對象data都為undefined，還未初始化。<br>在created階段，vue實例的數據對象有了，el還沒有。</p>
+<p><em>載入前後</em> beforeMount/mounted<br>在beforeMount階段，vue實例的$el和data都初始化了，但還是掛載之前未虛擬的DOM節點，data尚未替換。<br>在mounted階段，vue實例掛載完成，data成功渲染。</p>
+<p><em>更新前後</em> beforeUpdate/updated<br>當data變化時，會觸發beforeUpdate和updated方法。這兩個不常用，不推薦使用。</p>
+<p><em>銷毀前後</em> beforeDestory/destoryed<br>beforeDestory是在vue實例銷毀前觸發，一般在這裡要通過removeEventListener<strong>解除手動綁定的事件</strong>。<br>實例銷毀後，觸發的destroyed。</p>
+<h3 id="組件間的通信"><a href="#組件間的通信" class="headerlink" title="組件間的通信"></a>組件間的通信</h3><p>父子 props/event  parent/children ref provide/inject<br>兄弟 bus vuex<br>跨級 bus vuex provide.inject</p>
+<h3 id="路由的跳轉方式"><a href="#路由的跳轉方式" class="headerlink" title="路由的跳轉方式"></a>路由的跳轉方式</h3><p><router-link to="home"> router-link標籤會渲染為<a>標籤，template中的跳轉都是這種<br>另一種是編程是導航 也就是通過<code>js跳轉</code> 比如 <code>router.push(&#39;/home&#39;)</code>  </a></router-link></p>
+<h3 id="Vue-js-雙向綁定原理"><a href="#Vue-js-雙向綁定原理" class="headerlink" title="Vue.js 雙向綁定原理"></a>Vue.js 雙向綁定原理</h3><p>核心的 API 是通過 Object.defineProperty() 來劫持各個屬性的setter / getter，在數據變動時發佈消息給訂閱者，觸發相應的監聽回調<br><a href="https://cn.vuejs.org/v2/guide/reactivity.html" target="_blank" rel="noopener">https://cn.vuejs.org/v2/guide/reactivity.html</a></p>
+<h3 id="Vuex與Redux的主要區別在哪裡，兩者各有什麼優缺點？"><a href="#Vuex與Redux的主要區別在哪裡，兩者各有什麼優缺點？" class="headerlink" title="Vuex與Redux的主要區別在哪裡，兩者各有什麼優缺點？"></a>Vuex與Redux的主要區別在哪裡，兩者各有什麼優缺點？</h3><p>Vuex 其實是一個針對 Vue <strong>特化的 Flux</strong>，主要是為了配合 Vue 本身的響應式機制。當然吸取了一些 Redux 的特點，<br>比如單狀態樹和便於測試和熱重載的 API，但是也選擇性的放棄了一些在 Vue 的場景下並不契合的特性，<br>比如強制的 immutability（在保證了每一次狀態變化都能追蹤的情況下強制的 immutability 帶來的收益就很有限了）、為了同構而設計得較為繁瑣的 API、必須依賴第三方庫才能相對高效率地獲得狀態樹的局部狀態等等（相比之下 Vuex 直接用 Vue 本身的計算屬性就可以）</p>
+<p>所以 <code>Vue + Vuex</code> 會更簡潔，也不需要考慮性能問題，代價就是 Vuex 只能和 Vue 配合。<br>Vue + Redux 也不是不可以，但是 Redux 作為一個泛用的實現和 Vue 的契合度肯定不如 Vuex。</p>
+<p>作者：尤雨溪<br>链接：<a href="https://www.zhihu.com/question/38546875/answer/76970954" target="_blank" rel="noopener">https://www.zhihu.com/question/38546875/answer/76970954</a><br>来源：知乎</p>
+<h4 id="Flux"><a href="#Flux" class="headerlink" title="Flux"></a>Flux</h4><p>FLUX是一個由Facebook提出來的開發架構(FLUX 是一個 Pattern 而不是一個正式的框架)，目的是在解決所謂的MVC在大型商業網站所存在的問題，把沒有條理跟亂七八糟的架構做一個流程規範的定義。</p>
+<p>FLUX的中心思想打造<strong>單一的資料流進行方式(one-way data flow)</strong>，相對於MVC只定義了三個角色的功能與關係，FLUX更明確的定義了一個資料進行的方式，使得大家更容易遵守規則。</p>
+<p><a href="https://dotblogs.com.tw/blackie1019/2015/04/14/151049" target="_blank" rel="noopener">https://dotblogs.com.tw/blackie1019/2015/04/14/151049</a></p>
+<h4 id="Immutable"><a href="#Immutable" class="headerlink" title="Immutable"></a>Immutable</h4><p>Immutable 翻成中文就是永遠不變的，意思就是：「當一個資料被創建之後，就永遠不會變了」。那如果我需要更改資料的話怎麼辦呢？你就只能創一個新的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  id: <span class="number">1</span>,</span><br><span class="line">  text: <span class="string">'hello'</span></span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">obj.text = <span class="string">'world'</span> <span class="comment">// 這樣不行，因為你改變了 obj 這個物件</span></span><br><span class="line">  </span><br><span class="line"><span class="comment">// 你必須要像這樣創造一個新的物件</span></span><br><span class="line"><span class="keyword">const</span> newObj = &#123;</span><br><span class="line">  ...obj,</span><br><span class="line">  text: <span class="string">'world'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>這也是為什麼我們在用setState的時候總是要產生一個新的物件，而不是直接對現有的做操作。<br>還有一個要注意的地方，那就是 spread operator 只會複製第一層的資料而已，它並不是 deep clone  </p>
+<p>在學習 React 的時候搞懂 Immutable 是很重要的，它可以讓你之後的程式減少互相干擾的機會，讓你除錯的時候邏輯清晰。</p>
+<p><a href="https://blog.techbridge.cc/2018/01/05/react-render-optimization/" target="_blank" rel="noopener">https://blog.techbridge.cc/2018/01/05/react-render-optimization/</a>  </p>
+<h3 id="nextTick"><a href="#nextTick" class="headerlink" title="nextTick()"></a>nextTick()</h3><p>Vue中的nextTick涉及到<strong>Vue中DOM的異步更新</strong></p>
+<p><a href="https://cn.vuejs.org/v2/guide/reactivity.html" target="_blank" rel="noopener">Vue 實現響應式</a>並不是數據發生變化之後 DOM 立即變化，而是按一定的策略進行 DOM 的更新。(異步更新隊列)<br>在下次 DOM 更新循環結束之後執行延遲回調。在修改數據之後，立即使用這個回調函數，獲取更新後的 DOM。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"example"</span>&gt;&#123;&#123;message&#125;&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">var vm = new Vue(&#123;</span></span><br><span class="line"><span class="regexp">  el: '#example',</span></span><br><span class="line"><span class="regexp">  data: &#123;</span></span><br><span class="line"><span class="regexp">    message: '123'</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;)</span></span><br><span class="line"><span class="regexp">vm.message = 'new message' /</span><span class="regexp">/ 更改數據</span></span><br><span class="line"><span class="regexp">vm.$el.textContent === 'new message' /</span><span class="regexp">/ false</span></span><br><span class="line"><span class="regexp">Vue.nextTick(function () &#123;</span></span><br><span class="line"><span class="regexp">  vm.$el.textContent === 'new message' /</span><span class="regexp">/ true</span></span><br><span class="line"><span class="regexp">&#125;)</span></span><br></pre></td></tr></table></figure></p>
+<p><a href="https://jsbin.com/xafilatoka/edit?html,output" target="_blank" rel="noopener">https://jsbin.com/xafilatoka/edit?html,output</a></p>
+<p>看完這個示例，也許有人會問，我在 Vue 實例方法中修改了數據，<br>然後再在 $nextTick 回調中獲取該數據在相應 DOM 元素所綁定的內容（或屬性）殊無必要，我為什麼需要這樣的 API 呢？</p>
+<p>考慮這樣一種場景，<strong>你有一個 jQuery 插件，希望在 DOM 元素中某些屬性發生變化之後重新應用該插件，這時候就需要在 $nextTick 的回調函數中執行重新應用插件的方法。</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 修改數據</span></span><br><span class="line">vm.msg = <span class="string">'Hello'</span></span><br><span class="line"><span class="comment">// DOM 還未更新</span></span><br><span class="line">Vue.nextTick(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// DOM 更新</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>其根本原因是因為Vue中DOM更新是異步的</p>
+<p>在Vue生命週期的<code>created()</code>鉤子函數進行的DOM操作一定要放在<code>Vue.nextTick()</code>的回調函數中</p>
+<p>在created()鉤子函數執行的時候DOM 其實並未進行任何渲染，而此時進行DOM操作無異於徒勞，<br>所以此處一定要將DOM操作的js代碼放進<code>Vue.nextTick()</code>的回調函數中。</p>
+<p>與之對應的就是mounted()鉤子函數，因為該鉤子函數執行時所有的DOM掛載和渲染都已完成，<br>此時在該鉤子函數中進行任何DOM操作都不會有問題 。</p>
+<p>在數據變化後要執行的某個操作，而這個操作需要使用隨數據改變而改變的DOM結構的時候，這個操作都應該放進Vue.nextTick()的回調函數中。</p>
+<p><a href="https://juejin.im/post/5c97002b6fb9a070aa5cf60b" target="_blank" rel="noopener">https://juejin.im/post/5c97002b6fb9a070aa5cf60b</a><br><a href="https://zhuanlan.zhihu.com/p/26724001" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/26724001</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/q/" data-id="cjum0bnmq0006bcsbep6d2hd6" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/vue/2019/04/18/render-function/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          render function
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/04/">April 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/vue/2019/04/18/keep-alive/">keep-alive</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/04/18/optimization/">Optimization</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/04/18/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/04/18/lifecycle/">Vue生命週期</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/04/18/pit/">vue的坑</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Jacob Hsu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/vue/" class="mobile-nav-link">Home</a>
+  
+    <a href="/vue/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/vue/fancybox/jquery.fancybox.css">
+  <script src="/vue/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/vue/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
