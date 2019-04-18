@@ -100,11 +100,11 @@
 <h3 id="Props"><a href="#Props" class="headerlink" title="Props"></a>Props</h3><p>我們可以看到React和Vue都有<code>props</code>的概念，這是<code>properties</code>的簡寫。<br>props在組件中是一個特殊的屬性，<strong>允許父組件往子組件傳送數據</strong>。  </p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.keys(<span class="keyword">this</span>.state.pastadishes).map(<span class="function"><span class="params">key</span> =&gt;</span></span><br><span class="line">    &lt;PastaItem index=&#123;key&#125; key=&#123;key&#125; details=&#123;<span class="keyword">this</span>.state.pastadishes[key]&#125; addToOrder=&#123;<span class="keyword">this</span>.addToOrder&#125; orders=&#123;<span class="keyword">this</span>.state.orders[key]&#125; /&gt;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <p>上面的JSX庫組中，index, key, details, orders 與 addToOrder都是<code>props</code>，數據會被下傳到子組件<code>PastaItem</code>中去。<br>在React中，這是必須的，它依賴一個<code>單一數據源</code>作為它的<code>狀態</code>  </p>
-<p>而在Vue中，props略有不同。它們一樣是在組件中被定義，但Vue依賴於模板語法，你可以通過模板的循環函數更高效地展示傳入的數據。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;pasta-item v-<span class="keyword">for</span>=<span class="string">"(item, key) in samplePasta"</span> :item=<span class="string">"item"</span> :key=<span class="string">"key"</span> @order=<span class="string">"handleOrder(key)"</span>&gt;&lt;/pasta-item&gt;</span><br></pre></td></tr></table></figure></p>
+<p>而在Vue中，props略有不同。它們一樣是在組件中被定義，但Vue依賴於模板語法，你可以通過模板的循環函數更高效地展示傳入的數據。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;pasta-item v-<span class="keyword">for</span>=<span class="string">"(item, key) in samplePasta"</span> :item=<span class="string">"item"</span> :key=<span class="string">"key"</span> @order=<span class="string">"handleOrder(key)"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">pasta-item</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
 <p>這是模板的實現，但這代碼完全能工作，然而在React中展現相同數據會更麻煩一點。  </p>
 <h3 id="模板-vs-JSX"><a href="#模板-vs-JSX" class="headerlink" title="模板 vs JSX"></a>模板 vs JSX</h3><p>React與Vue最大的不同是模板的編寫。<br>Vue鼓勵你去寫近似常規HTML的模板。寫起來很接近標準HTML元素，只是多了一些屬性。<br>Vue鼓勵你去使用HTML模板去進行渲染，使用相似於Angular風格的方法去輸出動態的內容。因此，通過把原有的模板整合成新的Vue模板，Vue很容易提供舊的應用的升級。這也讓新來者很容易適應它的語法。  </p>
 <p>另一方面，React推薦你所有的模板通用JavaScript的語法擴展——JSX書寫。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">  &lt;pasta-item v-<span class="keyword">for</span>=<span class="string">"(item, key) in samplePasta"</span> :item=<span class="string">"item"</span> :key=<span class="string">"key"</span> @order=<span class="string">"handleOrder(key)"</span>&gt;&lt;/pasta-item&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">  &lt;pasta-item v-<span class="keyword">for</span>=<span class="string">"(item, key) in samplePasta"</span> :item=<span class="string">"item"</span> :key=<span class="string">"key"</span> @order=<span class="string">"handleOrder(key)"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">pasta-item</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul className=<span class="string">"pasta-list"</span>&gt;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">Object</span>.keys(<span class="keyword">this</span>.state.pastadishes).map(<span class="function"><span class="params">key</span> =&gt;</span></span><br><span class="line">            &lt;PastaItem index=&#123;key&#125; key=&#123;key&#125; details=&#123;<span class="keyword">this</span>.state.pastadishes[key]&#125; addToOrder=&#123;<span class="keyword">this</span>.addToOrder&#125; orders=&#123;<span class="keyword">this</span>.state.orders[key]&#125; /&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&lt;<span class="regexp">/ul&gt;</span></span><br></pre></td></tr></table></figure>
 <p>React/JSX乍看之下，覺得非常囉嗦，但使用JavaScript而不是模板來開發，賦予了開發者許多編程能力。<br>JSX只是JavaScript混合著XML語法，然而一旦你掌握了它，它使用起來會讓你感到暢快。<br>而相反的觀點是Vue的模板語法去除了往視圖/組件中添加邏輯的誘惑，保持了關注點分離。  </p>
 <h3 id="狀態管理-vs-對象屬性"><a href="#狀態管理-vs-對象屬性" class="headerlink" title="狀態管理 vs 對象屬性"></a>狀態管理 vs 對象屬性</h3><p>狀態是React關鍵的概念。也有一些配套框架被設計為管理一個大的state對象，如Redux。此外，state對象在React應用中是不可變的，意味著它不能被直接改變。在React中你需要使用<code>setState()</code>方法去更新狀態。<br>在Vue中，state對象並不是必須的，數據由data屬性在Vue對象中進行管理。<br>而在Vue中，則不需要使用如setState()之類的方法去改變它的狀態，在Vue對象中，data參數就是應用中數據的保存者。</p>
@@ -114,7 +114,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/vue_vs_react/" data-id="cjum0bnmk0004bcsbgm6684pq" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/vue_vs_react/" data-id="cjum8mnot0007qosb8nu4g8z3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -123,19 +123,19 @@
     
 <nav id="article-nav">
   
-    <a href="/vue/2019/04/18/pit/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/vue/2019/04/18/render-function/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          vue的坑
+          render function
         
       </div>
     </a>
   
   
-    <a href="/vue/2019/04/18/render-function/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/vue/2019/04/18/q/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">render function</div>
+      <div class="article-nav-title">Question</div>
     </a>
   
 </nav>
@@ -172,11 +172,11 @@
       <ul>
         
           <li>
-            <a href="/vue/2019/04/18/keep-alive/">keep-alive</a>
+            <a href="/vue/2019/04/18/diff/">Different</a>
           </li>
         
           <li>
-            <a href="/vue/2019/04/18/optimization/">Optimization</a>
+            <a href="/vue/2019/04/18/keep-alive/">keep-alive</a>
           </li>
         
           <li>
@@ -188,7 +188,7 @@
           </li>
         
           <li>
-            <a href="/vue/2019/04/18/pit/">vue的坑</a>
+            <a href="/vue/2019/04/18/optimization/">Optimization</a>
           </li>
         
       </ul>

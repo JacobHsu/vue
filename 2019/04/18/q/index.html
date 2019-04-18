@@ -94,7 +94,7 @@
 <h3 id="在動態組件上使用-keep-alive"><a href="#在動態組件上使用-keep-alive" class="headerlink" title="在動態組件上使用 keep-alive"></a>在動態組件上使用 keep-alive</h3><p>多標籤的界面中使用 is 特性來切換不同的組件</p>
 <p>當在這些組件之間切換的時候，你有時會想保持這些組件的狀態，以<strong>避免反覆重渲染導致的性能問題</strong></p>
 <p>我們更希望那些標籤的組件實例能夠被在它們<strong>第一次被創建的時候緩存下來</strong>。為瞭解決這個問題，我們可以用一個 <keep-alive> 元素將其動態組件包裹起來。</keep-alive></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 失活的組件將會被緩存！--&gt;</span><br><span class="line">&lt;keep-alive&gt;</span><br><span class="line">  &lt;component v-bind:is=<span class="string">"currentTabComponent"</span>&gt;&lt;/component&gt;</span><br><span class="line">&lt;<span class="regexp">/keep-alive&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 失活的組件將會被緩存！--&gt;</span><br><span class="line">&lt;keep-alive&gt;</span><br><span class="line">  &lt;component v-bind:is=<span class="string">"currentTabComponent"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">component</span>&gt;</span></span></span><br><span class="line">&lt;<span class="regexp">/keep-alive&gt;</span></span><br></pre></td></tr></table></figure>
 <p><a href="https://cn.vuejs.org/v2/guide/components-dynamic-async.html#在动态组件上使用-keep-alive" target="_blank" rel="noopener">https://cn.vuejs.org/v2/guide/components-dynamic-async.html#在动态组件上使用-keep-alive</a></p>
 <h3 id="Render函數-怎樣理解單向數據流"><a href="#Render函數-怎樣理解單向數據流" class="headerlink" title="Render函數 怎樣理解單向數據流"></a>Render函數 怎樣理解單向數據流</h3><p>這個概念出現在組件通信。<br>父組件是通過 <code>prop</code> 把數據傳遞到子組件的，但是這個 prop 只能由父組件修改，子組件不能修改，否則會報錯。<br>子組件想修改時，只能通過<code>$emit</code> 派發一個自定義事件，父組件接收到後，由父組件修改。<br>一般來說，對於子組件想要更改父組件狀態的場景，可以有兩種方案：<br>在子組件的 data 中拷貝一份 prop，data 是可以修改的，但 prop 不能</p>
 <h3 id="生命週期"><a href="#生命週期" class="headerlink" title="生命週期"></a>生命週期</h3><p><em>創建前後</em> beforeCreate/created<br>在beforeCreate 階段，vue實例的掛載元素el和數據對象data都為undefined，還未初始化。<br>在created階段，vue實例的數據對象有了，el還沒有。</p>
@@ -131,7 +131,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/q/" data-id="cjum0bnmq0006bcsbep6d2hd6" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/q/" data-id="cjum8mnp50008qosbjfgxn5xi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -140,11 +140,11 @@
     
 <nav id="article-nav">
   
-    <a href="/vue/2019/04/18/render-function/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/vue/2019/04/18/vue_vs_react/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          render function
+          Vue與React
         
       </div>
     </a>
@@ -184,11 +184,11 @@
       <ul>
         
           <li>
-            <a href="/vue/2019/04/18/keep-alive/">keep-alive</a>
+            <a href="/vue/2019/04/18/diff/">Different</a>
           </li>
         
           <li>
-            <a href="/vue/2019/04/18/optimization/">Optimization</a>
+            <a href="/vue/2019/04/18/keep-alive/">keep-alive</a>
           </li>
         
           <li>
@@ -200,7 +200,7 @@
           </li>
         
           <li>
-            <a href="/vue/2019/04/18/pit/">vue的坑</a>
+            <a href="/vue/2019/04/18/optimization/">Optimization</a>
           </li>
         
       </ul>
