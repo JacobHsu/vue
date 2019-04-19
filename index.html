@@ -62,6 +62,59 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-router" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/vue/2019/04/19/router/" class="article-date">
+  <time datetime="2019-04-19T02:53:36.037Z" itemprop="datePublished">2019-04-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/vue/2019/04/19/router/">Vue Router</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Vue Router: <a href="https://router.vuejs.org/zh/" target="_blank" rel="noopener">介绍</a>  </p>
+<h2 id="vue-router的-hash-和-history-两种模式的区别"><a href="#vue-router的-hash-和-history-两种模式的区别" class="headerlink" title="vue-router的 hash 和 history 两种模式的区别"></a>vue-router的 <code>hash</code> 和 <code>history</code> 两种模式的区别</h2><h4 id="為什麼要有-hash-和-history"><a href="#為什麼要有-hash-和-history" class="headerlink" title="為什麼要有 hash 和 history"></a>為什麼要有 hash 和 history</h4><p>對於 Vue 這類漸進式前端開發框架，為了構建 <strong>SPA（單頁面應用）</strong>，需要引入前端路由系統，這也就是 Vue-Router 存在的意義。前端路由的核心，就在於 —— <strong>改變視圖的同時不會向後端發出請求</strong>。</p>
+<p>為了達到這一目的，瀏覽器當前提供了以下兩種支持：</p>
+<p><code>hash</code> —— 即地址欄 URL 中的 <code>#</code> 符號。比如這個 URL：<a href="http://www.abc.com/#/hello，hash" target="_blank" rel="noopener">http://www.abc.com/#/hello，hash</a> 的值為 #/hello。它的特點在於：hash 雖然出現在 URL 中，但不會被包括在 HTTP 請求中，對後端完全沒有影響，因此改變 hash 不會重新加載頁面。  </p>
+<p><code>history</code> —— 利用了 HTML5 History Interface 中新增的 pushState() 和 replaceState() 方法。（需要特定瀏覽器支持）這兩個方法應用於瀏覽器的歷史記錄棧，在當前已有的 <code>back</code>、<code>forward</code>、<code>go</code> 的基礎之上，它們提供了對歷史記錄進行修改的功能。只是當它們執行修改時，雖然改變了當前的 URL，但瀏覽器不會立即向後端發送請求。</p>
+<p>因此可以說，hash 模式和 history 模式都屬於瀏覽器自身的特性，Vue-Router 只是利用了這兩個特性（通過調用瀏覽器提供的接口）來實現前端路由。</p>
+<p><a href="https://router.vuejs.org/zh/guide/essentials/history-mode.html" target="_blank" rel="noopener">HTML5 History 模式</a> </p>
+<blockquote>
+<p>如果不想要很醜的 hash，我們可以用路由的 history 模式，這種模式充分利用 <code>history.pushState API</code> 來完成 URL 跳轉而無須重新加載頁面。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  mode: <span class="string">'history'</span>,</span><br><span class="line">  routes: [...]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><code>history</code> 模式下，前端的 URL 必須和實際向後端發起請求的 URL 一致，如 <code>http://www.abc.com/book/id</code>。如果後端缺少對 <code>/book/id</code> 的路由處理，將返回 <code>404</code> 錯誤。</p>
+<p>Vue-Router 官網裡如此描述：</p>
+<blockquote>
+<p>不過這種模式要玩好，還需要後台配置支持……所以呢，你要在服務端增加一個覆蓋所有情況的候選資源：如果 URL 匹配不到任何靜態資源，則應該返回同一個 index.html 頁面，這個頁面就是你 app 依賴的頁面。</p>
+</blockquote>
+<h3 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h3><p>結合自身例子，對於一般的 <code>Vue + Vue-Router + Webpack + XXX</code> 形式的 Web 開發場景，用 <code>history</code> 模式即可，只需在後端（<code>Apache 或 Nginx</code>）進行簡單的路由配置，同時搭配前端路由的 404 頁面支持。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/19/router/" data-id="cjunhtgo2000apgsb38ottmrt" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-watch" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/vue/2019/04/19/watch/" class="article-date">
@@ -96,7 +149,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/19/watch/" data-id="cjungg3dq00089csb4f4mm0jf" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/19/watch/" data-id="cjunhtgnp0008pgsbjcddiuzq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -137,7 +190,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/diff/" data-id="cjungg3dg00019csbpe6gu1a1" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/diff/" data-id="cjunhtgn10000pgsbud0izeic" class="article-share-link">Share</a>
       
       
     </footer>
@@ -181,7 +234,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/keep-alive/" data-id="cjungg3di00029csbk0t2rp74" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/keep-alive/" data-id="cjunhtgn90002pgsbm3olu9gd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -226,7 +279,59 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/hello-world/" data-id="cjungg3d900009csbdg29a9bi" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/hello-world/" data-id="cjunhtgnb0003pgsbrkyecih4" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-optimization" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/vue/2019/04/18/optimization/" class="article-date">
+  <time datetime="2019-04-18T01:57:58.577Z" itemprop="datePublished">2019-04-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/vue/2019/04/18/optimization/">Optimization</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="公用CDN"><a href="#公用CDN" class="headerlink" title="公用CDN"></a>公用CDN</h3><p>使用公用的CDN資源，可以起到緩存作用，並減少打包體積</p>
+<h3 id="使用v-if代替v-show"><a href="#使用v-if代替v-show" class="headerlink" title="使用v-if代替v-show"></a>使用v-if代替v-show</h3><p>v-if不渲染DOM，v-show會預渲染DOM<br>需要頻繁切換顯示狀態 用  <code>v-if</code></p>
+<h3 id="v-for必須加上key，並避免同時使用v-if"><a href="#v-for必須加上key，並避免同時使用v-if" class="headerlink" title="v-for必須加上key，並避免同時使用v-if"></a>v-for必須加上key，並避免同時使用v-if</h3><p>為了避免渲染本應該被隱藏的列表 比如 <code>v-for=&quot;user in users&quot; v-if=&quot;shouldShowUsers&quot;</code>。<br>這種情形下，請將 v-if 移動至容器元素上 (比如 ul, ol)</p>
+<h3 id="事件及時銷毀"><a href="#事件及時銷毀" class="headerlink" title="事件及時銷毀"></a>事件及時銷毀</h3><p>Vue組件銷毀時，會自動清理它與其它實例的連接，解綁它的全部指令及事件監聽器，但是僅限於組件本身的事件。<br>也就是說，在js內使用addEventListener等方式是不會自動銷毀的，我們需要在組件銷毀時手動移除這些事件的監聽，以免造成內存洩露，如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">created() &#123;</span><br><span class="line">  addEventListener(<span class="string">'touchmove'</span>, <span class="keyword">this</span>.touchmove, <span class="literal">false</span>)</span><br><span class="line">&#125;,</span><br><span class="line">beforeDestroy() &#123;</span><br><span class="line">  removeEventListener(<span class="string">'touchmove'</span>, <span class="keyword">this</span>.touchmove, <span class="literal">false</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="資源提前請求"><a href="#資源提前請求" class="headerlink" title="資源提前請求"></a>資源提前請求</h2><p>Vue項目中各文件的加載順序為：router.js、main.js、App.vue、[page].vue<br>其中，router的加載時間相比於page.vue快近100ms，如果page.vue的文件較多，時間差異會更大<br>所以，可以在頁面掛載、渲染的同時去請求接口數據，如在router.js中請求數據：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import Router from &apos;vue-router&apos;</span><br><span class="line">import store from &apos;./store&apos;</span><br><span class="line"></span><br><span class="line">store.dispatch(&apos;initAjax&apos;)</span><br></pre></td></tr></table></figure></p>
+<h2 id="異步路由"><a href="#異步路由" class="headerlink" title="異步路由"></a>異步路由</h2><p>使用異步路由可以根據URL自動加載所需頁面的資源，並且不會造成頁面阻塞，較適用於移動端頁面<br>建議主頁面直接import，非主頁面使用異步路由<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  path: <span class="string">'/order'</span>,</span><br><span class="line">  component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'./views/order.vue'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="異步組件"><a href="#異步組件" class="headerlink" title="異步組件"></a>異步組件</h2><p>不需要首屏加載的組件都使用異步組件的方式來加載（如多tab），包括需要觸發條件的動作也使用異步組件（如彈窗） 使用方式為：v-if來控制顯示時機，引入組件的Promise即可<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;HellowWorld v-<span class="keyword">if</span>=<span class="string">"showHello"</span> /&gt;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  components: &#123; <span class="attr">HellowWorld</span>: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'../components/HelloWorld.vue'</span>) &#125;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      showHello: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    initAsync() &#123;</span><br><span class="line">      addEventListener(<span class="string">'scroll'</span>, (e) =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span> (scrollY &gt; <span class="number">100</span>) &#123;</span><br><span class="line">          <span class="keyword">this</span>.showHello = <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="異步插件"><a href="#異步插件" class="headerlink" title="異步插件"></a>異步插件</h2><p>首屏用不到的插件、或只在特定場景才會用到的插件使用異步加載（如定位插件，部分情況可以通過URL傳遞經緯度；或生成畫報插件，需要在點擊時觸發）；插件第一次加載後緩存在本地，使用方式為：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 以定位插件為例</span></span><br><span class="line"><span class="keyword">const</span> latitude = getUrlParam(<span class="string">'latitude'</span>)</span><br><span class="line"><span class="keyword">const</span> longitude = getUrlParam(<span class="string">'longitude'</span>)</span><br><span class="line"><span class="comment">// 如果沒有經緯度參數，則使用定位插件來獲取經緯度</span></span><br><span class="line"><span class="keyword">if</span> (!latitude || !longitude) &#123;</span><br><span class="line">  <span class="comment">// 首次加載定位插件</span></span><br><span class="line">  <span class="comment">// webpack4寫法，若使用webpack3及以下，則await import('locationPlugin')即可</span></span><br><span class="line">  <span class="keyword">if</span> (!<span class="keyword">this</span>.WhereAmI) <span class="keyword">this</span>.WhereAmI = (<span class="keyword">await</span> <span class="keyword">import</span>(<span class="string">'locationPlugin'</span>)).default</span><br><span class="line">  <span class="comment">// do sth...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="減少網路請求"><a href="#減少網路請求" class="headerlink" title="減少網路請求"></a>減少網路請求</h3><p>瀏覽器對同一時間針對同一域名下的請求有一定數量限制（一般是6個），超過限制數目的請求會被阻塞</p>
+<h3 id="打包優化-升級Vue-Cli-3"><a href="#打包優化-升級Vue-Cli-3" class="headerlink" title="打包優化　升級Vue-Cli-3"></a>打包優化　升級Vue-Cli-3</h3><p>vue-cli-3採用webpack4+babel7，對編譯打包方面做了很多優化（成倍的提升），使用yarn作為包管理工具，並且對很多優化的最佳實踐做了默認配置</p>
+<h3 id="SSR-Server-Side-Rendering"><a href="#SSR-Server-Side-Rendering" class="headerlink" title="SSR (Server Side Rendering)"></a>SSR (Server Side Rendering)</h3><p>對加載性能要求較高的項目建議升級SSR</p>
+<blockquote>
+<p>SSR就是因為要解決SPA的SEO問題而出現的解法。 第一個頁面由Server side render，之後的操作還是由Client side render</p>
+</blockquote>
+<p>ref：<a href="https://juejin.im/post/5c4e6d7951882522c03ea809" target="_blank" rel="noopener">https://juejin.im/post/5c4e6d7951882522c03ea809</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/optimization/" data-id="cjunhtgnc0004pgsbl99gygr4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -375,59 +480,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/lifecycle/" data-id="cjungg3dk00039csbummb9byw" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-optimization" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/vue/2019/04/18/optimization/" class="article-date">
-  <time datetime="2019-04-18T01:57:58.577Z" itemprop="datePublished">2019-04-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/vue/2019/04/18/optimization/">Optimization</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="公用CDN"><a href="#公用CDN" class="headerlink" title="公用CDN"></a>公用CDN</h3><p>使用公用的CDN資源，可以起到緩存作用，並減少打包體積</p>
-<h3 id="使用v-if代替v-show"><a href="#使用v-if代替v-show" class="headerlink" title="使用v-if代替v-show"></a>使用v-if代替v-show</h3><p>v-if不渲染DOM，v-show會預渲染DOM<br>需要頻繁切換顯示狀態 用  <code>v-if</code></p>
-<h3 id="v-for必須加上key，並避免同時使用v-if"><a href="#v-for必須加上key，並避免同時使用v-if" class="headerlink" title="v-for必須加上key，並避免同時使用v-if"></a>v-for必須加上key，並避免同時使用v-if</h3><p>為了避免渲染本應該被隱藏的列表 比如 <code>v-for=&quot;user in users&quot; v-if=&quot;shouldShowUsers&quot;</code>。<br>這種情形下，請將 v-if 移動至容器元素上 (比如 ul, ol)</p>
-<h3 id="事件及時銷毀"><a href="#事件及時銷毀" class="headerlink" title="事件及時銷毀"></a>事件及時銷毀</h3><p>Vue組件銷毀時，會自動清理它與其它實例的連接，解綁它的全部指令及事件監聽器，但是僅限於組件本身的事件。<br>也就是說，在js內使用addEventListener等方式是不會自動銷毀的，我們需要在組件銷毀時手動移除這些事件的監聽，以免造成內存洩露，如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">created() &#123;</span><br><span class="line">  addEventListener(<span class="string">'touchmove'</span>, <span class="keyword">this</span>.touchmove, <span class="literal">false</span>)</span><br><span class="line">&#125;,</span><br><span class="line">beforeDestroy() &#123;</span><br><span class="line">  removeEventListener(<span class="string">'touchmove'</span>, <span class="keyword">this</span>.touchmove, <span class="literal">false</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="資源提前請求"><a href="#資源提前請求" class="headerlink" title="資源提前請求"></a>資源提前請求</h2><p>Vue項目中各文件的加載順序為：router.js、main.js、App.vue、[page].vue<br>其中，router的加載時間相比於page.vue快近100ms，如果page.vue的文件較多，時間差異會更大<br>所以，可以在頁面掛載、渲染的同時去請求接口數據，如在router.js中請求數據：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import Router from &apos;vue-router&apos;</span><br><span class="line">import store from &apos;./store&apos;</span><br><span class="line"></span><br><span class="line">store.dispatch(&apos;initAjax&apos;)</span><br></pre></td></tr></table></figure></p>
-<h2 id="異步路由"><a href="#異步路由" class="headerlink" title="異步路由"></a>異步路由</h2><p>使用異步路由可以根據URL自動加載所需頁面的資源，並且不會造成頁面阻塞，較適用於移動端頁面<br>建議主頁面直接import，非主頁面使用異步路由<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  path: <span class="string">'/order'</span>,</span><br><span class="line">  component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'./views/order.vue'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="異步組件"><a href="#異步組件" class="headerlink" title="異步組件"></a>異步組件</h2><p>不需要首屏加載的組件都使用異步組件的方式來加載（如多tab），包括需要觸發條件的動作也使用異步組件（如彈窗） 使用方式為：v-if來控制顯示時機，引入組件的Promise即可<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;HellowWorld v-<span class="keyword">if</span>=<span class="string">"showHello"</span> /&gt;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  components: &#123; <span class="attr">HellowWorld</span>: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'../components/HelloWorld.vue'</span>) &#125;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      showHello: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    initAsync() &#123;</span><br><span class="line">      addEventListener(<span class="string">'scroll'</span>, (e) =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span> (scrollY &gt; <span class="number">100</span>) &#123;</span><br><span class="line">          <span class="keyword">this</span>.showHello = <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="異步插件"><a href="#異步插件" class="headerlink" title="異步插件"></a>異步插件</h2><p>首屏用不到的插件、或只在特定場景才會用到的插件使用異步加載（如定位插件，部分情況可以通過URL傳遞經緯度；或生成畫報插件，需要在點擊時觸發）；插件第一次加載後緩存在本地，使用方式為：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 以定位插件為例</span></span><br><span class="line"><span class="keyword">const</span> latitude = getUrlParam(<span class="string">'latitude'</span>)</span><br><span class="line"><span class="keyword">const</span> longitude = getUrlParam(<span class="string">'longitude'</span>)</span><br><span class="line"><span class="comment">// 如果沒有經緯度參數，則使用定位插件來獲取經緯度</span></span><br><span class="line"><span class="keyword">if</span> (!latitude || !longitude) &#123;</span><br><span class="line">  <span class="comment">// 首次加載定位插件</span></span><br><span class="line">  <span class="comment">// webpack4寫法，若使用webpack3及以下，則await import('locationPlugin')即可</span></span><br><span class="line">  <span class="keyword">if</span> (!<span class="keyword">this</span>.WhereAmI) <span class="keyword">this</span>.WhereAmI = (<span class="keyword">await</span> <span class="keyword">import</span>(<span class="string">'locationPlugin'</span>)).default</span><br><span class="line">  <span class="comment">// do sth...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="減少網路請求"><a href="#減少網路請求" class="headerlink" title="減少網路請求"></a>減少網路請求</h3><p>瀏覽器對同一時間針對同一域名下的請求有一定數量限制（一般是6個），超過限制數目的請求會被阻塞</p>
-<h3 id="打包優化-升級Vue-Cli-3"><a href="#打包優化-升級Vue-Cli-3" class="headerlink" title="打包優化　升級Vue-Cli-3"></a>打包優化　升級Vue-Cli-3</h3><p>vue-cli-3採用webpack4+babel7，對編譯打包方面做了很多優化（成倍的提升），使用yarn作為包管理工具，並且對很多優化的最佳實踐做了默認配置</p>
-<h3 id="SSR-Server-Side-Rendering"><a href="#SSR-Server-Side-Rendering" class="headerlink" title="SSR (Server Side Rendering)"></a>SSR (Server Side Rendering)</h3><p>對加載性能要求較高的項目建議升級SSR</p>
-<blockquote>
-<p>SSR就是因為要解決SPA的SEO問題而出現的解法。 第一個頁面由Server side render，之後的操作還是由Client side render</p>
-</blockquote>
-<p>ref：<a href="https://juejin.im/post/5c4e6d7951882522c03ea809" target="_blank" rel="noopener">https://juejin.im/post/5c4e6d7951882522c03ea809</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/optimization/" data-id="cjungg3dl00049csbtxxgteq9" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/lifecycle/" data-id="cjunhtgn70001pgsbvoe62w1w" class="article-share-link">Share</a>
       
       
     </footer>
@@ -466,53 +519,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/render-function/" data-id="cjungg3dm00059csbwvud1sat" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-pit" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/vue/2019/04/18/pit/" class="article-date">
-  <time datetime="2019-04-18T01:57:58.577Z" itemprop="datePublished">2019-04-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/vue/2019/04/18/pit/">vue的坑</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Vue-不能檢測對象屬性的添加或刪除"><a href="#Vue-不能檢測對象屬性的添加或刪除" class="headerlink" title="Vue 不能檢測對象屬性的添加或刪除"></a>Vue 不能檢測對象屬性的添加或刪除</h2><p><a href="https://jsbin.com/mayehetobu/1/edit?html,console,output" target="_blank" rel="noopener">https://jsbin.com/mayehetobu/1/edit?html,console,output</a><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en-US"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;title&gt;My Vue.js App&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">  &lt;script src="https:/</span><span class="regexp">/cdn.jsdelivr.net/</span>vue/latest/vue.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;/head&gt;</span></span><br><span class="line"><span class="string">&lt;body&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;div id="</span>app<span class="string">"&gt;</span></span><br><span class="line"><span class="string">    &#123;&#123; message &#125;&#125;</span></span><br><span class="line"><span class="string">&lt;/div&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;script type="</span>text/javascript<span class="string">"&gt;</span></span><br><span class="line"><span class="string">    new Vue(&#123;</span></span><br><span class="line"><span class="string">      el: '#app',</span></span><br><span class="line"><span class="string">      data: &#123;</span></span><br><span class="line"><span class="string">        message: ''</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    &#125;);</span></span><br><span class="line"><span class="string">    // `vm.message` 是響應的</span></span><br><span class="line"><span class="string">    // 之後設置 `message`</span></span><br><span class="line"><span class="string">    vm.message = 'Hello!'</span></span><br><span class="line"><span class="string">    // `vm.message` 是非響應的</span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>Vue 不允許在已經創建的實例上動態添加新的根級響應式屬性 (root-level reactive property)。<br>然而它可以使用 <code>Vue.set(object, key, value)</code> 方法將響應屬性添加到嵌套的對象上：</p>
-<p><a href="https://jsbin.com/nujomojovo/edit?html,output" target="_blank" rel="noopener">https://jsbin.com/nujomojovo/edit?html,output</a><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">    &lt;p&gt;&#123;&#123;obj&#125;&#125;&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">      obj: &#123;&#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    mounted() &#123;</span><br><span class="line">      <span class="comment">//想要動態添加對象的屬性並且頁面能更新到</span></span><br><span class="line">      <span class="keyword">this</span>.obj.a = <span class="number">1111</span>  <span class="comment">//瀏覽器什麼都沒渲染出來</span></span><br><span class="line">      <span class="keyword">this</span>.$<span class="keyword">set</span>(this.obj,'a',1) // 方法一 &#123; <span class="string">"a"</span>: <span class="number">1</span> &#125;</span><br><span class="line">      <span class="keyword">this</span>.obj = <span class="built_in">Object</span>.assign(&#123;&#125;, <span class="keyword">this</span>.obj,&#123;<span class="attr">a</span>:<span class="number">2</span>&#125;)  <span class="comment">//方法二 可以添加多個屬性 //&#123; "a": 2 &#125;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p><a href="https://juejin.im/post/5aa89ab9f265da238b7db328" target="_blank" rel="noopener">https://juejin.im/post/5aa89ab9f265da238b7db328</a>  </p>
-<p><a href="https://jsbin.com/mayehetobu/1/edit?html,console,output" target="_blank" rel="noopener">https://jsbin.com/mayehetobu/1/edit?html,console,output</a></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">    &#123;&#123; message &#125;&#125;</span><br><span class="line">     dog &#123;&#123; counter.dog &#125;&#125;, cat &#123;&#123; counter.cat &#125;&#125;, penguin &#123;&#123; counter.penguin &#125;&#125;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;script type="text/</span>javascript<span class="string">"&gt;</span></span><br><span class="line"><span class="string">    new Vue(&#123;</span></span><br><span class="line"><span class="string">      el: '#app',</span></span><br><span class="line"><span class="string">      data: &#123;</span></span><br><span class="line"><span class="string">        message: '',</span></span><br><span class="line"><span class="string">        counter: &#123;</span></span><br><span class="line"><span class="string">            // 一開始沒有註冊 penguine，只註冊了 dog 和 cat</span></span><br><span class="line"><span class="string">            dog: 0,</span></span><br><span class="line"><span class="string">            cat: 0</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">      &#125;,</span></span><br><span class="line"><span class="string">      created() &#123;</span></span><br><span class="line"><span class="string">        // 在 created 的時候才建立 penguine 順便設值為 0</span></span><br><span class="line"><span class="string">        // 使用 $set 動態新增響應式組件</span></span><br><span class="line"><span class="string">        this.$set(this.counter, "</span>penguin<span class="string">", 1);</span></span><br><span class="line"><span class="string">      &#125;,</span></span><br><span class="line"><span class="string">      updated() &#123;</span></span><br><span class="line"><span class="string">        // 讓我們可以知道組件有被更新</span></span><br><span class="line"><span class="string">        console.log("</span>view updated<span class="string">");</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    &#125;);</span></span><br><span class="line"><span class="string">    //之後設置 `message`</span></span><br><span class="line"><span class="string">    vm.message = 'Hello!';</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br></pre></td></tr></table></figure>
-<p>物件部分：<a href="https://pjchender.blogspot.com/2017/05/vue-vue-reactivity.html" target="_blank" rel="noopener">一開始沒有被註冊到的物件不會響應式更新</a>  </p>
-<p>ref: <a href="https://cn.vuejs.org/v2/guide/reactivity.html" target="_blank" rel="noopener">深入響應式原理</a>  </p>
-<p>是其非侵入性的響應式系統。數據模型僅僅是普通的 JavaScript 對象。<br>而當你修改它們時，視圖會進行更新。這使得狀態管理非常簡單直接  </p>
-<p><img src="https://cn.vuejs.org/images/data.png" alt="Alt reactivity"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/pit/" data-id="cjungg3dn00069csbfqk09rsv" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/render-function/" data-id="cjunhtgne0006pgsba68x5tw0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -572,7 +579,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/vue_vs_react/" data-id="cjungg3dp00079csbo9hgldy4" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/vue_vs_react/" data-id="cjunhtgnf0007pgsbhmzds9zb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -649,7 +656,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/q/" data-id="cjungg3dx00099csbf25daiha" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/q/" data-id="cjunhtgnr0009pgsbnm572t5k" class="article-share-link">Share</a>
       
       
     </footer>
@@ -660,6 +667,11 @@
 
   
 
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/vue/page/2/">2</a><a class="extend next" rel="next" href="/vue/page/2/">Next &raquo;</a>
+  </nav>
 
 </section>
         
@@ -690,6 +702,10 @@
       <ul>
         
           <li>
+            <a href="/vue/2019/04/19/router/">Vue Router</a>
+          </li>
+        
+          <li>
             <a href="/vue/2019/04/19/watch/">Watch</a>
           </li>
         
@@ -703,10 +719,6 @@
         
           <li>
             <a href="/vue/2019/04/18/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/vue/2019/04/18/lifecycle/">Vue生命週期</a>
           </li>
         
       </ul>
