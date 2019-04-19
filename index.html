@@ -62,6 +62,50 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-watch" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/vue/2019/04/19/watch/" class="article-date">
+  <time datetime="2019-04-19T02:11:22.425Z" itemprop="datePublished">2019-04-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/vue/2019/04/19/watch/">Watch</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>Watch</code> 可讓我們監視某個值，當這個值變動的時候，就去做某些事情。</p>
+<p>例，如果 userName 發生變化，就去執行 _valid 這個 method。使用者輸入了合法的字串。</p>
+<p><a href="https://jsbin.com/zesijokaju/edit?html,output" target="_blank" rel="noopener">https://jsbin.com/zesijokaju/edit?html,output</a></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">p</span>&gt;</span>請輸入使用者名稱。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">v-model</span>=<span class="string">"userName"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">p</span>&gt;</span>$&#123; errMsg &#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    delimiters: [<span class="string">'$&#123;'</span>, <span class="string">'&#125;'</span>],</span><br><span class="line">    data: &#123;</span><br><span class="line">    userName: <span class="string">''</span>,</span><br><span class="line">    errMsg: <span class="string">''</span></span><br><span class="line">    &#125;,</span><br><span class="line">    watch: &#123;</span><br><span class="line">    userName: <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>._valid(value)) &#123;</span><br><span class="line">        <span class="keyword">this</span>.errMsg = <span class="string">'使用者名稱開頭不可為數字。'</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.errMsg = <span class="string">'合法的使用者名稱。'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">    _valid: <span class="function"><span class="keyword">function</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="regexp">/^[0-9]/</span>.test(name);</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Vue 提供了一種更通用的方式來觀察和響應 Vue 實例上的數據變動：<code>偵聽屬性</code>。當你有一些數據需要隨著其它數據變動而變動時，你很容易濫用 watch——特別是如果你之前使用過 AngularJS。然而，通常更好的做法是使用<code>計算屬性</code>而不是命令式的 watch 回調。</p>
+<p>雖然計算屬性在大多數情況下更合適，但有時也需要一個自定義的偵聽器。這就是為什麼 Vue 通過 watch 選項提供了一個更通用的方法，來響應數據的變化。當需要<strong>在數據變化時執行異步或開銷較大的操作</strong>時，這個方式是最有用的。</p>
+<h4 id="References"><a href="#References" class="headerlink" title="References"></a>References</h4><p><a href="https://cythilya.github.io/2017/04/15/vue-watch/" target="_blank" rel="noopener">Vue.js: Watch</a><br><a href="https://vuejs.org/v2/guide/computed.html" target="_blank" rel="noopener">Computed Properties and Watchers</a>  </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/19/watch/" data-id="cjungg3dq00089csb4f4mm0jf" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-diff" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/vue/2019/04/18/diff/" class="article-date">
@@ -93,7 +137,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/diff/" data-id="cjum8mno80000qosbyzfkkgtd" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/diff/" data-id="cjungg3dg00019csbpe6gu1a1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -137,7 +181,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/keep-alive/" data-id="cjum8mnof0001qosbe4flther" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/keep-alive/" data-id="cjungg3di00029csbk0t2rp74" class="article-share-link">Share</a>
       
       
     </footer>
@@ -182,7 +226,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/hello-world/" data-id="cjum8mnog0002qosbxqz1hb1w" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/hello-world/" data-id="cjungg3d900009csbdg29a9bi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -331,7 +375,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/lifecycle/" data-id="cjum8mnoi0003qosbsvpgbv9f" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/lifecycle/" data-id="cjungg3dk00039csbummb9byw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -383,7 +427,46 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/optimization/" data-id="cjum8mnoj0004qosbaqzenu9o" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/optimization/" data-id="cjungg3dl00049csbtxxgteq9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-render-function" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/vue/2019/04/18/render-function/" class="article-date">
+  <time datetime="2019-04-18T01:57:58.577Z" itemprop="datePublished">2019-04-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/vue/2019/04/18/render-function/">render function</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Vue 推薦使用在絕大多數情況下使用 template 來創建你的 HTML。然而在一些場景中，你真的需要 JavaScript 的完全編程的能力，這就是 <code>render 函數</code>，它比 template 更接近編譯器。  </p>
+<p>如果你真的需要重複很多次的元素/組件，你可以使用工廠函數來實現。<br>例如，下面<a href="https://cn.vuejs.org/v2/guide/render-function.html#%E7%BA%A6%E6%9D%9F" target="_blank" rel="noopener">這個例子</a> render 函數完美有效地渲染了 20 個相同的段落：</p>
+<p><a href="https://jsbin.com/lidohak/edit?html,js,output" target="_blank" rel="noopener">https://jsbin.com/lidohak/edit?html,js,output</a><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">render: <span class="function"><span class="keyword">function</span> (<span class="params">createElement</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> createElement(<span class="string">'div'</span>,</span><br><span class="line">    <span class="built_in">Array</span>.apply(<span class="literal">null</span>, &#123; <span class="attr">length</span>: <span class="number">20</span> &#125;).map(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> createElement(<span class="string">'p'</span>, <span class="string">'hi'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/render-function/" data-id="cjungg3dm00059csbwvud1sat" class="article-share-link">Share</a>
       
       
     </footer>
@@ -429,46 +512,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/pit/" data-id="cjum8mnok0005qosb6l7f7g8x" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-render-function" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/vue/2019/04/18/render-function/" class="article-date">
-  <time datetime="2019-04-18T01:57:58.577Z" itemprop="datePublished">2019-04-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/vue/2019/04/18/render-function/">render function</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Vue 推薦使用在絕大多數情況下使用 template 來創建你的 HTML。然而在一些場景中，你真的需要 JavaScript 的完全編程的能力，這就是 <code>render 函數</code>，它比 template 更接近編譯器。  </p>
-<p>如果你真的需要重複很多次的元素/組件，你可以使用工廠函數來實現。<br>例如，下面<a href="https://cn.vuejs.org/v2/guide/render-function.html#%E7%BA%A6%E6%9D%9F" target="_blank" rel="noopener">這個例子</a> render 函數完美有效地渲染了 20 個相同的段落：</p>
-<p><a href="https://jsbin.com/lidohak/edit?html,js,output" target="_blank" rel="noopener">https://jsbin.com/lidohak/edit?html,js,output</a><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">render: <span class="function"><span class="keyword">function</span> (<span class="params">createElement</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> createElement(<span class="string">'div'</span>,</span><br><span class="line">    <span class="built_in">Array</span>.apply(<span class="literal">null</span>, &#123; <span class="attr">length</span>: <span class="number">20</span> &#125;).map(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> createElement(<span class="string">'p'</span>, <span class="string">'hi'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/render-function/" data-id="cjum8mnor0006qosbva0nfemo" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/pit/" data-id="cjungg3dn00069csbfqk09rsv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -528,7 +572,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/vue_vs_react/" data-id="cjum8mnot0007qosb8nu4g8z3" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/vue_vs_react/" data-id="cjungg3dp00079csbo9hgldy4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -605,7 +649,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/q/" data-id="cjum8mnp50008qosbjfgxn5xi" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/q/" data-id="cjungg3dx00099csbf25daiha" class="article-share-link">Share</a>
       
       
     </footer>
@@ -646,6 +690,10 @@
       <ul>
         
           <li>
+            <a href="/vue/2019/04/19/watch/">Watch</a>
+          </li>
+        
+          <li>
             <a href="/vue/2019/04/18/diff/">Different</a>
           </li>
         
@@ -659,10 +707,6 @@
         
           <li>
             <a href="/vue/2019/04/18/lifecycle/">Vue生命週期</a>
-          </li>
-        
-          <li>
-            <a href="/vue/2019/04/18/optimization/">Optimization</a>
           </li>
         
       </ul>

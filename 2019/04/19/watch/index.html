@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Watch | Vue.js</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Watch 可讓我們監視某個值，當這個值變動的時候，就去做某些事情。 例，如果 userName 發生變化，就去執行 _valid 這個 method。使用者輸入了合法的字串。 https://jsbin.com/zesijokaju/edit?html,output 12345&amp;lt;div id=&quot;app&quot;&amp;gt;   &amp;lt;p&amp;gt;請輸入使用者名稱。&amp;lt;/p&amp;gt;   &amp;lt;in">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Watch">
+<meta property="og:url" content="https://github.com/JacobHsu/vue/2019/04/19/watch/index.html">
+<meta property="og:site_name" content="Vue.js">
+<meta property="og:description" content="Watch 可讓我們監視某個值，當這個值變動的時候，就去做某些事情。 例，如果 userName 發生變化，就去執行 _valid 這個 method。使用者輸入了合法的字串。 https://jsbin.com/zesijokaju/edit?html,output 12345&amp;lt;div id=&quot;app&quot;&amp;gt;   &amp;lt;p&amp;gt;請輸入使用者名稱。&amp;lt;/p&amp;gt;   &amp;lt;in">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-04-19T02:27:50.930Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Watch">
+<meta name="twitter:description" content="Watch 可讓我們監視某個值，當這個值變動的時候，就去做某些事情。 例，如果 userName 發生變化，就去執行 _valid 這個 method。使用者輸入了合法的字串。 https://jsbin.com/zesijokaju/edit?html,output 12345&amp;lt;div id=&quot;app&quot;&amp;gt;   &amp;lt;p&amp;gt;請輸入使用者名稱。&amp;lt;/p&amp;gt;   &amp;lt;in">
+  
+    <link rel="alternate" href="/vue/atom.xml" title="Vue.js" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/vue/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/vue/" id="logo">Vue.js</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/vue/">Home</a>
+        
+          <a class="main-nav-link" href="/vue/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/vue/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/JacobHsu/vue"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-watch" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/vue/2019/04/19/watch/" class="article-date">
+  <time datetime="2019-04-19T02:11:22.425Z" itemprop="datePublished">2019-04-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Watch
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>Watch</code> 可讓我們監視某個值，當這個值變動的時候，就去做某些事情。</p>
+<p>例，如果 userName 發生變化，就去執行 _valid 這個 method。使用者輸入了合法的字串。</p>
+<p><a href="https://jsbin.com/zesijokaju/edit?html,output" target="_blank" rel="noopener">https://jsbin.com/zesijokaju/edit?html,output</a></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">p</span>&gt;</span>請輸入使用者名稱。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">v-model</span>=<span class="string">"userName"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">p</span>&gt;</span>$&#123; errMsg &#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    delimiters: [<span class="string">'$&#123;'</span>, <span class="string">'&#125;'</span>],</span><br><span class="line">    data: &#123;</span><br><span class="line">    userName: <span class="string">''</span>,</span><br><span class="line">    errMsg: <span class="string">''</span></span><br><span class="line">    &#125;,</span><br><span class="line">    watch: &#123;</span><br><span class="line">    userName: <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>._valid(value)) &#123;</span><br><span class="line">        <span class="keyword">this</span>.errMsg = <span class="string">'使用者名稱開頭不可為數字。'</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.errMsg = <span class="string">'合法的使用者名稱。'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">    _valid: <span class="function"><span class="keyword">function</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="regexp">/^[0-9]/</span>.test(name);</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Vue 提供了一種更通用的方式來觀察和響應 Vue 實例上的數據變動：<code>偵聽屬性</code>。當你有一些數據需要隨著其它數據變動而變動時，你很容易濫用 watch——特別是如果你之前使用過 AngularJS。然而，通常更好的做法是使用<code>計算屬性</code>而不是命令式的 watch 回調。</p>
+<p>雖然計算屬性在大多數情況下更合適，但有時也需要一個自定義的偵聽器。這就是為什麼 Vue 通過 watch 選項提供了一個更通用的方法，來響應數據的變化。當需要<strong>在數據變化時執行異步或開銷較大的操作</strong>時，這個方式是最有用的。</p>
+<h4 id="References"><a href="#References" class="headerlink" title="References"></a>References</h4><p><a href="https://cythilya.github.io/2017/04/15/vue-watch/" target="_blank" rel="noopener">Vue.js: Watch</a><br><a href="https://vuejs.org/v2/guide/computed.html" target="_blank" rel="noopener">Computed Properties and Watchers</a>  </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/19/watch/" data-id="cjungg3dq00089csb4f4mm0jf" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/vue/2019/04/18/diff/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Different</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/04/">April 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/vue/2019/04/19/watch/">Watch</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/04/18/diff/">Different</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/04/18/keep-alive/">keep-alive</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/04/18/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/04/18/lifecycle/">Vue生命週期</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Jacob Hsu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/vue/" class="mobile-nav-link">Home</a>
+  
+    <a href="/vue/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/vue/fancybox/jquery.fancybox.css">
+  <script src="/vue/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/vue/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
