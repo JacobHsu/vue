@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>slots 插槽 | Vue.js</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Vue 實現了一套內容分發的 API，將 &amp;lt;slot&amp;gt; 元素作為承載分發內容的出口 slots   具名插槽（Named Slots）使用屬性 name 決定配置的內容。沒有 name 的匿名插槽將成為預設插槽，匹配不到的內容會放置在此；若沒有默認插槽，匹配不到的內容會被捨棄。 https://codepen.io/JacobHsu/pen/zQwMdN 12345678&amp;lt;div">
+<meta property="og:type" content="article">
+<meta property="og:title" content="slots 插槽">
+<meta property="og:url" content="https://github.com/JacobHsu/vue/2019/05/17/slots/index.html">
+<meta property="og:site_name" content="Vue.js">
+<meta property="og:description" content="Vue 實現了一套內容分發的 API，將 &amp;lt;slot&amp;gt; 元素作為承載分發內容的出口 slots   具名插槽（Named Slots）使用屬性 name 決定配置的內容。沒有 name 的匿名插槽將成為預設插槽，匹配不到的內容會放置在此；若沒有默認插槽，匹配不到的內容會被捨棄。 https://codepen.io/JacobHsu/pen/zQwMdN 12345678&amp;lt;div">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-17T07:09:41.739Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="slots 插槽">
+<meta name="twitter:description" content="Vue 實現了一套內容分發的 API，將 &amp;lt;slot&amp;gt; 元素作為承載分發內容的出口 slots   具名插槽（Named Slots）使用屬性 name 決定配置的內容。沒有 name 的匿名插槽將成為預設插槽，匹配不到的內容會放置在此；若沒有默認插槽，匹配不到的內容會被捨棄。 https://codepen.io/JacobHsu/pen/zQwMdN 12345678&amp;lt;div">
+  
+    <link rel="alternate" href="/vue/atom.xml" title="Vue.js" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/vue/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/vue/" id="logo">Vue.js</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/vue/">Home</a>
+        
+          <a class="main-nav-link" href="/vue/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/vue/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/JacobHsu/vue"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-slots" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/vue/2019/05/17/slots/" class="article-date">
+  <time datetime="2019-05-17T07:05:07.801Z" itemprop="datePublished">2019-05-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      slots 插槽
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Vue 實現了一套內容分發的 API，將 <code>&lt;slot&gt;</code> 元素作為承載分發內容的出口</p>
+<p><a href="https://cn.vuejs.org/v2/guide/components-slots.html" target="_blank" rel="noopener">slots</a>  </p>
+<h2 id="具名插槽（Named-Slots）"><a href="#具名插槽（Named-Slots）" class="headerlink" title="具名插槽（Named Slots）"></a>具名插槽（Named Slots）</h2><p>使用屬性 name 決定配置的內容。沒有 name 的匿名插槽將成為預設插槽，匹配不到的內容會放置在此；若沒有默認插槽，匹配不到的內容會被捨棄。</p>
+<p><a href="https://codepen.io/JacobHsu/pen/zQwMdN" target="_blank" rel="noopener">https://codepen.io/JacobHsu/pen/zQwMdN</a></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">layout</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">slot</span>=<span class="string">"header"</span>&gt;</span>header這裡可能是一個頁面標題<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>主要內容的一個段落。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>另一個主要段落。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">slot</span>=<span class="string">"footer"</span>&gt;</span>footer這裡有一些聯繫信息<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">layout</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'layout'</span>, &#123;</span><br><span class="line">  template: <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;div class="container"&gt;</span></span><br><span class="line"><span class="string">      &lt;header&gt;</span></span><br><span class="line"><span class="string">        &lt;slot name="header"&gt;&lt;/slot&gt;</span></span><br><span class="line"><span class="string">      &lt;/header&gt;</span></span><br><span class="line"><span class="string">      &lt;main&gt;</span></span><br><span class="line"><span class="string">        &lt;slot&gt;&lt;/slot&gt;</span></span><br><span class="line"><span class="string">      &lt;/main&gt;</span></span><br><span class="line"><span class="string">      &lt;footer&gt;</span></span><br><span class="line"><span class="string">        &lt;slot name="footer"&gt;&lt;/slot&gt;</span></span><br><span class="line"><span class="string">      &lt;/footer&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;`</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>header這裡可能是一個頁面標題<br>主要內容的一個段落。<br>另一個主要段落。<br>footer這裡有一些聯繫信息  </p>
+<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p><a href="https://cythilya.github.io/2017/10/11/vue-component-slot/" target="_blank" rel="noopener">Vue.js: Slot</a>  </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/JacobHsu/vue/2019/05/17/slots/" data-id="cjvrqtsk8000558sbe9t8ov0w" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/vue/2019/05/10/vuex/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Vuex</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/04/">April 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/vue/2019/05/17/slots/">slots 插槽</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/05/10/vuex/">Vuex</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/04/19/router/">Vue Router</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/04/19/watch/">Watch</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/04/18/diff/">Different</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Jacob Hsu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/vue/" class="mobile-nav-link">Home</a>
+  
+    <a href="/vue/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/vue/fancybox/jquery.fancybox.css">
+  <script src="/vue/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/vue/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

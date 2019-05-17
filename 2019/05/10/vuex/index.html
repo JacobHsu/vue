@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Vuex | Vue.js</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="main.js12345import store from &apos;./store&apos;new Vue(&amp;#123;  store,  render: h =&amp;gt; h(App),&amp;#125;).$mount(&apos;#app&apos;) store/index.js123456789101112131415161718192021222324252627282930import Vue from &apos;vue&apos;impor">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vuex">
+<meta property="og:url" content="https://github.com/JacobHsu/vue/2019/05/10/vuex/index.html">
+<meta property="og:site_name" content="Vue.js">
+<meta property="og:description" content="main.js12345import store from &apos;./store&apos;new Vue(&amp;#123;  store,  render: h =&amp;gt; h(App),&amp;#125;).$mount(&apos;#app&apos;) store/index.js123456789101112131415161718192021222324252627282930import Vue from &apos;vue&apos;impor">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-10T02:04:53.927Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vuex">
+<meta name="twitter:description" content="main.js12345import store from &apos;./store&apos;new Vue(&amp;#123;  store,  render: h =&amp;gt; h(App),&amp;#125;).$mount(&apos;#app&apos;) store/index.js123456789101112131415161718192021222324252627282930import Vue from &apos;vue&apos;impor">
+  
+    <link rel="alternate" href="/vue/atom.xml" title="Vue.js" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/vue/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/vue/" id="logo">Vue.js</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/vue/">Home</a>
+        
+          <a class="main-nav-link" href="/vue/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/vue/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/JacobHsu/vue"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-vuex" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/vue/2019/05/10/vuex/" class="article-date">
+  <time datetime="2019-05-10T02:02:06.884Z" itemprop="datePublished">2019-05-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Vuex
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>main.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">'./store'</span></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  store,</span><br><span class="line">  render: <span class="function"><span class="params">h</span> =&gt;</span> h(App),</span><br><span class="line">&#125;).$mount(<span class="string">'#app'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>store/index.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line"></span><br><span class="line">Vue.use(Vuex)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">    state: &#123;</span><br><span class="line">        count: <span class="number">10</span>,</span><br><span class="line">        numb: <span class="number">10086</span></span><br><span class="line">    &#125;,</span><br><span class="line">    getters: &#123;</span><br><span class="line">        add: <span class="function">(<span class="params">state, getter</span>) =&gt;</span> &#123;</span><br><span class="line">            state.count = getter.add;</span><br><span class="line">            <span class="keyword">return</span> state.count;</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    mutations: &#123;</span><br><span class="line">        increment(state) &#123;</span><br><span class="line">            state.count = <span class="number">2</span>;</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    actions: &#123;</span><br><span class="line">        actionA(&#123; dispatch, commit &#125;) &#123;</span><br><span class="line">            <span class="keyword">return</span> commit(<span class="string">'add'</span>);</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;); </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> store;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/JacobHsu/vue/2019/05/10/vuex/" data-id="cjvrqtskc000958sbgedf5v4g" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/vue/2019/05/17/slots/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          slots 插槽
+        
+      </div>
+    </a>
+  
+  
+    <a href="/vue/2019/04/19/router/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Vue Router</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/04/">April 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/vue/2019/05/17/slots/">slots 插槽</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/05/10/vuex/">Vuex</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/04/19/router/">Vue Router</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/04/19/watch/">Watch</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/04/18/diff/">Different</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Jacob Hsu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/vue/" class="mobile-nav-link">Home</a>
+  
+    <a href="/vue/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/vue/fancybox/jquery.fancybox.css">
+  <script src="/vue/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/vue/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

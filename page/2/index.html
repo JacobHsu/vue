@@ -98,7 +98,216 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/pit/" data-id="cjunhtgnd0005pgsbt0yxfr6d" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/pit/" data-id="cjvrqtsk4000258sbo7bzl80b" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-vue_vs_react" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/vue/2019/04/18/vue_vs_react/" class="article-date">
+  <time datetime="2019-04-18T01:57:58.577Z" itemprop="datePublished">2019-04-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/vue/2019/04/18/vue_vs_react/">Vue與React</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最大的變化是React推廣了Virtual DOM並創造了新的語法——JSX，<code>JSX</code>允許開發者在JavaScript中書寫HTML（即<code>HTML in JavaScript</code>）。</p>
+<p>Vue致力解決的問題與React一致，但卻提供了另外一套解決方案。Vue使用<code>模板系統</code>而不是JSX，使其對現有應用的升級更加容易。這是因為模板用的就是<code>普通的HTML</code>，通過Vue來整合現有的系統是比較容易的</p>
+<h4 id="相似之處"><a href="#相似之處" class="headerlink" title="相似之處"></a>相似之處</h4><p>都是JavaScript的UI框架，專注於創造前端的富應用<br>Reat與Vue只有框架的骨架，其他的功能如路由、狀態管理等是框架分離的組件。  </p>
+<p>相似但略有不同之處是它們配套框架的處理方法。<br>相同之處在於，兩個框架都專注於UI層，其他的功能如路由、狀態管理等都交由同伴框架進行處理。<br>而不同之處是在於它們如何關聯它們各自的配套框架。<br>Vue的核心團隊維護著<code>vue-router</code>和<code>vuex</code>，它們都是作為官方推薦的存在。<br>而React的<code>react-router</code>和<code>react-redux</code>則是由社區成員維護，它們都不是官方維護的。  </p>
+<h3 id="Virtual-DOM"><a href="#Virtual-DOM" class="headerlink" title="Virtual DOM"></a>Virtual DOM</h3><p>Vue與React的其中最大一個相似之處，就是他們都使用了<code>Virtual DOM</code>。<br>虛擬DOM，DOM樹的虛擬表現。它的誕生是基於這麼一個概念：改變真實的DOM狀態遠比改變一個JavaScript對象的花銷要大得多</p>
+<p>Virtual DOM是一個映射真實DOM的JavaScript對象，如果需要改變任何元素的狀態，那麼是先在Virtual DOM上進行改變，而不是直接改變真實的DOM。當有變化產生時，一個新的Virtual DOM對象會被創建並<strong>計算新舊Virtual DOM之間的差別</strong>。之後這些差別會應用在真實的DOM上。</p>
+<p><strong>計算差異的算法是高性能框架的秘密所在，React和Vue在實現上有點不同。</strong></p>
+<p>Vue宣稱可以更快地計算出Virtual DOM的差異，這是由於它在渲染過程中，會跟蹤每一個組件的依賴關係，<strong>不需要重新渲染整個組件樹</strong>。</p>
+<p>而對於React而言，<strong>每當應用的狀態被改變時，全部子組件都會重新渲染</strong>。當然，這可以通過shouldComponentUpdate這個生命週期方法來進行控制，但Vue將此視為默認的優化。</p>
+<h3 id="組件化"><a href="#組件化" class="headerlink" title="組件化"></a>組件化</h3><p>React與Vue都鼓勵組件化應用。這本質上說，是建議你將你的應用分拆成一個個功能明確的模塊，每個模塊之間可以通過合適的方式互相聯繫。</p>
+<p>在Vue中，如果你遵守一定的規則，你可以使用單文件組件。<br>HTML, JavaScript和CSS都寫在一個文件之中。你不再需要在.vue組件文件中引入CSS，雖然這也是可以的。<br>React也是非常相似的，JavaScript與JSX被寫入同一個組件文件中。  </p>
+<h3 id="Props"><a href="#Props" class="headerlink" title="Props"></a>Props</h3><p>我們可以看到React和Vue都有<code>props</code>的概念，這是<code>properties</code>的簡寫。<br>props在組件中是一個特殊的屬性，<strong>允許父組件往子組件傳送數據</strong>。  </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.keys(<span class="keyword">this</span>.state.pastadishes).map(<span class="function"><span class="params">key</span> =&gt;</span></span><br><span class="line">    &lt;PastaItem index=&#123;key&#125; key=&#123;key&#125; details=&#123;<span class="keyword">this</span>.state.pastadishes[key]&#125; addToOrder=&#123;<span class="keyword">this</span>.addToOrder&#125; orders=&#123;<span class="keyword">this</span>.state.orders[key]&#125; /&gt;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>上面的JSX庫組中，index, key, details, orders 與 addToOrder都是<code>props</code>，數據會被下傳到子組件<code>PastaItem</code>中去。<br>在React中，這是必須的，它依賴一個<code>單一數據源</code>作為它的<code>狀態</code>  </p>
+<p>而在Vue中，props略有不同。它們一樣是在組件中被定義，但Vue依賴於模板語法，你可以通過模板的循環函數更高效地展示傳入的數據。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;pasta-item v-<span class="keyword">for</span>=<span class="string">"(item, key) in samplePasta"</span> :item=<span class="string">"item"</span> :key=<span class="string">"key"</span> @order=<span class="string">"handleOrder(key)"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">pasta-item</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>這是模板的實現，但這代碼完全能工作，然而在React中展現相同數據會更麻煩一點。  </p>
+<h3 id="模板-vs-JSX"><a href="#模板-vs-JSX" class="headerlink" title="模板 vs JSX"></a>模板 vs JSX</h3><p>React與Vue最大的不同是模板的編寫。<br>Vue鼓勵你去寫近似常規HTML的模板。寫起來很接近標準HTML元素，只是多了一些屬性。<br>Vue鼓勵你去使用HTML模板去進行渲染，使用相似於Angular風格的方法去輸出動態的內容。因此，通過把原有的模板整合成新的Vue模板，Vue很容易提供舊的應用的升級。這也讓新來者很容易適應它的語法。  </p>
+<p>另一方面，React推薦你所有的模板通用JavaScript的語法擴展——JSX書寫。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">  &lt;pasta-item v-<span class="keyword">for</span>=<span class="string">"(item, key) in samplePasta"</span> :item=<span class="string">"item"</span> :key=<span class="string">"key"</span> @order=<span class="string">"handleOrder(key)"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">pasta-item</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul className=<span class="string">"pasta-list"</span>&gt;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">Object</span>.keys(<span class="keyword">this</span>.state.pastadishes).map(<span class="function"><span class="params">key</span> =&gt;</span></span><br><span class="line">            &lt;PastaItem index=&#123;key&#125; key=&#123;key&#125; details=&#123;<span class="keyword">this</span>.state.pastadishes[key]&#125; addToOrder=&#123;<span class="keyword">this</span>.addToOrder&#125; orders=&#123;<span class="keyword">this</span>.state.orders[key]&#125; /&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&lt;<span class="regexp">/ul&gt;</span></span><br></pre></td></tr></table></figure>
+<p>React/JSX乍看之下，覺得非常囉嗦，但使用JavaScript而不是模板來開發，賦予了開發者許多編程能力。<br>JSX只是JavaScript混合著XML語法，然而一旦你掌握了它，它使用起來會讓你感到暢快。<br>而相反的觀點是Vue的模板語法去除了往視圖/組件中添加邏輯的誘惑，保持了關注點分離。  </p>
+<h3 id="狀態管理-vs-對象屬性"><a href="#狀態管理-vs-對象屬性" class="headerlink" title="狀態管理 vs 對象屬性"></a>狀態管理 vs 對象屬性</h3><p>狀態是React關鍵的概念。也有一些配套框架被設計為管理一個大的state對象，如Redux。此外，state對象在React應用中是不可變的，意味著它不能被直接改變。在React中你需要使用<code>setState()</code>方法去更新狀態。<br>在Vue中，state對象並不是必須的，數據由data屬性在Vue對象中進行管理。<br>而在Vue中，則不需要使用如setState()之類的方法去改變它的狀態，在Vue對象中，data參數就是應用中數據的保存者。</p>
+<p>對於管理大型應用中的狀態這一話題而言，Vue.js的作者尤雨溪曾說過，Vue解決方案適用於小型應用，但對於對於大型應用而言不太適合。<br>多數情況下，框架內置的狀態管理是不足以支撐大型應用的，Redux或Vuex等狀態管理方案是必須使用的。</p>
+<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p><a href="https://deliciousbrains.com/vue-vs-react-battle-javascript" target="_blank" rel="noopener">https://deliciousbrains.com/vue-vs-react-battle-javascript</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/vue_vs_react/" data-id="cjvrqtskr000b58sbc5qz5iv6" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-lifecycle" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/vue/2019/04/18/lifecycle/" class="article-date">
+  <time datetime="2019-04-18T01:57:58.577Z" itemprop="datePublished">2019-04-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/vue/2019/04/18/lifecycle/">Vue生命週期</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Vue執行了一連串工作，包含在原始資料加料、建立Vue Instance、編譯樣板、綁定資料等，隨著資料新增修改，週而復始直到刪除，稱為生命週期(Lifecycle)。</p>
+<p>從開始創建、初始化數據、編譯模板、掛載Dom→渲染、更新→渲染、卸載等一系列過程</p>
+<p>在他做這些工作的時機點前後，提供你客製化的空間，稱為<code>Hook</code>(如圖上白底紅字的部分)。</p>
+<p><img src="https://cn.vuejs.org/images/lifecycle.png" alt="lifecycle"></p>
+<table>
+<thead>
+<tr>
+<th>生命週期鉤子</th>
+<th style="text-align:center">組件狀態</th>
+<th style="text-align:right">最佳實踐</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>beforeCreate</td>
+<td style="text-align:center">實例初始化之後，數據與事件配置之前</td>
+<td style="text-align:right">初始化非響應式變量</td>
+</tr>
+<tr>
+<td>created</td>
+<td style="text-align:center">已將data和methods掛載vue到實例上，未掛載到DOM</td>
+<td style="text-align:right">可初始化ajax請求，頁面的初始化</td>
+</tr>
+<tr>
+<td>beforeMount</td>
+<td style="text-align:center">模板編譯完成，但未掛載，無法讀取DOM</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>mounted</td>
+<td style="text-align:center">實例掛載到DOM上，此時可以通過DOM API獲取到DOM節點</td>
+<td style="text-align:right">常用於獲取VNode信息和操作，ajax請求</td>
+</tr>
+<tr>
+<td>beforeupdate</td>
+<td style="text-align:center">響應式數據更新時調用</td>
+<td style="text-align:right">適合在更新之前訪問現有的DOM，比如手動移除已添加的事件監聽器</td>
+</tr>
+<tr>
+<td>updated</td>
+<td style="text-align:center">當組件響應式變量變更時調用，可執行依賴於DOM的操作</td>
+<td style="text-align:right">避免在這個鉤子函數中操作數據，可能陷入死循環</td>
+</tr>
+<tr>
+<td>beforeDestroy</td>
+<td style="text-align:center">實例銷毀之前調用</td>
+<td style="text-align:right">常用於銷毀定時器、解綁全局事件、銷毀插件對象等操作</td>
+</tr>
+<tr>
+<td>destroyed</td>
+<td style="text-align:center">實例銷毀後調用，調用後，Vue 實例指示的所有東西都會解綁定，所有的事件監聽器會被移除，所有的子實例也會被銷毀</td>
+</tr>
+</tbody>
+</table>
+<p>資料在created以後才存取得到(意味別把資料初始化跟ajax寫在beforeCreate)<br>created階段的ajax請求與mounted請求的區別：<br>前者頁面視圖未出現，如果請求信息過多，頁面會長時間處於白屏狀態<br>如果要對 DOM 做動作，記得要在 mounted 掛鉤中，它如同 onload 事件，或是 jQuery 中的 ready()  </p>
+<table>
+<thead>
+<tr>
+<th>生命週期鉤子</th>
+<th style="text-align:center">組件狀態</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>beforeCreate</td>
+<td style="text-align:center">不能訪問到data、computed、watch、methods上的方法和數據</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>created</td>
+<td style="text-align:center">可訪問方法和數據，不能訪問到$el屬性，$ref屬性內容為空數組</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>beforeMount</td>
+<td style="text-align:center">在掛載開始之前被調用`，找到對應的template，並編譯成render函數</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>mounted</td>
+<td style="text-align:center">$ref屬性可以訪問</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>beforeupdate</td>
+<td style="text-align:center">發生在虛擬DOM打補丁之前</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>updated</td>
+<td style="text-align:center">虛擬 DOM 重新渲染和打補丁之後調用</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>beforeDestroy</td>
+<td style="text-align:center">這一步，實例仍然完全可用，this仍能獲取到實例</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>destroyed</td>
+<td style="text-align:center">所有的子實例會被銷毀</td>
+</tr>
+</tbody>
+</table>
+<p>初始化組件時，僅執行了beforeCreate/Created/beforeMount/mounted四個鉤子函數</p>
+<p>當改變data中定義的變量（響應式變量）時，會執行beforeUpdate/updated鉤子函數</p>
+<p>當切換組件（當前組件未緩存）時，會執行beforeDestory/destroyed鉤子函數</p>
+<p>初始化和銷毀時的生命鉤子函數均只會執行一次，  beforeUpdate/updated可多次執行</p>
+<p><a href="https://jsbin.com/melanen/edit?html,js,console,output" target="_blank" rel="noopener">https://jsbin.com/melanen/edit?html,js,console,output</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    a: <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">== beforeCreate ==</span><br><span class="line"><span class="keyword">this</span>.a: <span class="literal">undefined</span></span><br><span class="line"><span class="keyword">this</span>.$el: <span class="literal">undefined</span></span><br><span class="line"></span><br><span class="line">== created ==</span><br><span class="line"><span class="keyword">this</span>.a: <span class="number">1</span></span><br><span class="line"><span class="keyword">this</span>.$el: <span class="literal">undefined</span></span><br><span class="line"></span><br><span class="line">== mounted ==</span><br><span class="line"><span class="keyword">this</span>.a: <span class="number">1</span></span><br><span class="line"><span class="keyword">this</span>.$el: [object HTMLDivElement]</span><br></pre></td></tr></table></figure>
+<p><code>beforeCreate</code>時，資料和元素掛載都還沒被建立<br><code>created</code>時，資料已經可以取得了，但元素掛載還沒<br><code>mounted</code>時，全部都被建立了，如果你想改變 DOM 或資料，可以在這裡做，因為它還沒被瀏覽器「畫」出來，必須直到<br><code>updated</code> 執行時，才會把最終的結果畫在瀏覽器上被看到。</p>
+<h3 id="父子組件的生命週期"><a href="#父子組件的生命週期" class="headerlink" title="父子組件的生命週期"></a>父子組件的生命週期</h3><p>1.僅當子組件完成掛載後，父組件才會掛載<br>2.當子組件完成掛載後，父組件會主動執行一次  3.beforeUpdate/updated鉤子函數（僅首次）<br>4.父子組件在data變化中是分別監控的，但是在更新props中的數據是關聯的（可實踐）<br>銷毀父組件時，先將子組件銷毀後才會銷毀父組件  </p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p><a href="https://vuejs.org/v2/guide/instance.html#Lifecycle-Diagram" target="_blank" rel="noopener">Lifecycle Diagram</a><br><a href="https://juejin.im/entry/5aee8fbb518825671952308c" target="_blank" rel="noopener">https://juejin.im/entry/5aee8fbb518825671952308c</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/lifecycle/" data-id="cjvrqtsk9000658sbpl69dk2s" class="article-share-link">Share</a>
       
       
     </footer>
@@ -131,7 +340,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/04/">April 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/04/">April 2019</a></li></ul>
     </div>
   </div>
 
@@ -144,6 +353,14 @@
       <ul>
         
           <li>
+            <a href="/vue/2019/05/17/slots/">slots 插槽</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/05/10/vuex/">Vuex</a>
+          </li>
+        
+          <li>
             <a href="/vue/2019/04/19/router/">Vue Router</a>
           </li>
         
@@ -153,14 +370,6 @@
         
           <li>
             <a href="/vue/2019/04/18/diff/">Different</a>
-          </li>
-        
-          <li>
-            <a href="/vue/2019/04/18/keep-alive/">keep-alive</a>
-          </li>
-        
-          <li>
-            <a href="/vue/2019/04/18/hello-world/">Hello World</a>
           </li>
         
       </ul>
