@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Event Handling | Vue.js</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="事件修饰符   12&amp;lt;!-- 提交事件不再重载页面 --&amp;gt;&amp;lt;form v-on:submit.prevent=&quot;onSubmit&quot;&amp;gt;&amp;lt;/form&amp;gt; 假設我們今天有一顆按鈕，但是我不希望他就這樣直接submit出去，那怎麼辦？我還是希望他按下按鈕之後會跑出“here I am！”，但是他不要送出資訊轉到submit.html，那這時我們要怎麼做？很簡單，我們只要寫">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Event Handling">
+<meta property="og:url" content="https://github.com/JacobHsu/vue/2019/05/29/events/index.html">
+<meta property="og:site_name" content="Vue.js">
+<meta property="og:description" content="事件修饰符   12&amp;lt;!-- 提交事件不再重载页面 --&amp;gt;&amp;lt;form v-on:submit.prevent=&quot;onSubmit&quot;&amp;gt;&amp;lt;/form&amp;gt; 假設我們今天有一顆按鈕，但是我不希望他就這樣直接submit出去，那怎麼辦？我還是希望他按下按鈕之後會跑出“here I am！”，但是他不要送出資訊轉到submit.html，那這時我們要怎麼做？很簡單，我們只要寫">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-29T03:28:29.779Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Event Handling">
+<meta name="twitter:description" content="事件修饰符   12&amp;lt;!-- 提交事件不再重载页面 --&amp;gt;&amp;lt;form v-on:submit.prevent=&quot;onSubmit&quot;&amp;gt;&amp;lt;/form&amp;gt; 假設我們今天有一顆按鈕，但是我不希望他就這樣直接submit出去，那怎麼辦？我還是希望他按下按鈕之後會跑出“here I am！”，但是他不要送出資訊轉到submit.html，那這時我們要怎麼做？很簡單，我們只要寫">
+  
+    <link rel="alternate" href="/vue/atom.xml" title="Vue.js" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/vue/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/vue/" id="logo">Vue.js</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/vue/">Home</a>
+        
+          <a class="main-nav-link" href="/vue/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/vue/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/JacobHsu/vue"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-events" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/vue/2019/05/29/events/" class="article-date">
+  <time datetime="2019-05-29T03:26:05.698Z" itemprop="datePublished">2019-05-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Event Handling
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://cn.vuejs.org/v2/guide/events.html" target="_blank" rel="noopener">事件修饰符</a>  </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 提交事件不再重载页面 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">v-on:submit.prevent</span>=<span class="string">"onSubmit"</span>&gt;</span><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><a href="https://nowills.blogspot.com/2016/08/vue-js-vuejsv-on.html" target="_blank" rel="noopener">假設我們今天有一顆按鈕，但是我不希望他就這樣直接submit出去，那怎麼辦？</a><br>我還是希望他按下按鈕之後會跑出“here I am！”，但是他不要送出資訊轉到submit.html，那這時我們要怎麼做？<br>很簡單，我們只要寫<code>v-on:submit.prevent</code>就好了  </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/JacobHsu/vue/2019/05/29/events/" data-id="cjw8rqa3e00000gsb918wnjuk" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/vue/2019/05/17/slots/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">slots 插槽</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/04/">April 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/vue/2019/05/29/events/">Event Handling</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/05/17/slots/">slots 插槽</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/05/10/vuex/">Vuex</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/04/19/router/">Vue Router</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/04/19/watch/">Watch</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Jacob Hsu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/vue/" class="mobile-nav-link">Home</a>
+  
+    <a href="/vue/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/vue/fancybox/jquery.fancybox.css">
+  <script src="/vue/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/vue/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
