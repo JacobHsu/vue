@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Handling Errors in Vue.js | Vue.js</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="三種類型的錯誤引用一個不能存在的變量：123&amp;lt;div id=&quot;app&quot; v-cloak&amp;gt;  Hello, &amp;#123;&amp;#123;name&amp;#125;&amp;#125;&amp;lt;/div&amp;gt; 運行後不會拋出錯誤，但是在控制台會有[Vue warn]消息 Codepen 將變量綁定到一個被計算出來的屬性，計算的時候會拋出異常：1234567891011121314&amp;lt;div id=&quot;ap">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Handling Errors in Vue.js">
+<meta property="og:url" content="https://github.com/JacobHsu/vue/2019/06/18/handling-errors/index.html">
+<meta property="og:site_name" content="Vue.js">
+<meta property="og:description" content="三種類型的錯誤引用一個不能存在的變量：123&amp;lt;div id=&quot;app&quot; v-cloak&amp;gt;  Hello, &amp;#123;&amp;#123;name&amp;#125;&amp;#125;&amp;lt;/div&amp;gt; 運行後不會拋出錯誤，但是在控制台會有[Vue warn]消息 Codepen 將變量綁定到一個被計算出來的屬性，計算的時候會拋出異常：1234567891011121314&amp;lt;div id=&quot;ap">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-06-18T02:22:15.737Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Handling Errors in Vue.js">
+<meta name="twitter:description" content="三種類型的錯誤引用一個不能存在的變量：123&amp;lt;div id=&quot;app&quot; v-cloak&amp;gt;  Hello, &amp;#123;&amp;#123;name&amp;#125;&amp;#125;&amp;lt;/div&amp;gt; 運行後不會拋出錯誤，但是在控制台會有[Vue warn]消息 Codepen 將變量綁定到一個被計算出來的屬性，計算的時候會拋出異常：1234567891011121314&amp;lt;div id=&quot;ap">
+  
+    <link rel="alternate" href="/vue/atom.xml" title="Vue.js" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/vue/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/vue/" id="logo">Vue.js</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/vue/">Home</a>
+        
+          <a class="main-nav-link" href="/vue/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/vue/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/JacobHsu/vue"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-handling-errors" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/vue/2019/06/18/handling-errors/" class="article-date">
+  <time datetime="2019-06-18T01:39:11.885Z" itemprop="datePublished">2019-06-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Handling Errors in Vue.js
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="三種類型的錯誤"><a href="#三種類型的錯誤" class="headerlink" title="三種類型的錯誤"></a>三種類型的錯誤</h1><h3 id="引用一個不能存在的變量："><a href="#引用一個不能存在的變量：" class="headerlink" title="引用一個不能存在的變量："></a>引用一個不能存在的變量：</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"app"</span> v-cloak&gt;</span><br><span class="line">  Hello, &#123;&#123;name&#125;&#125;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+<p>運行後不會拋出錯誤，但是在控制台會有<code>[Vue warn]</code>消息</p>
+<p><a href="https://codepen.io/cfjedimaster/embed/qweOKB?height=265&amp;theme-id=0&amp;default-tab=js%2Cresult&amp;user=cfjedimaster&amp;slug-hash=qweOKB&amp;pen-title=Error1A&amp;name=cp_embed_1" target="_blank" rel="noopener">Codepen</a></p>
+<h3 id="將變量綁定到一個被計算出來的屬性，計算的時候會拋出異常："><a href="#將變量綁定到一個被計算出來的屬性，計算的時候會拋出異常：" class="headerlink" title="將變量綁定到一個被計算出來的屬性，計算的時候會拋出異常："></a>將變量綁定到一個被計算出來的屬性，計算的時候會拋出異常：</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"app"</span> v-cloak&gt;</span><br><span class="line">  Hello, &#123;&#123;name2&#125;&#125;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">const app = new Vue(&#123;</span></span><br><span class="line"><span class="regexp">  el:'#app',</span></span><br><span class="line"><span class="regexp">  computed:&#123;</span></span><br><span class="line"><span class="regexp">    name2() &#123;</span></span><br><span class="line"><span class="regexp">      return x;</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;)</span></span><br><span class="line"><span class="regexp">&lt;/</span>script&gt;</span><br></pre></td></tr></table></figure>
+<p><a href="https://codepen.io/cfjedimaster/embed/BEXoOw?height=265&amp;theme-id=0&amp;default-tab=js%2Cresult&amp;user=cfjedimaster&amp;slug-hash=BEXoOw&amp;pen-title=Error1B&amp;name=cp_embed_2" target="_blank" rel="noopener">Codepen</a></p>
+<p>###　執行一個會拋出異常的方法</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span> <span class="attr">v-cloak</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"doIt"</span>&gt;</span>Do It<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript"><span class="keyword">const</span> app = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">  el:<span class="string">'#app'</span>,</span></span><br><span class="line"><span class="undefined">  methods:&#123;</span></span><br><span class="line"><span class="undefined">	  doIt() &#123;</span></span><br><span class="line"><span class="javascript">		  <span class="keyword">return</span> x;</span></span><br><span class="line"><span class="undefined">	  &#125;</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined">&#125;)</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>這個錯誤在控制台也<code>[Vue warn]</code>和常規報錯。和計算錯誤的區別在於，只有你點擊了按鈕才會觸發函數調用，才會報錯。</p>
+<p><a href="https://codepen.io/cfjedimaster/embed/oOKjJb?height=265&amp;theme-id=0&amp;default-tab=js%2Cresult&amp;user=cfjedimaster&amp;slug-hash=oOKjJb&amp;pen-title=Error1C&amp;name=cp_embed_3" target="_blank" rel="noopener">Codepen</a> </p>
+<blockquote>
+<p>如果在組件渲染時出現運行錯誤，錯誤將會被傳遞至全局 <code>Vue.config.errorHandler</code> 配置函數 (如果已設置)。利用這個鉤子函數來配合錯誤跟蹤服務是個不錯的主意。比如 <a href="https://sentry.io/for/vue/" target="_blank" rel="noopener">Sentry</a>，它為 Vue 提供了官方集成。</p>
+</blockquote>
+<h1 id="Vue中異常處理包含以下幾個方面的技巧："><a href="#Vue中異常處理包含以下幾個方面的技巧：" class="headerlink" title="Vue中異常處理包含以下幾個方面的技巧："></a>Vue中異常處理包含以下幾個方面的技巧：</h1><p><a href="https://vuejs.org/v2/api/#errorHandler" target="_blank" rel="noopener">errorHandler</a><br><a href="https://vuejs.org/v2/api/#warnHandler" target="_blank" rel="noopener">warnHandler</a> </p>
+<blockquote>
+<p>Note this only works during development and is ignored in production.<br>renderError<br><a href="https://link.juejin.im/?target=https%3A%2F%2Fcn.vuejs.org%2Fv2%2Fapi%2F%23errorCaptured" target="_blank" rel="noopener">errorCaptured</a><br><a href="https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onerror" target="_blank" rel="noopener">window.onerror</a> (不僅僅針對Vue)  </p>
+</blockquote>
+<h3 id="errorHandler"><a href="#errorHandler" class="headerlink" title="errorHandler"></a><a href="https://vuejs.org/v2/api/#errorHandler" target="_blank" rel="noopener">errorHandler</a></h3><p><code>err</code>指代error對象，<code>info</code>是一個Vue特有的字符串(信息非常有用的)，<code>vm</code>指代Vue應用本身。記住在一個頁面你可以有多個Vue應用。這個error handler作用到所有的應用。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Vue.config.errorHandler = <span class="function"><span class="keyword">function</span>(<span class="params">err, vm, info</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`Error: <span class="subst">$&#123;err.toString()&#125;</span>\nInfo: <span class="subst">$&#123;info&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>1.變量錯誤不會觸發errorHandler，它只是一個warning。<br>2.計算錯誤會拋出錯誤被errorHandler捕獲：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Error</span>: <span class="built_in">ReferenceError</span>: x is not defined</span><br><span class="line">Info: render</span><br></pre></td></tr></table></figure></p>
+<p>3.方法錯誤也會被捕獲：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Error</span>: <span class="built_in">ReferenceError</span>: x is not defined</span><br><span class="line">Info: v-on handler</span><br></pre></td></tr></table></figure></p>
+<h3 id="renderError"><a href="#renderError" class="headerlink" title="renderError"></a>renderError</h3><p>和前面兩個不同，這個技巧不適用於全局，和組件相關。並且只適用於非生產環境。</p>
+<p><a href="https://codepen.io/cfjedimaster/embed/NmQrwa?height=265&amp;theme-id=0&amp;default-tab=result&amp;user=cfjedimaster&amp;slug-hash=NmQrwa&amp;pen-title=Error1B%20with%20renderError&amp;name=cp_embed_7" target="_blank" rel="noopener">codepen</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Vue.config.productionTip = <span class="literal">false</span>;</span><br><span class="line">Vue.config.devtools = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">Vue.config.errorHandler = <span class="function"><span class="keyword">function</span>(<span class="params">err, vm, info</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`Error: <span class="subst">$&#123;err.toString()&#125;</span>\nInfo: <span class="subst">$&#123;info&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Vue.config.warnHandler = <span class="function"><span class="keyword">function</span>(<span class="params">msg, vm, trace</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`Warn: <span class="subst">$&#123;msg&#125;</span>\nTrace: <span class="subst">$&#123;trace&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el:<span class="string">'#app'</span>,</span><br><span class="line">  computed:&#123;</span><br><span class="line">    name2() &#123;</span><br><span class="line">      <span class="keyword">return</span> x;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  renderError (h, err) &#123;</span><br><span class="line">    <span class="keyword">return</span> h(<span class="string">'pre'</span>, &#123; <span class="attr">style</span>: &#123; <span class="attr">color</span>: <span class="string">'red'</span> &#125;&#125;, err.stack)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="errorCaptured"><a href="#errorCaptured" class="headerlink" title="errorCaptured"></a>errorCaptured</h3><p>這個error Handler只能在父組件中處理子組件的錯誤。據我所知，我們沒法直接在Vue的主實例(main instance)中使用它。</p>
+<p>errorCaptured是個很有趣的特性，我想哪些構建組件庫的開發者應該會用到吧。這個特性更像是一個面向組件開發者而不是一般開發者。</p>
+<p><a href="https://link.juejin.im/?target=https%3A%2F%2Fcodepen.io%2Fcfjedimaster%2Fembed%2FMRMbYJ%3Fheight%3D265%26theme-id%3D0%26default-tab%3Djs%252Cresult%26user%3Dcfjedimaster%26slug-hash%3DMRMbYJ%26pen-title%3DError1%26name%3Dcp_embed_8" target="_blank" rel="noopener">實例</a></p>
+<h3 id="window-onerror-終極技巧"><a href="#window-onerror-終極技巧" class="headerlink" title="window.onerror 終極技巧"></a>window.onerror 終極技巧</h3><p>最後也是最重要的一個候選項 <code>window.onerror</code>。<br>它是一個全局的異常處理函數，可以抓取所有的JavaScript異常。</p>
+<p>如果你定義了<code>onerror</code>，但是沒有啟用<code>Vue.config.errorHandler</code>，那麼有很多異常都抓不到。Vue希望你要定義它，否則異常不會拋出去的</p>
+<p><a href="https://codepen.io/cfjedimaster/embed/WWVowN?height=265&amp;theme-id=0&amp;default-tab=js%2Cresult&amp;user=cfjedimaster&amp;slug-hash=WWVowN&amp;pen-title=Error1C%20with%20Handler%20(window" target="_blank" rel="noopener">運行實例</a>)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onerror = <span class="function"><span class="keyword">function</span>(<span class="params">message, source, line, column, error</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'ONE ERROR HANDLER TO RULE THEM ALL:'</span>, message);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Vue.config.productionTip = <span class="literal">false</span>;</span><br><span class="line">Vue.config.devtools = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">Vue.config.errorHandler = <span class="function"><span class="keyword">function</span>(<span class="params">err, vm, info</span>) </span>&#123;</span><br><span class="line">  <span class="comment">//oopsIDidItAgain();</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`Error: <span class="subst">$&#123;err.toString()&#125;</span>\nInfo: <span class="subst">$&#123;info&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el:<span class="string">'#app'</span>,</span><br><span class="line">  methods:&#123;</span><br><span class="line">    doIt() &#123;</span><br><span class="line">      <span class="keyword">return</span> x;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="References"><a href="#References" class="headerlink" title="References"></a>References</h4><p><a href="https://www.raymondcamden.com/2019/05/01/handling-errors-in-vuejs" target="_blank" rel="noopener">Handling Errors in Vue.js</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/JacobHsu/vue/2019/06/18/handling-errors/" data-id="cjx16nbmh0000p8sbfzrjqjfv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/vue/2019/05/29/events/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Event Handling</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/04/">April 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/vue/2019/06/18/handling-errors/">Handling Errors in Vue.js</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/05/29/events/">Event Handling</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/05/17/slots/">slots 插槽</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/05/10/vuex/">Vuex</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/04/19/router/">Vue Router</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Jacob Hsu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/vue/" class="mobile-nav-link">Home</a>
+  
+    <a href="/vue/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/vue/fancybox/jquery.fancybox.css">
+  <script src="/vue/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/vue/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

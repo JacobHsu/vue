@@ -90,12 +90,12 @@
 <p><code></code>：將數據解析為純文本，不能輸出真正的html，在頁面加載時顯示花括號，所以通常使用v-html和v-text代替，且花括號方式在以後可能被取消</p>
 <p><code>v-html=&quot;html&quot;</code>：輸出真正的html</p>
 <p><code>v-text=&quot;text&quot;</code>：將數據解析為純文本，不能輸出真正的html，與花括號的區別是在頁面加載時不顯示花括號</p>
-<p><a href="https://jsbin.com/wadoyiqabo/edit?html,output" target="_blank" rel="noopener">https://jsbin.com/wadoyiqabo/edit?html,output</a><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">　　<span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123;message&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span> <span class="comment">&lt;!-- 輸出：&lt;span&gt;通過雙括號綁定&lt;/span&gt; --&gt;</span></span><br><span class="line">　　<span class="tag">&lt;<span class="name">p</span> <span class="attr">v-html</span>=<span class="string">"html"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span> <span class="comment">&lt;!-- 輸出：html標籤在渲染的時候被解析 --&gt;</span></span><br><span class="line">　　<span class="tag">&lt;<span class="name">p</span> <span class="attr">v-text</span>=<span class="string">"text"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span> <span class="comment">&lt;!-- 輸出：&lt;span&gt;html標籤在渲染的時候被源碼輸出&lt;/span&gt; --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">　　let app = new Vue(&#123;</span></span><br><span class="line"><span class="undefined">　　el: "#app",</span></span><br><span class="line"><span class="undefined">　　data: &#123;</span></span><br><span class="line"><span class="xml">　　　　message: "<span class="tag">&lt;<span class="name">span</span>&gt;</span>通過雙括號綁定<span class="tag">&lt;/<span class="name">span</span>&gt;</span>",</span></span><br><span class="line"><span class="xml">　　　　html: "<span class="tag">&lt;<span class="name">span</span>&gt;</span>html標籤在渲染的時候被解析<span class="tag">&lt;/<span class="name">span</span>&gt;</span>",</span></span><br><span class="line"><span class="xml">　　　　text: "<span class="tag">&lt;<span class="name">span</span>&gt;</span>html標籤在渲染的時候被源碼輸出<span class="tag">&lt;/<span class="name">span</span>&gt;</span>",</span></span><br><span class="line"><span class="undefined">　　&#125;</span></span><br><span class="line"><span class="undefined">&#125;);</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><a href="https://jsbin.com/wadoyiqabo/edit?html,output" target="_blank" rel="noopener">https://jsbin.com/wadoyiqabo/edit?html,output</a><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">　　<span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123;message&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span> <span class="comment">&lt;!-- 輸出：&lt;span&gt;通過雙括號綁定&lt;/span&gt; --&gt;</span></span><br><span class="line">　　<span class="tag">&lt;<span class="name">p</span> <span class="attr">v-html</span>=<span class="string">"html"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span> <span class="comment">&lt;!-- 輸出：html標籤在渲染的時候被解析 --&gt;</span></span><br><span class="line">　　<span class="tag">&lt;<span class="name">p</span> <span class="attr">v-text</span>=<span class="string">"text"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span> <span class="comment">&lt;!-- 輸出：&lt;span&gt;html標籤在渲染的時候被源碼輸出&lt;/span&gt; --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">　　<span class="keyword">let</span> app = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">　　el: <span class="string">"#app"</span>,</span></span><br><span class="line"><span class="undefined">　　data: &#123;</span></span><br><span class="line"><span class="xml">　　　　message: "<span class="tag">&lt;<span class="name">span</span>&gt;</span>通過雙括號綁定<span class="tag">&lt;/<span class="name">span</span>&gt;</span>",</span></span><br><span class="line"><span class="xml">　　　　html: "<span class="tag">&lt;<span class="name">span</span>&gt;</span>html標籤在渲染的時候被解析<span class="tag">&lt;/<span class="name">span</span>&gt;</span>",</span></span><br><span class="line"><span class="xml">　　　　text: "<span class="tag">&lt;<span class="name">span</span>&gt;</span>html標籤在渲染的時候被源碼輸出<span class="tag">&lt;/<span class="name">span</span>&gt;</span>",</span></span><br><span class="line"><span class="undefined">　　&#125;</span></span><br><span class="line"><span class="undefined">&#125;);</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/diff/" data-id="cjw8rqa3m00010gsb31wixpvr" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/diff/" data-id="cjx16nbn10002p8sbkqjg3udk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -140,7 +140,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/04/">April 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/04/">April 2019</a></li></ul>
     </div>
   </div>
 
@@ -151,6 +151,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/vue/2019/06/18/handling-errors/">Handling Errors in Vue.js</a>
+          </li>
         
           <li>
             <a href="/vue/2019/05/29/events/">Event Handling</a>
@@ -166,10 +170,6 @@
         
           <li>
             <a href="/vue/2019/04/19/router/">Vue Router</a>
-          </li>
-        
-          <li>
-            <a href="/vue/2019/04/19/watch/">Watch</a>
           </li>
         
       </ul>
