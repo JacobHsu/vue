@@ -5,19 +5,19 @@
   
 
   
-  <title>render function | Vue.js</title>
+  <title>Vue.set | Vue.js</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Vue 推薦使用在絕大多數情況下使用 template 來創建你的 HTML。然而在一些場景中，你真的需要 JavaScript 的完全編程的能力，這就是 render 函數，它比 template 更接近編譯器。   如果你真的需要重複很多次的元素/組件，你可以使用工廠函數來實現。例如，下面這個例子 render 函數完美有效地渲染了 20 個相同的段落： https://jsbin.com/l">
+  <meta name="description" content="Vue2 如何使用Vue.set? 123456789const app = new Vue(&amp;#123;   //data中已經存在info根屬性  data: &amp;#123;    a: 1  &amp;#125;  // render: h =&amp;gt; h(Suduko)&amp;#125;).$mount(&apos;#app1&apos;)Vue.set(app.data, &apos;b&apos;, 2) output : error Vu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="render function">
-<meta property="og:url" content="https://github.com/JacobHsu/vue/2019/04/18/render-function/index.html">
+<meta property="og:title" content="Vue.set">
+<meta property="og:url" content="https://github.com/JacobHsu/vue/2019/07/02/vue.set/index.html">
 <meta property="og:site_name" content="Vue.js">
-<meta property="og:description" content="Vue 推薦使用在絕大多數情況下使用 template 來創建你的 HTML。然而在一些場景中，你真的需要 JavaScript 的完全編程的能力，這就是 render 函數，它比 template 更接近編譯器。   如果你真的需要重複很多次的元素/組件，你可以使用工廠函數來實現。例如，下面這個例子 render 函數完美有效地渲染了 20 個相同的段落： https://jsbin.com/l">
+<meta property="og:description" content="Vue2 如何使用Vue.set? 123456789const app = new Vue(&amp;#123;   //data中已經存在info根屬性  data: &amp;#123;    a: 1  &amp;#125;  // render: h =&amp;gt; h(Suduko)&amp;#125;).$mount(&apos;#app1&apos;)Vue.set(app.data, &apos;b&apos;, 2) output : error Vu">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-18T01:57:58.577Z">
+<meta property="og:updated_time" content="2019-07-02T01:59:01.525Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="render function">
-<meta name="twitter:description" content="Vue 推薦使用在絕大多數情況下使用 template 來創建你的 HTML。然而在一些場景中，你真的需要 JavaScript 的完全編程的能力，這就是 render 函數，它比 template 更接近編譯器。   如果你真的需要重複很多次的元素/組件，你可以使用工廠函數來實現。例如，下面這個例子 render 函數完美有效地渲染了 20 個相同的段落： https://jsbin.com/l">
+<meta name="twitter:title" content="Vue.set">
+<meta name="twitter:description" content="Vue2 如何使用Vue.set? 123456789const app = new Vue(&amp;#123;   //data中已經存在info根屬性  data: &amp;#123;    a: 1  &amp;#125;  // render: h =&amp;gt; h(Suduko)&amp;#125;).$mount(&apos;#app1&apos;)Vue.set(app.data, &apos;b&apos;, 2) output : error Vu">
   
     <link rel="alternate" href="/vue/atom.xml" title="Vue.js" type="application/atom+xml">
   
@@ -64,10 +64,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-render-function" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-vue.set" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/vue/2019/04/18/render-function/" class="article-date">
-  <time datetime="2019-04-18T01:57:58.577Z" itemprop="datePublished">2019-04-18</time>
+    <a href="/vue/2019/07/02/vue.set/" class="article-date">
+  <time datetime="2019-07-02T01:53:00.490Z" itemprop="datePublished">2019-07-02</time>
 </a>
     
   </div>
@@ -78,7 +78,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      render function
+      Vue.set
     </h1>
   
 
@@ -86,14 +86,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Vue 推薦使用在絕大多數情況下使用 template 來創建你的 HTML。然而在一些場景中，你真的需要 JavaScript 的完全編程的能力，這就是 <code>render 函數</code>，它比 template 更接近編譯器。  </p>
-<p>如果你真的需要重複很多次的元素/組件，你可以使用工廠函數來實現。<br>例如，下面<a href="https://cn.vuejs.org/v2/guide/render-function.html#%E7%BA%A6%E6%9D%9F" target="_blank" rel="noopener">這個例子</a> render 函數完美有效地渲染了 20 個相同的段落：</p>
-<p><a href="https://jsbin.com/lidohak/edit?html,js,output" target="_blank" rel="noopener">https://jsbin.com/lidohak/edit?html,js,output</a><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">render: <span class="function"><span class="keyword">function</span> (<span class="params">createElement</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> createElement(<span class="string">'div'</span>,</span><br><span class="line">    <span class="built_in">Array</span>.apply(<span class="literal">null</span>, &#123; <span class="attr">length</span>: <span class="number">20</span> &#125;).map(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> createElement(<span class="string">'p'</span>, <span class="string">'hi'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
+        <p><a href="https://segmentfault.com/q/1010000008472683" target="_blank" rel="noopener">Vue2 如何使用Vue.set?</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">   <span class="comment">//data中已經存在info根屬性</span></span><br><span class="line">  data: &#123;</span><br><span class="line">    a: <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// render: h =&gt; h(Suduko)</span></span><br><span class="line">&#125;).$mount(<span class="string">'#app1'</span>)</span><br><span class="line"></span><br><span class="line">Vue.set(app.data, <span class="string">'b'</span>, <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p>output : error</p>
+<p>Vue 不允許動態添加<a href="https://cn.vuejs.org/v2/guide/reactivity.html" target="_blank" rel="noopener">根級響應式屬性</a>。</p>
+<blockquote>
+<p>不能在直接data上增加屬性，可以在data裡的對象上增加屬性。<br>例如:Vue.set(vm.someobj, {a,”b”})</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el:<span class="string">"#app-demo"</span>,</span><br><span class="line">    data:&#123;</span><br><span class="line">        msg:&#123;</span><br><span class="line">            age:<span class="number">18</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">Vue.set(app.msg,<span class="string">"name"</span>,<span class="string">"jacobhsu"</span>);</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/render-function/" data-id="cjxl5zrg8000bmcsbmvzxwnr7" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/07/02/vue.set/" data-id="cjxl5zrg20008mcsbay37je4z" class="article-share-link">Share</a>
       
       
     </footer>
@@ -102,19 +106,10 @@
     
 <nav id="article-nav">
   
-    <a href="/vue/2019/04/18/optimization/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Optimization
-        
-      </div>
-    </a>
   
-  
-    <a href="/vue/2019/04/18/lifecycle/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/vue/2019/06/19/event-handling/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Vue生命週期</div>
+      <div class="article-nav-title">Event Handling</div>
     </a>
   
 </nav>

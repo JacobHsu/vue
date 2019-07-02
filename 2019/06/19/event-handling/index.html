@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Event Handling | Vue.js</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="事件修饰符更好的方式是：方法只有纯粹的数据逻辑，而不是去处理 DOM 事件细节。 为了解决这个问题，Vue.js 为 v-on 提供了事件修饰符。 .stop 等同於event.stopPropagation()，防止事件冒泡。.prevent 等同於event.preventDefault()，防止執行預設的行為。.capture 與事件冒泡的方向相反，事件捕獲 (event capturing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Event Handling">
+<meta property="og:url" content="https://github.com/JacobHsu/vue/2019/06/19/event-handling/index.html">
+<meta property="og:site_name" content="Vue.js">
+<meta property="og:description" content="事件修饰符更好的方式是：方法只有纯粹的数据逻辑，而不是去处理 DOM 事件细节。 为了解决这个问题，Vue.js 为 v-on 提供了事件修饰符。 .stop 等同於event.stopPropagation()，防止事件冒泡。.prevent 等同於event.preventDefault()，防止執行預設的行為。.capture 與事件冒泡的方向相反，事件捕獲 (event capturing">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-06-19T03:32:46.827Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Event Handling">
+<meta name="twitter:description" content="事件修饰符更好的方式是：方法只有纯粹的数据逻辑，而不是去处理 DOM 事件细节。 为了解决这个问题，Vue.js 为 v-on 提供了事件修饰符。 .stop 等同於event.stopPropagation()，防止事件冒泡。.prevent 等同於event.preventDefault()，防止執行預設的行為。.capture 與事件冒泡的方向相反，事件捕獲 (event capturing">
+  
+    <link rel="alternate" href="/vue/atom.xml" title="Vue.js" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/vue/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/vue/" id="logo">Vue.js</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/vue/">Home</a>
+        
+          <a class="main-nav-link" href="/vue/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/vue/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/JacobHsu/vue"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-event-handling" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/vue/2019/06/19/event-handling/" class="article-date">
+  <time datetime="2019-06-19T03:18:10.403Z" itemprop="datePublished">2019-06-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Event Handling
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="事件修饰符"><a href="#事件修饰符" class="headerlink" title="事件修饰符"></a><a href="https://cn.vuejs.org/v2/guide/events.html" target="_blank" rel="noopener">事件修饰符</a></h1><p>更好的方式是：方法只有纯粹的数据逻辑，而不是去处理 DOM 事件细节。</p>
+<p>为了解决这个问题，Vue.js 为 <code>v-on</code> 提供了<code>事件修饰符</code>。</p>
+<p><code>.stop</code> 等同於<code>event.stopPropagation()</code>，防止事件冒泡。<br><code>.prevent</code> 等同於<code>event.preventDefault()</code>，防止執行預設的行為。<br><code>.capture</code> 與事件冒泡的方向相反，事件捕獲 (event capturing) 是由外而內的。<br><code>.self</code> 只會觸發自己範圍內的事件，不包含子元素。<br><code>.once</code> 只會觸發一次<br><code>.passive</code>  </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 阻止单击事件继续传播 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-on:click.stop</span>=<span class="string">"doThis"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 提交事件不再重载页面 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">v-on:submit.prevent</span>=<span class="string">"onSubmit"</span>&gt;</span><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>###　.prevent</p>
+<p>使用　<code>&lt;a href=&quot;#&quot;&gt;</code>　當成點擊的按鈕時，通常會使用　<code>event.preventDefault()</code>　，防止瀏覽器的網址列出現 <code>#</code>。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">type</span>=<span class="string">"button"</span> @<span class="attr">click.prevent</span>=<span class="string">"prompt"</span>&gt;</span>按我取得訊息<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>$&#123; msg &#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span>,</span><br><span class="line">  delimiters: [<span class="string">'$&#123;'</span>, <span class="string">'&#125;'</span>],</span><br><span class="line">  data: &#123;</span><br><span class="line">    msg: <span class="string">'沒發生任何事情！'</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    prompt() &#123;</span><br><span class="line">      <span class="keyword">this</span>.msg = <span class="string">'按鈕被按了！監聽到 click 事件。'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><a href="https://cythilya.github.io/2017/04/17/vue-methods-and-event-handling/" target="_blank" rel="noopener">Vue.js: Methods 與事件處理 (Event Handling)</a>  </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/JacobHsu/vue/2019/06/19/event-handling/" data-id="cjxl5zrf60000mcsbzm5f2z1t" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/vue/2019/07/02/vue.set/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Vue.set
+        
+      </div>
+    </a>
+  
+  
+    <a href="/vue/2019/06/18/handling-errors/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Handling Errors in Vue.js</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/04/">April 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/vue/2019/07/02/vue.set/">Vue.set</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/06/19/event-handling/">Event Handling</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/06/18/handling-errors/">Handling Errors in Vue.js</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/05/29/events/">Event Handling</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/05/17/slots/">slots 插槽</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Jacob Hsu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/vue/" class="mobile-nav-link">Home</a>
+  
+    <a href="/vue/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/vue/fancybox/jquery.fancybox.css">
+  <script src="/vue/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/vue/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
