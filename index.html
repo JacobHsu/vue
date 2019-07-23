@@ -84,11 +84,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="Image"><a href="#Image" class="headerlink" title="Image"></a>Image</h2><p>KycForm.vue 父  </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">kyc-image</span> <span class="attr">v-for</span>=<span class="string">"img in imgArr"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:key</span>=<span class="string">"img.pos"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:text</span>=<span class="string">"img.text"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:imgSrc.sync</span>=<span class="string">"form.imageList[img.pos]"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:id</span>=<span class="string">"`img_$&#123;img.pos&#125;`"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">class</span>=<span class="string">"mt-3"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">kyc-image</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>KycImage.vue 子  </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">accept</span>=<span class="string">"image/jpeg, image/png"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">type</span>=<span class="string">"file"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:id</span>=<span class="string">"(id)"</span></span></span><br><span class="line"><span class="tag">    @<span class="attr">change</span>=<span class="string">"handleLoad"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:class</span>=<span class="string">"[$style.idimg__input]"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// props 父組件 傳遞資料給 子組件</span></span><br><span class="line">props: &#123;</span><br><span class="line">  imgSrc: &#123;</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    <span class="keyword">default</span>: <span class="literal">null</span></span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">  handleLoad(evt) &#123;</span><br><span class="line">    <span class="keyword">this</span>.isLoading = <span class="literal">true</span></span><br><span class="line">    <span class="keyword">const</span> imgFile = evt.target.files[<span class="number">0</span>]</span><br><span class="line">    <span class="comment">// console.log(imgFile, 'orig image')</span></span><br><span class="line">    <span class="keyword">if</span> (!imgFile) &#123;</span><br><span class="line">      <span class="keyword">this</span>.applyStyle(<span class="literal">null</span>)</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">this</span>.applyStyle(<span class="keyword">this</span>.imgSrc) <span class="comment">// this.imgSrc 從props來 </span></span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 將圖片套用在CSS</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  applyStyle(src) &#123;</span><br><span class="line">    <span class="keyword">const</span> imgStyle = <span class="keyword">this</span>.$refs[<span class="keyword">this</span>.id].style <span class="comment">// $refs 取得 DOM Element 的資訊</span></span><br><span class="line">    imgStyle.backgroundImage = <span class="string">''</span></span><br><span class="line">    <span class="keyword">if</span> (src) &#123;</span><br><span class="line">      imgStyle.backgroundImage = <span class="string">`url(<span class="subst">$&#123;src&#125;</span>)`</span></span><br><span class="line">      <span class="keyword">this</span>.$emit(<span class="string">'update:imgSrc'</span>, src) <span class="comment">// 子組件 傳遞資料給 父組件 </span></span><br><span class="line">      imgStyle.backgroundRepeat = <span class="string">'no-repeat'</span></span><br><span class="line">      imgStyle.backgroundPosition = <span class="string">'center'</span></span><br><span class="line">      imgStyle.backgroundSize = <span class="string">'contain'</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">this</span>.$emit(<span class="string">'update:imgSrc'</span>, <span class="string">''</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.isLoading = <span class="literal">false</span></span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/07/23/image/" data-id="cjyffehub0003k4sbtm9cwrjo" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/07/23/image/" data-id="cjyfflcxl00059csb91ctlhs9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -130,7 +136,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/07/22/err/" data-id="cjyffehua0002k4sbfj03wrog" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/07/22/err/" data-id="cjyfflcx800009csbr5sw6o33" class="article-share-link">Share</a>
       
       
     </footer>
@@ -173,7 +179,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/07/02/vue.set/" data-id="cjyffehuq000gk4sba4r74jcf" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/07/02/vue.set/" data-id="cjyfflcxy000e9csb8c17ynw2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -218,7 +224,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/06/19/event-handling/" data-id="cjyffehu80001k4sbwyfdauf9" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/06/19/event-handling/" data-id="cjyfflcxj00039csbi44ks5cv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -284,7 +290,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/06/18/handling-errors/" data-id="cjyffehuf0006k4sbdu4jyfm5" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/06/18/handling-errors/" data-id="cjyfflcxk00049csbfbwp0b16" class="article-share-link">Share</a>
       
       
     </footer>
@@ -323,7 +329,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/05/29/events/" data-id="cjyffehue0005k4sbwgl46nar" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/05/29/events/" data-id="cjyfflcxh00029csbks8fte5t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -367,7 +373,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/05/17/slots/" data-id="cjyffehuo000ek4sbc0ykn6l6" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/05/17/slots/" data-id="cjyfflcxx000d9csbslo8nk3s" class="article-share-link">Share</a>
       
       
     </footer>
@@ -405,7 +411,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/05/10/vuex/" data-id="cjyffehun000dk4sbznucb0zs" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/05/10/vuex/" data-id="cjyfflcy0000g9csbl8bep9cy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -458,7 +464,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/19/router/" data-id="cjyffehuj000ak4sbcqiajhvy" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/19/router/" data-id="cjyfflcxw000c9csb4m2woy6j" class="article-share-link">Share</a>
       
       
     </footer>
@@ -502,7 +508,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/19/watch/" data-id="cjyffehur000hk4sb1zhrbzxp" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/19/watch/" data-id="cjyfflcxz000f9csbmuu019c7" class="article-share-link">Share</a>
       
       
     </footer>
