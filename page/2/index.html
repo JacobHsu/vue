@@ -62,6 +62,47 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-diff" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/vue/2019/04/18/diff/" class="article-date">
+  <time datetime="2019-04-18T05:54:41.791Z" itemprop="datePublished">2019-04-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/vue/2019/04/18/diff/">Different</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://www.cnblogs.com/jinbang/p/6790592.html" target="_blank" rel="noopener">vuejs v-text 和 v-html的区别</a></p>
+<p><code></code>：將數據解析為純文本，不能輸出真正的html，在頁面加載時顯示花括號，所以通常使用v-html和v-text代替，且花括號方式在以後可能被取消</p>
+<p><code>v-html=&quot;html&quot;</code>：輸出真正的html</p>
+<p><code>v-text=&quot;text&quot;</code>：將數據解析為純文本，不能輸出真正的html，與花括號的區別是在頁面加載時不顯示花括號</p>
+<p><a href="https://jsbin.com/wadoyiqabo/edit?html,output" target="_blank" rel="noopener">https://jsbin.com/wadoyiqabo/edit?html,output</a><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">　　<span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123;message&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span> <span class="comment">&lt;!-- 輸出：&lt;span&gt;通過雙括號綁定&lt;/span&gt; --&gt;</span></span><br><span class="line">　　<span class="tag">&lt;<span class="name">p</span> <span class="attr">v-html</span>=<span class="string">"html"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span> <span class="comment">&lt;!-- 輸出：html標籤在渲染的時候被解析 --&gt;</span></span><br><span class="line">　　<span class="tag">&lt;<span class="name">p</span> <span class="attr">v-text</span>=<span class="string">"text"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span> <span class="comment">&lt;!-- 輸出：&lt;span&gt;html標籤在渲染的時候被源碼輸出&lt;/span&gt; --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">　　let app = new Vue(&#123;</span></span><br><span class="line"><span class="undefined">　　el: "#app",</span></span><br><span class="line"><span class="undefined">　　data: &#123;</span></span><br><span class="line"><span class="xml">　　　　message: "<span class="tag">&lt;<span class="name">span</span>&gt;</span>通過雙括號綁定<span class="tag">&lt;/<span class="name">span</span>&gt;</span>",</span></span><br><span class="line"><span class="xml">　　　　html: "<span class="tag">&lt;<span class="name">span</span>&gt;</span>html標籤在渲染的時候被解析<span class="tag">&lt;/<span class="name">span</span>&gt;</span>",</span></span><br><span class="line"><span class="xml">　　　　text: "<span class="tag">&lt;<span class="name">span</span>&gt;</span>html標籤在渲染的時候被源碼輸出<span class="tag">&lt;/<span class="name">span</span>&gt;</span>",</span></span><br><span class="line"><span class="undefined">　　&#125;</span></span><br><span class="line"><span class="undefined">&#125;);</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/diff/" data-id="cjyffehu20000k4sb5xxq4zju" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-keep-alive" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/vue/2019/04/18/keep-alive/" class="article-date">
@@ -96,7 +137,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/keep-alive/" data-id="cjydtc6jm0007xwsbiopiwcas" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/keep-alive/" data-id="cjyffehug0007k4sbkqbvi3cf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -148,52 +189,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/optimization/" data-id="cjydtc6jl0006xwsbcisilcl6" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/vue/2019/04/18/hello-world/" class="article-date">
-  <time datetime="2019-04-18T01:57:58.577Z" itemprop="datePublished">2019-04-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/vue/2019/04/18/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/hello-world/" data-id="cjydtc6jh0004xwsbb9r4w0qr" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/optimization/" data-id="cjyffehum000ck4sbs6ip789b" class="article-share-link">Share</a>
       
       
     </footer>
@@ -342,7 +338,52 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/lifecycle/" data-id="cjydtc6jn0008xwsb8a3xf5iq" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/lifecycle/" data-id="cjyffehuh0008k4sb94z2zxtq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/vue/2019/04/18/hello-world/" class="article-date">
+  <time datetime="2019-04-18T01:57:58.577Z" itemprop="datePublished">2019-04-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/vue/2019/04/18/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/hello-world/" data-id="cjyffehud0004k4sbgnnub84w" class="article-share-link">Share</a>
       
       
     </footer>
@@ -402,7 +443,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/vue_vs_react/" data-id="cjydtc6ju000exwsbfqpx3wb4" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/vue_vs_react/" data-id="cjyffehup000fk4sb1abotqry" class="article-share-link">Share</a>
       
       
     </footer>
@@ -479,7 +520,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/q/" data-id="cjydtc6k4000hxwsbcz42rwn2" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/q/" data-id="cjyffehv1000ik4sb2ao2dbiw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -518,7 +559,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/render-function/" data-id="cjydtc6jp000axwsbt8eucw73" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/render-function/" data-id="cjyffehul000bk4sbg3l7o4k8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -564,7 +605,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/pit/" data-id="cjydtc6jo0009xwsbttdb3cuo" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/pit/" data-id="cjyffehui0009k4sbfp8ygiv9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -610,6 +651,10 @@
       <ul>
         
           <li>
+            <a href="/vue/2019/07/23/image/">Image</a>
+          </li>
+        
+          <li>
             <a href="/vue/2019/07/22/err/">Error</a>
           </li>
         
@@ -623,10 +668,6 @@
         
           <li>
             <a href="/vue/2019/06/18/handling-errors/">Handling Errors in Vue.js</a>
-          </li>
-        
-          <li>
-            <a href="/vue/2019/05/29/events/">Event Handling</a>
           </li>
         
       </ul>
