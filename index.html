@@ -62,6 +62,46 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-input" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/vue/2019/08/05/input/" class="article-date">
+  <time datetime="2019-08-05T09:40:42.395Z" itemprop="datePublished">2019-08-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/vue/2019/08/05/input/">Input</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h1><p>vue 设置文本框只能输入正整数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-input @keyup.native=<span class="string">"handleInput"</span> v-model=<span class="string">"form.subjectId"</span> :placeholder=<span class="string">""</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">el-input</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 验证只能输入正整数</span></span><br><span class="line">handleInput() &#123;</span><br><span class="line">    <span class="keyword">this</span>.form.subjectId = <span class="keyword">this</span>.form.subjectId.replace(<span class="regexp">/[^\.\d]/g</span>, <span class="string">''</span>)</span><br><span class="line">    <span class="keyword">this</span>.form.subjectId = <span class="keyword">this</span>.form.subjectId.replace(<span class="string">'.'</span>, <span class="string">''</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://segmentfault.com/q/1010000009478912" target="_blank" rel="noopener">Vue键盘事件为何要加上native？</a><br>现在在组件上使用 v-on 只会监听自定义事件 (组件用 $emit 触发的事件)。<br>如果要监听根元素的原生事件，可以使用 <code>.native</code> 修饰符</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/JacobHsu/vue/2019/08/05/input/" data-id="cjyy7mn9z0006ewsbaqgrseef" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-image" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/vue/2019/07/23/image/" class="article-date">
@@ -94,7 +134,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/07/23/image/" data-id="cjyfflcxl00059csb91ctlhs9" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/07/23/image/" data-id="cjyy7mn9v0003ewsbzer88zem" class="article-share-link">Share</a>
       
       
     </footer>
@@ -136,7 +176,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/07/22/err/" data-id="cjyfflcx800009csbr5sw6o33" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/07/22/err/" data-id="cjyy7mn9f0000ewsb7pwwjg6c" class="article-share-link">Share</a>
       
       
     </footer>
@@ -179,7 +219,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/07/02/vue.set/" data-id="cjyfflcxy000e9csb8c17ynw2" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/07/02/vue.set/" data-id="cjyy7mnad000gewsb2ki3n5je" class="article-share-link">Share</a>
       
       
     </footer>
@@ -224,7 +264,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/06/19/event-handling/" data-id="cjyfflcxj00039csbi44ks5cv" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/06/19/event-handling/" data-id="cjyy7mn9y0005ewsbeki7e32z" class="article-share-link">Share</a>
       
       
     </footer>
@@ -290,7 +330,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/06/18/handling-errors/" data-id="cjyfflcxk00049csbfbwp0b16" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/06/18/handling-errors/" data-id="cjyy7mna20008ewsbqciuto18" class="article-share-link">Share</a>
       
       
     </footer>
@@ -329,7 +369,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/05/29/events/" data-id="cjyfflcxh00029csbks8fte5t" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/05/29/events/" data-id="cjyy7mn9s0001ewsbb77o3q7k" class="article-share-link">Share</a>
       
       
     </footer>
@@ -373,7 +413,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/05/17/slots/" data-id="cjyfflcxx000d9csbslo8nk3s" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/05/17/slots/" data-id="cjyy7mnab000eewsbz1y7r0z3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -411,7 +451,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/05/10/vuex/" data-id="cjyfflcy0000g9csbl8bep9cy" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/05/10/vuex/" data-id="cjyy7mnae000hewsb4r7lblxn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -464,51 +504,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/19/router/" data-id="cjyfflcxw000c9csb4m2woy6j" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-watch" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/vue/2019/04/19/watch/" class="article-date">
-  <time datetime="2019-04-19T02:11:22.425Z" itemprop="datePublished">2019-04-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/vue/2019/04/19/watch/">Watch</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><code>Watch</code> 可讓我們監視某個值，當這個值變動的時候，就去做某些事情。</p>
-<p>例，如果 userName 發生變化，就去執行 _valid 這個 method。使用者輸入了合法的字串。</p>
-<p><a href="https://jsbin.com/zesijokaju/edit?html,output" target="_blank" rel="noopener">https://jsbin.com/zesijokaju/edit?html,output</a></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">p</span>&gt;</span>請輸入使用者名稱。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">v-model</span>=<span class="string">"userName"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">p</span>&gt;</span>$&#123; errMsg &#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    delimiters: [<span class="string">'$&#123;'</span>, <span class="string">'&#125;'</span>],</span><br><span class="line">    data: &#123;</span><br><span class="line">    userName: <span class="string">''</span>,</span><br><span class="line">    errMsg: <span class="string">''</span></span><br><span class="line">    &#125;,</span><br><span class="line">    watch: &#123;</span><br><span class="line">    userName: <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>._valid(value)) &#123;</span><br><span class="line">        <span class="keyword">this</span>.errMsg = <span class="string">'使用者名稱開頭不可為數字。'</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.errMsg = <span class="string">'合法的使用者名稱。'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">    _valid: <span class="function"><span class="keyword">function</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="regexp">/^[0-9]/</span>.test(name);</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-<p>Vue 提供了一種更通用的方式來觀察和響應 Vue 實例上的數據變動：<code>偵聽屬性</code>。當你有一些數據需要隨著其它數據變動而變動時，你很容易濫用 watch——特別是如果你之前使用過 AngularJS。然而，通常更好的做法是使用<code>計算屬性</code>而不是命令式的 watch 回調。</p>
-<p>雖然計算屬性在大多數情況下更合適，但有時也需要一個自定義的偵聽器。這就是為什麼 Vue 通過 watch 選項提供了一個更通用的方法，來響應數據的變化。當需要<strong>在數據變化時執行異步或開銷較大的操作</strong>時，這個方式是最有用的。</p>
-<h4 id="References"><a href="#References" class="headerlink" title="References"></a>References</h4><p><a href="https://cythilya.github.io/2017/04/15/vue-watch/" target="_blank" rel="noopener">Vue.js: Watch</a><br><a href="https://vuejs.org/v2/guide/computed.html" target="_blank" rel="noopener">Computed Properties and Watchers</a>  </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/19/watch/" data-id="cjyfflcxz000f9csbmuu019c7" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/19/router/" data-id="cjyy7mna9000cewsb6lh5dru9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -541,7 +537,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/04/">April 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/04/">April 2019</a></li></ul>
     </div>
   </div>
 
@@ -552,6 +548,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/vue/2019/08/05/input/">Input</a>
+          </li>
         
           <li>
             <a href="/vue/2019/07/23/image/">Image</a>
@@ -567,10 +567,6 @@
         
           <li>
             <a href="/vue/2019/06/19/event-handling/">Event Handling</a>
-          </li>
-        
-          <li>
-            <a href="/vue/2019/06/18/handling-errors/">Handling Errors in Vue.js</a>
           </li>
         
       </ul>
