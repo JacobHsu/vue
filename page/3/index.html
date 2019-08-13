@@ -5,11 +5,11 @@
   
 
   
-  <title>Archives: 2019/5 | Vue.js</title>
+  <title>Vue.js</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="Vue.js">
-<meta property="og:url" content="https://github.com/JacobHsu/vue/archives/2019/05/index.html">
+<meta property="og:url" content="https://github.com/JacobHsu/vue/page/3/index.html">
 <meta property="og:site_name" content="Vue.js">
 <meta property="og:locale" content="default">
 <meta name="twitter:card" content="summary">
@@ -62,76 +62,51 @@
       <div class="outer">
         <section id="main">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/vue/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/vue/2019/05/29/events/" class="archive-article-date">
-  <time datetime="2019-05-29T03:26:05.698Z" itemprop="datePublished">May 29</time>
+    <article id="post-render-function" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/vue/2019/04/18/render-function/" class="article-date">
+  <time datetime="2019-04-18T01:57:58.577Z" itemprop="datePublished">2019-04-18</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
     <h1 itemprop="name">
-      <a class="archive-article-title" href="/vue/2019/05/29/events/">Event Handling</a>
+      <a class="article-title" href="/vue/2019/04/18/render-function/">render function</a>
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/vue/2019/05/17/slots/" class="archive-article-date">
-  <time datetime="2019-05-17T07:05:07.801Z" itemprop="datePublished">May 17</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/vue/2019/05/17/slots/">slots 插槽</a>
-    </h1>
-  
+        <p>Vue 推薦使用在絕大多數情況下使用 template 來創建你的 HTML。然而在一些場景中，你真的需要 JavaScript 的完全編程的能力，這就是 <code>render 函數</code>，它比 template 更接近編譯器。  </p>
+<p>如果你真的需要重複很多次的元素/組件，你可以使用工廠函數來實現。<br>例如，下面<a href="https://cn.vuejs.org/v2/guide/render-function.html#%E7%BA%A6%E6%9D%9F" target="_blank" rel="noopener">這個例子</a> render 函數完美有效地渲染了 20 個相同的段落：</p>
+<p><a href="https://jsbin.com/lidohak/edit?html,js,output" target="_blank" rel="noopener">https://jsbin.com/lidohak/edit?html,js,output</a><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">render: <span class="function"><span class="keyword">function</span> (<span class="params">createElement</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> createElement(<span class="string">'div'</span>,</span><br><span class="line">    <span class="built_in">Array</span>.apply(<span class="literal">null</span>, &#123; <span class="attr">length</span>: <span class="number">20</span> &#125;).map(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> createElement(<span class="string">'p'</span>, <span class="string">'hi'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/vue/2019/05/10/vuex/" class="archive-article-date">
-  <time datetime="2019-05-10T02:02:06.884Z" itemprop="datePublished">May 10</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/vue/2019/05/10/vuex/">Vuex</a>
-    </h1>
-  
-
-    </header>
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/render-function/" data-id="cjz9iyfed000co4sbj7ec3lct" class="article-share-link">Share</a>
+      
+      
+    </footer>
   </div>
+  
 </article>
-  
-  
-    </div></section>
+
+
   
 
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/vue/page/2/">&laquo; Prev</a><a class="page-number" href="/vue/">1</a><a class="page-number" href="/vue/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
 
 </section>
         

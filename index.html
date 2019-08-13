@@ -62,6 +62,45 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-passing-props" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/vue/2019/08/13/passing-props/" class="article-date">
+  <time datetime="2019-08-13T07:52:12.363Z" itemprop="datePublished">2019-08-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/vue/2019/08/13/passing-props/">路由組件傳參</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://router.vuejs.org/zh/guide/essentials/passing-props.html#布尔模式" target="_blank" rel="noopener">路由組件傳參</a></p>
+<p>如果 <code>props</code> 被設置為 <code>true</code>，<code>route.params</code> 將會被設置為組件屬性</p>
+<p>router/index.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">name: <span class="string">'User'</span></span><br><span class="line">component: User,</span><br><span class="line">redirect: &#123; <span class="attr">name</span>: <span class="string">'UserMain'</span> &#125;,</span><br><span class="line">children: [</span><br><span class="line">&#123;</span><br><span class="line">    path: <span class="string">'user/:userID?/:userType?'</span>,</span><br><span class="line">    name: <span class="string">'UserMain'</span>,</span><br><span class="line">    component: UserMain,</span><br><span class="line">    props: <span class="literal">true</span> <span class="comment">// 可用 `this.$route.params.userID` </span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/JacobHsu/vue/2019/08/13/passing-props/" data-id="cjz9jovq80000hksbg3wsri56" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-input" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/vue/2019/08/05/input/" class="article-date">
@@ -92,7 +131,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/08/05/input/" data-id="cjyy7mn9z0006ewsbaqgrseef" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/08/05/input/" data-id="cjz9iyfe20006o4sbq50t9cs0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -134,7 +173,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/07/23/image/" data-id="cjyy7mn9v0003ewsbzer88zem" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/07/23/image/" data-id="cjz9iyfe40007o4sblywm8q40" class="article-share-link">Share</a>
       
       
     </footer>
@@ -176,7 +215,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/07/22/err/" data-id="cjyy7mn9f0000ewsb7pwwjg6c" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/07/22/err/" data-id="cjz9iyfdb0000o4sb88rjfh89" class="article-share-link">Share</a>
       
       
     </footer>
@@ -219,7 +258,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/07/02/vue.set/" data-id="cjyy7mnad000gewsb2ki3n5je" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/07/02/vue.set/" data-id="cjz9iyfek000io4sbepz79fc2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -264,7 +303,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/06/19/event-handling/" data-id="cjyy7mn9y0005ewsbeki7e32z" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/06/19/event-handling/" data-id="cjz9iyfdy0004o4sbsc521xof" class="article-share-link">Share</a>
       
       
     </footer>
@@ -330,7 +369,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/06/18/handling-errors/" data-id="cjyy7mna20008ewsbqciuto18" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/06/18/handling-errors/" data-id="cjz9iyfe10005o4sbqjujf015" class="article-share-link">Share</a>
       
       
     </footer>
@@ -369,7 +408,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/05/29/events/" data-id="cjyy7mn9s0001ewsbb77o3q7k" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/05/29/events/" data-id="cjz9iyfdt0001o4sb6jdd2lrp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -413,7 +452,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/05/17/slots/" data-id="cjyy7mnab000eewsbz1y7r0z3" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/05/17/slots/" data-id="cjz9iyfei000go4sbdexb6ni0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -451,60 +490,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/05/10/vuex/" data-id="cjyy7mnae000hewsb4r7lblxn" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-router" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/vue/2019/04/19/router/" class="article-date">
-  <time datetime="2019-04-19T02:53:36.037Z" itemprop="datePublished">2019-04-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/vue/2019/04/19/router/">Vue Router</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Vue Router: <a href="https://router.vuejs.org/zh/" target="_blank" rel="noopener">介绍</a>  </p>
-<h2 id="vue-router的-hash-和-history-两种模式的区别"><a href="#vue-router的-hash-和-history-两种模式的区别" class="headerlink" title="vue-router的 hash 和 history 两种模式的区别"></a>vue-router的 <code>hash</code> 和 <code>history</code> 两种模式的区别</h2><h4 id="為什麼要有-hash-和-history"><a href="#為什麼要有-hash-和-history" class="headerlink" title="為什麼要有 hash 和 history"></a>為什麼要有 hash 和 history</h4><p>對於 Vue 這類漸進式前端開發框架，為了構建 <strong>SPA（單頁面應用）</strong>，需要引入前端路由系統，這也就是 Vue-Router 存在的意義。前端路由的核心，就在於 —— <strong>改變視圖的同時不會向後端發出請求</strong>。</p>
-<p>為了達到這一目的，瀏覽器當前提供了以下兩種支持：</p>
-<p><code>hash</code> —— 即地址欄 URL 中的 <code>#</code> 符號。比如這個 URL：<a href="http://www.abc.com/#/hello，hash" target="_blank" rel="noopener">http://www.abc.com/#/hello，hash</a> 的值為 #/hello。它的特點在於：hash 雖然出現在 URL 中，但不會被包括在 HTTP 請求中，對後端完全沒有影響，因此改變 hash 不會重新加載頁面。  </p>
-<p><code>history</code> —— 利用了 HTML5 History Interface 中新增的 pushState() 和 replaceState() 方法。（需要特定瀏覽器支持）這兩個方法應用於瀏覽器的歷史記錄棧，在當前已有的 <code>back</code>、<code>forward</code>、<code>go</code> 的基礎之上，它們提供了對歷史記錄進行修改的功能。只是當它們執行修改時，雖然改變了當前的 URL，但瀏覽器不會立即向後端發送請求。</p>
-<p>因此可以說，hash 模式和 history 模式都屬於瀏覽器自身的特性，Vue-Router 只是利用了這兩個特性（通過調用瀏覽器提供的接口）來實現前端路由。</p>
-<p><a href="https://router.vuejs.org/zh/guide/essentials/history-mode.html" target="_blank" rel="noopener">HTML5 History 模式</a> </p>
-<blockquote>
-<p>如果不想要很醜的 hash，我們可以用路由的 history 模式，這種模式充分利用 <code>history.pushState API</code> 來完成 URL 跳轉而無須重新加載頁面。</p>
-</blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  mode: <span class="string">'history'</span>,</span><br><span class="line">  routes: [...]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p><code>history</code> 模式下，前端的 URL 必須和實際向後端發起請求的 URL 一致，如 <code>http://www.abc.com/book/id</code>。如果後端缺少對 <code>/book/id</code> 的路由處理，將返回 <code>404</code> 錯誤。</p>
-<p>Vue-Router 官網裡如此描述：</p>
-<blockquote>
-<p>不過這種模式要玩好，還需要後台配置支持……所以呢，你要在服務端增加一個覆蓋所有情況的候選資源：如果 URL 匹配不到任何靜態資源，則應該返回同一個 index.html 頁面，這個頁面就是你 app 依賴的頁面。</p>
-</blockquote>
-<h3 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h3><p>結合自身例子，對於一般的 <code>Vue + Vue-Router + Webpack + XXX</code> 形式的 Web 開發場景，用 <code>history</code> 模式即可，只需在後端（<code>Apache 或 Nginx</code>）進行簡單的路由配置，同時搭配前端路由的 404 頁面支持。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/19/router/" data-id="cjyy7mna9000cewsb6lh5dru9" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/05/10/vuex/" data-id="cjz9iyfef000eo4sb73ujc920" class="article-share-link">Share</a>
       
       
     </footer>
@@ -518,7 +504,7 @@
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/vue/page/2/">2</a><a class="extend next" rel="next" href="/vue/page/2/">Next &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/vue/page/2/">2</a><a class="page-number" href="/vue/page/3/">3</a><a class="extend next" rel="next" href="/vue/page/2/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -550,6 +536,10 @@
       <ul>
         
           <li>
+            <a href="/vue/2019/08/13/passing-props/">路由組件傳參</a>
+          </li>
+        
+          <li>
             <a href="/vue/2019/08/05/input/">Input</a>
           </li>
         
@@ -563,10 +553,6 @@
         
           <li>
             <a href="/vue/2019/07/02/vue.set/">Vue.set</a>
-          </li>
-        
-          <li>
-            <a href="/vue/2019/06/19/event-handling/">Event Handling</a>
           </li>
         
       </ul>
