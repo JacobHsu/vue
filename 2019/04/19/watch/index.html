@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Vue.js">
 <meta property="og:description" content="Watch 可讓我們監視某個值，當這個值變動的時候，就去做某些事情。 例，如果 userName 發生變化，就去執行 _valid 這個 method。使用者輸入了合法的字串。 https://jsbin.com/zesijokaju/edit?html,output 12345&amp;lt;div id=&quot;app&quot;&amp;gt;   &amp;lt;p&amp;gt;請輸入使用者名稱。&amp;lt;/p&amp;gt;   &amp;lt;in">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-19T02:27:50.930Z">
+<meta property="og:updated_time" content="2019-09-06T09:00:14.316Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Watch">
 <meta name="twitter:description" content="Watch 可讓我們監視某個值，當這個值變動的時候，就去做某些事情。 例，如果 userName 發生變化，就去執行 _valid 這個 method。使用者輸入了合法的字串。 https://jsbin.com/zesijokaju/edit?html,output 12345&amp;lt;div id=&quot;app&quot;&amp;gt;   &amp;lt;p&amp;gt;請輸入使用者名稱。&amp;lt;/p&amp;gt;   &amp;lt;in">
@@ -93,12 +93,15 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    delimiters: [<span class="string">'$&#123;'</span>, <span class="string">'&#125;'</span>],</span><br><span class="line">    data: &#123;</span><br><span class="line">    userName: <span class="string">''</span>,</span><br><span class="line">    errMsg: <span class="string">''</span></span><br><span class="line">    &#125;,</span><br><span class="line">    watch: &#123;</span><br><span class="line">    userName: <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>._valid(value)) &#123;</span><br><span class="line">        <span class="keyword">this</span>.errMsg = <span class="string">'使用者名稱開頭不可為數字。'</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.errMsg = <span class="string">'合法的使用者名稱。'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">    _valid: <span class="function"><span class="keyword">function</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="regexp">/^[0-9]/</span>.test(name);</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
 <p>Vue 提供了一種更通用的方式來觀察和響應 Vue 實例上的數據變動：<code>偵聽屬性</code>。當你有一些數據需要隨著其它數據變動而變動時，你很容易濫用 watch——特別是如果你之前使用過 AngularJS。然而，通常更好的做法是使用<code>計算屬性</code>而不是命令式的 watch 回調。</p>
 <p>雖然計算屬性在大多數情況下更合適，但有時也需要一個自定義的偵聽器。這就是為什麼 Vue 通過 watch 選項提供了一個更通用的方法，來響應數據的變化。當需要<strong>在數據變化時執行異步或開銷較大的操作</strong>時，這個方式是最有用的。</p>
+<h3 id="computed和watch用法異同"><a href="#computed和watch用法異同" class="headerlink" title="computed和watch用法異同"></a>computed和watch用法異同</h3><p>相同：<code>computed</code>和<code>watch</code>都起到監聽/依賴一個數據，並進行處理的作用</p>
+<p>異同：它們其實都是vue對監聽器的實現，只不過<br><code>computed</code>主要用於對同步數據的處理，<br><code>watch</code>則主要用於觀測某個值的變化去完成一段開銷較大的複雜業務邏輯。  </p>
+<p>能用computed的時候優先用computed，避免了多個數據影響其中某個數據時多次調用watch的尷尬情況。</p>
 <h4 id="References"><a href="#References" class="headerlink" title="References"></a>References</h4><p><a href="https://cythilya.github.io/2017/04/15/vue-watch/" target="_blank" rel="noopener">Vue.js: Watch</a><br><a href="https://vuejs.org/v2/guide/computed.html" target="_blank" rel="noopener">Computed Properties and Watchers</a>  </p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/19/watch/" data-id="cjz9iyfej000ho4sbxg4lyn0a" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/19/watch/" data-id="ck07w3h3p000haosbyqadgdyr" class="article-share-link">Share</a>
       
       
     </footer>

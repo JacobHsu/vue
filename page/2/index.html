@@ -101,11 +101,12 @@
 <p>不過這種模式要玩好，還需要後台配置支持……所以呢，你要在服務端增加一個覆蓋所有情況的候選資源：如果 URL 匹配不到任何靜態資源，則應該返回同一個 index.html 頁面，這個頁面就是你 app 依賴的頁面。</p>
 </blockquote>
 <h3 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h3><p>結合自身例子，對於一般的 <code>Vue + Vue-Router + Webpack + XXX</code> 形式的 Web 開發場景，用 <code>history</code> 模式即可，只需在後端（<code>Apache 或 Nginx</code>）進行簡單的路由配置，同時搭配前端路由的 404 頁面支持。</p>
+<h1 id="stackoverflow"><a href="#stackoverflow" class="headerlink" title="stackoverflow"></a>stackoverflow</h1><p><a href="https://stackoverflow.com/questions/47824660/optional-param-in-vuejs-router" target="_blank" rel="noopener">Optional param in vuejs router</a><br>Just adding a question mark <code>?</code> will make it optional.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    path: <span class="string">'/offers/:member?'</span>,</span><br><span class="line">    ...</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/19/router/" data-id="cjz9iyfec000bo4sbrprxgf2p" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/19/router/" data-id="ck07w3h3b0008aosbrxf7ay5j" class="article-share-link">Share</a>
       
       
     </footer>
@@ -144,12 +145,15 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    delimiters: [<span class="string">'$&#123;'</span>, <span class="string">'&#125;'</span>],</span><br><span class="line">    data: &#123;</span><br><span class="line">    userName: <span class="string">''</span>,</span><br><span class="line">    errMsg: <span class="string">''</span></span><br><span class="line">    &#125;,</span><br><span class="line">    watch: &#123;</span><br><span class="line">    userName: <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>._valid(value)) &#123;</span><br><span class="line">        <span class="keyword">this</span>.errMsg = <span class="string">'使用者名稱開頭不可為數字。'</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.errMsg = <span class="string">'合法的使用者名稱。'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">    _valid: <span class="function"><span class="keyword">function</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="regexp">/^[0-9]/</span>.test(name);</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
 <p>Vue 提供了一種更通用的方式來觀察和響應 Vue 實例上的數據變動：<code>偵聽屬性</code>。當你有一些數據需要隨著其它數據變動而變動時，你很容易濫用 watch——特別是如果你之前使用過 AngularJS。然而，通常更好的做法是使用<code>計算屬性</code>而不是命令式的 watch 回調。</p>
 <p>雖然計算屬性在大多數情況下更合適，但有時也需要一個自定義的偵聽器。這就是為什麼 Vue 通過 watch 選項提供了一個更通用的方法，來響應數據的變化。當需要<strong>在數據變化時執行異步或開銷較大的操作</strong>時，這個方式是最有用的。</p>
+<h3 id="computed和watch用法異同"><a href="#computed和watch用法異同" class="headerlink" title="computed和watch用法異同"></a>computed和watch用法異同</h3><p>相同：<code>computed</code>和<code>watch</code>都起到監聽/依賴一個數據，並進行處理的作用</p>
+<p>異同：它們其實都是vue對監聽器的實現，只不過<br><code>computed</code>主要用於對同步數據的處理，<br><code>watch</code>則主要用於觀測某個值的變化去完成一段開銷較大的複雜業務邏輯。  </p>
+<p>能用computed的時候優先用computed，避免了多個數據影響其中某個數據時多次調用watch的尷尬情況。</p>
 <h4 id="References"><a href="#References" class="headerlink" title="References"></a>References</h4><p><a href="https://cythilya.github.io/2017/04/15/vue-watch/" target="_blank" rel="noopener">Vue.js: Watch</a><br><a href="https://vuejs.org/v2/guide/computed.html" target="_blank" rel="noopener">Computed Properties and Watchers</a>  </p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/19/watch/" data-id="cjz9iyfej000ho4sbxg4lyn0a" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/19/watch/" data-id="ck07w3h3p000haosbyqadgdyr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -190,7 +194,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/diff/" data-id="cjz9iyfdv0002o4sbgd6nity7" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/diff/" data-id="ck07w3h300001aosbw264rlgx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -234,7 +238,152 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/keep-alive/" data-id="cjz9iyfe50008o4sblsg948xx" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/keep-alive/" data-id="ck07w3h3e000aaosb27f485oh" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-pit" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/vue/2019/04/18/pit/" class="article-date">
+  <time datetime="2019-04-18T01:57:58.577Z" itemprop="datePublished">2019-04-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/vue/2019/04/18/pit/">vue的坑</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Vue-不能檢測對象屬性的添加或刪除"><a href="#Vue-不能檢測對象屬性的添加或刪除" class="headerlink" title="Vue 不能檢測對象屬性的添加或刪除"></a>Vue 不能檢測對象屬性的添加或刪除</h2><p><a href="https://jsbin.com/mayehetobu/1/edit?html,console,output" target="_blank" rel="noopener">https://jsbin.com/mayehetobu/1/edit?html,console,output</a><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en-US"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;title&gt;My Vue.js App&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">  &lt;script src="https:/</span><span class="regexp">/cdn.jsdelivr.net/</span>vue/latest/vue.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;/head&gt;</span></span><br><span class="line"><span class="string">&lt;body&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;div id="</span>app<span class="string">"&gt;</span></span><br><span class="line"><span class="string">    &#123;&#123; message &#125;&#125;</span></span><br><span class="line"><span class="string">&lt;/div&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;script type="</span>text/javascript<span class="string">"&gt;</span></span><br><span class="line"><span class="string">    new Vue(&#123;</span></span><br><span class="line"><span class="string">      el: '#app',</span></span><br><span class="line"><span class="string">      data: &#123;</span></span><br><span class="line"><span class="string">        message: ''</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    &#125;);</span></span><br><span class="line"><span class="string">    // `vm.message` 是響應的</span></span><br><span class="line"><span class="string">    // 之後設置 `message`</span></span><br><span class="line"><span class="string">    vm.message = 'Hello!'</span></span><br><span class="line"><span class="string">    // `vm.message` 是非響應的</span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>Vue 不允許在已經創建的實例上動態添加新的根級響應式屬性 (root-level reactive property)。<br>然而它可以使用 <code>Vue.set(object, key, value)</code> 方法將響應屬性添加到嵌套的對象上：</p>
+<p><a href="https://jsbin.com/nujomojovo/edit?html,output" target="_blank" rel="noopener">https://jsbin.com/nujomojovo/edit?html,output</a><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">    &lt;p&gt;&#123;&#123;obj&#125;&#125;&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">      obj: &#123;&#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    mounted() &#123;</span><br><span class="line">      <span class="comment">//想要動態添加對象的屬性並且頁面能更新到</span></span><br><span class="line">      <span class="keyword">this</span>.obj.a = <span class="number">1111</span>  <span class="comment">//瀏覽器什麼都沒渲染出來</span></span><br><span class="line">      <span class="keyword">this</span>.$<span class="keyword">set</span>(this.obj,'a',1) // 方法一 &#123; <span class="string">"a"</span>: <span class="number">1</span> &#125;</span><br><span class="line">      <span class="keyword">this</span>.obj = <span class="built_in">Object</span>.assign(&#123;&#125;, <span class="keyword">this</span>.obj,&#123;<span class="attr">a</span>:<span class="number">2</span>&#125;)  <span class="comment">//方法二 可以添加多個屬性 //&#123; "a": 2 &#125;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><a href="https://juejin.im/post/5aa89ab9f265da238b7db328" target="_blank" rel="noopener">https://juejin.im/post/5aa89ab9f265da238b7db328</a>  </p>
+<p><a href="https://jsbin.com/mayehetobu/1/edit?html,console,output" target="_blank" rel="noopener">https://jsbin.com/mayehetobu/1/edit?html,console,output</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">    &#123;&#123; message &#125;&#125;</span><br><span class="line">     dog &#123;&#123; counter.dog &#125;&#125;, cat &#123;&#123; counter.cat &#125;&#125;, penguin &#123;&#123; counter.penguin &#125;&#125;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;script type="text/</span>javascript<span class="string">"&gt;</span></span><br><span class="line"><span class="string">    new Vue(&#123;</span></span><br><span class="line"><span class="string">      el: '#app',</span></span><br><span class="line"><span class="string">      data: &#123;</span></span><br><span class="line"><span class="string">        message: '',</span></span><br><span class="line"><span class="string">        counter: &#123;</span></span><br><span class="line"><span class="string">            // 一開始沒有註冊 penguine，只註冊了 dog 和 cat</span></span><br><span class="line"><span class="string">            dog: 0,</span></span><br><span class="line"><span class="string">            cat: 0</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">      &#125;,</span></span><br><span class="line"><span class="string">      created() &#123;</span></span><br><span class="line"><span class="string">        // 在 created 的時候才建立 penguine 順便設值為 0</span></span><br><span class="line"><span class="string">        // 使用 $set 動態新增響應式組件</span></span><br><span class="line"><span class="string">        this.$set(this.counter, "</span>penguin<span class="string">", 1);</span></span><br><span class="line"><span class="string">      &#125;,</span></span><br><span class="line"><span class="string">      updated() &#123;</span></span><br><span class="line"><span class="string">        // 讓我們可以知道組件有被更新</span></span><br><span class="line"><span class="string">        console.log("</span>view updated<span class="string">");</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    &#125;);</span></span><br><span class="line"><span class="string">    //之後設置 `message`</span></span><br><span class="line"><span class="string">    vm.message = 'Hello!';</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p>物件部分：<a href="https://pjchender.blogspot.com/2017/05/vue-vue-reactivity.html" target="_blank" rel="noopener">一開始沒有被註冊到的物件不會響應式更新</a>  </p>
+<p>ref: <a href="https://cn.vuejs.org/v2/guide/reactivity.html" target="_blank" rel="noopener">深入響應式原理</a>  </p>
+<p>是其非侵入性的響應式系統。數據模型僅僅是普通的 JavaScript 對象。<br>而當你修改它們時，視圖會進行更新。這使得狀態管理非常簡單直接  </p>
+<p><img src="https://cn.vuejs.org/images/data.png" alt="Alt reactivity"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/pit/" data-id="ck07w3h3k000daosb6j62s24e" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-render-function" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/vue/2019/04/18/render-function/" class="article-date">
+  <time datetime="2019-04-18T01:57:58.577Z" itemprop="datePublished">2019-04-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/vue/2019/04/18/render-function/">render function</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Vue 推薦使用在絕大多數情況下使用 template 來創建你的 HTML。然而在一些場景中，你真的需要 JavaScript 的完全編程的能力，這就是 <code>render 函數</code>，它比 template 更接近編譯器。  </p>
+<p>如果你真的需要重複很多次的元素/組件，你可以使用工廠函數來實現。<br>例如，下面<a href="https://cn.vuejs.org/v2/guide/render-function.html#%E7%BA%A6%E6%9D%9F" target="_blank" rel="noopener">這個例子</a> render 函數完美有效地渲染了 20 個相同的段落：</p>
+<p><a href="https://jsbin.com/lidohak/edit?html,js,output" target="_blank" rel="noopener">https://jsbin.com/lidohak/edit?html,js,output</a><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">render: <span class="function"><span class="keyword">function</span> (<span class="params">createElement</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> createElement(<span class="string">'div'</span>,</span><br><span class="line">    <span class="built_in">Array</span>.apply(<span class="literal">null</span>, &#123; <span class="attr">length</span>: <span class="number">20</span> &#125;).map(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> createElement(<span class="string">'p'</span>, <span class="string">'hi'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/render-function/" data-id="ck07w3h3n000faosbt6e6vcjn" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-vue_vs_react" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/vue/2019/04/18/vue_vs_react/" class="article-date">
+  <time datetime="2019-04-18T01:57:58.577Z" itemprop="datePublished">2019-04-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/vue/2019/04/18/vue_vs_react/">Vue與React</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最大的變化是React推廣了Virtual DOM並創造了新的語法——JSX，<code>JSX</code>允許開發者在JavaScript中書寫HTML（即<code>HTML in JavaScript</code>）。</p>
+<p>Vue致力解決的問題與React一致，但卻提供了另外一套解決方案。Vue使用<code>模板系統</code>而不是JSX，使其對現有應用的升級更加容易。這是因為模板用的就是<code>普通的HTML</code>，通過Vue來整合現有的系統是比較容易的</p>
+<h4 id="相似之處"><a href="#相似之處" class="headerlink" title="相似之處"></a>相似之處</h4><p>都是JavaScript的UI框架，專注於創造前端的富應用<br>Reat與Vue只有框架的骨架，其他的功能如路由、狀態管理等是框架分離的組件。  </p>
+<p>相似但略有不同之處是它們配套框架的處理方法。<br>相同之處在於，兩個框架都專注於UI層，其他的功能如路由、狀態管理等都交由同伴框架進行處理。<br>而不同之處是在於它們如何關聯它們各自的配套框架。<br>Vue的核心團隊維護著<code>vue-router</code>和<code>vuex</code>，它們都是作為官方推薦的存在。<br>而React的<code>react-router</code>和<code>react-redux</code>則是由社區成員維護，它們都不是官方維護的。  </p>
+<h3 id="Virtual-DOM"><a href="#Virtual-DOM" class="headerlink" title="Virtual DOM"></a>Virtual DOM</h3><p>Vue與React的其中最大一個相似之處，就是他們都使用了<code>Virtual DOM</code>。<br>虛擬DOM，DOM樹的虛擬表現。它的誕生是基於這麼一個概念：改變真實的DOM狀態遠比改變一個JavaScript對象的花銷要大得多</p>
+<p>Virtual DOM是一個映射真實DOM的JavaScript對象，如果需要改變任何元素的狀態，那麼是先在Virtual DOM上進行改變，而不是直接改變真實的DOM。當有變化產生時，一個新的Virtual DOM對象會被創建並<strong>計算新舊Virtual DOM之間的差別</strong>。之後這些差別會應用在真實的DOM上。</p>
+<p><strong>計算差異的算法是高性能框架的秘密所在，React和Vue在實現上有點不同。</strong></p>
+<p>Vue宣稱可以更快地計算出Virtual DOM的差異，這是由於它在渲染過程中，會跟蹤每一個組件的依賴關係，<strong>不需要重新渲染整個組件樹</strong>。</p>
+<p>而對於React而言，<strong>每當應用的狀態被改變時，全部子組件都會重新渲染</strong>。當然，這可以通過shouldComponentUpdate這個生命週期方法來進行控制，但Vue將此視為默認的優化。</p>
+<h3 id="組件化"><a href="#組件化" class="headerlink" title="組件化"></a>組件化</h3><p>React與Vue都鼓勵組件化應用。這本質上說，是建議你將你的應用分拆成一個個功能明確的模塊，每個模塊之間可以通過合適的方式互相聯繫。</p>
+<p>在Vue中，如果你遵守一定的規則，你可以使用單文件組件。<br>HTML, JavaScript和CSS都寫在一個文件之中。你不再需要在.vue組件文件中引入CSS，雖然這也是可以的。<br>React也是非常相似的，JavaScript與JSX被寫入同一個組件文件中。  </p>
+<h3 id="Props"><a href="#Props" class="headerlink" title="Props"></a>Props</h3><p>我們可以看到React和Vue都有<code>props</code>的概念，這是<code>properties</code>的簡寫。<br>props在組件中是一個特殊的屬性，<strong>允許父組件往子組件傳送數據</strong>。  </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.keys(<span class="keyword">this</span>.state.pastadishes).map(<span class="function"><span class="params">key</span> =&gt;</span></span><br><span class="line">    &lt;PastaItem index=&#123;key&#125; key=&#123;key&#125; details=&#123;<span class="keyword">this</span>.state.pastadishes[key]&#125; addToOrder=&#123;<span class="keyword">this</span>.addToOrder&#125; orders=&#123;<span class="keyword">this</span>.state.orders[key]&#125; /&gt;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>上面的JSX庫組中，index, key, details, orders 與 addToOrder都是<code>props</code>，數據會被下傳到子組件<code>PastaItem</code>中去。<br>在React中，這是必須的，它依賴一個<code>單一數據源</code>作為它的<code>狀態</code>  </p>
+<p>而在Vue中，props略有不同。它們一樣是在組件中被定義，但Vue依賴於模板語法，你可以通過模板的循環函數更高效地展示傳入的數據。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;pasta-item v-<span class="keyword">for</span>=<span class="string">"(item, key) in samplePasta"</span> :item=<span class="string">"item"</span> :key=<span class="string">"key"</span> @order=<span class="string">"handleOrder(key)"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">pasta-item</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>這是模板的實現，但這代碼完全能工作，然而在React中展現相同數據會更麻煩一點。  </p>
+<h3 id="模板-vs-JSX"><a href="#模板-vs-JSX" class="headerlink" title="模板 vs JSX"></a>模板 vs JSX</h3><p>React與Vue最大的不同是模板的編寫。<br>Vue鼓勵你去寫近似常規HTML的模板。寫起來很接近標準HTML元素，只是多了一些屬性。<br>Vue鼓勵你去使用HTML模板去進行渲染，使用相似於Angular風格的方法去輸出動態的內容。因此，通過把原有的模板整合成新的Vue模板，Vue很容易提供舊的應用的升級。這也讓新來者很容易適應它的語法。  </p>
+<p>另一方面，React推薦你所有的模板通用JavaScript的語法擴展——JSX書寫。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">  &lt;pasta-item v-<span class="keyword">for</span>=<span class="string">"(item, key) in samplePasta"</span> :item=<span class="string">"item"</span> :key=<span class="string">"key"</span> @order=<span class="string">"handleOrder(key)"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">pasta-item</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul className=<span class="string">"pasta-list"</span>&gt;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">Object</span>.keys(<span class="keyword">this</span>.state.pastadishes).map(<span class="function"><span class="params">key</span> =&gt;</span></span><br><span class="line">            &lt;PastaItem index=&#123;key&#125; key=&#123;key&#125; details=&#123;<span class="keyword">this</span>.state.pastadishes[key]&#125; addToOrder=&#123;<span class="keyword">this</span>.addToOrder&#125; orders=&#123;<span class="keyword">this</span>.state.orders[key]&#125; /&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&lt;<span class="regexp">/ul&gt;</span></span><br></pre></td></tr></table></figure>
+<p>React/JSX乍看之下，覺得非常囉嗦，但使用JavaScript而不是模板來開發，賦予了開發者許多編程能力。<br>JSX只是JavaScript混合著XML語法，然而一旦你掌握了它，它使用起來會讓你感到暢快。<br>而相反的觀點是Vue的模板語法去除了往視圖/組件中添加邏輯的誘惑，保持了關注點分離。  </p>
+<h3 id="狀態管理-vs-對象屬性"><a href="#狀態管理-vs-對象屬性" class="headerlink" title="狀態管理 vs 對象屬性"></a>狀態管理 vs 對象屬性</h3><p>狀態是React關鍵的概念。也有一些配套框架被設計為管理一個大的state對象，如Redux。此外，state對象在React應用中是不可變的，意味著它不能被直接改變。在React中你需要使用<code>setState()</code>方法去更新狀態。<br>在Vue中，state對象並不是必須的，數據由data屬性在Vue對象中進行管理。<br>而在Vue中，則不需要使用如setState()之類的方法去改變它的狀態，在Vue對象中，data參數就是應用中數據的保存者。</p>
+<p>對於管理大型應用中的狀態這一話題而言，Vue.js的作者尤雨溪曾說過，Vue解決方案適用於小型應用，但對於對於大型應用而言不太適合。<br>多數情況下，框架內置的狀態管理是不足以支撐大型應用的，Redux或Vuex等狀態管理方案是必須使用的。</p>
+<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p><a href="https://deliciousbrains.com/vue-vs-react-battle-javascript" target="_blank" rel="noopener">https://deliciousbrains.com/vue-vs-react-battle-javascript</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/vue_vs_react/" data-id="ck07w3h3o000gaosbdeh7cisz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -383,112 +532,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/lifecycle/" data-id="cjz9iyfe8000ao4sb857u6wy0" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-vue_vs_react" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/vue/2019/04/18/vue_vs_react/" class="article-date">
-  <time datetime="2019-04-18T01:57:58.577Z" itemprop="datePublished">2019-04-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/vue/2019/04/18/vue_vs_react/">Vue與React</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最大的變化是React推廣了Virtual DOM並創造了新的語法——JSX，<code>JSX</code>允許開發者在JavaScript中書寫HTML（即<code>HTML in JavaScript</code>）。</p>
-<p>Vue致力解決的問題與React一致，但卻提供了另外一套解決方案。Vue使用<code>模板系統</code>而不是JSX，使其對現有應用的升級更加容易。這是因為模板用的就是<code>普通的HTML</code>，通過Vue來整合現有的系統是比較容易的</p>
-<h4 id="相似之處"><a href="#相似之處" class="headerlink" title="相似之處"></a>相似之處</h4><p>都是JavaScript的UI框架，專注於創造前端的富應用<br>Reat與Vue只有框架的骨架，其他的功能如路由、狀態管理等是框架分離的組件。  </p>
-<p>相似但略有不同之處是它們配套框架的處理方法。<br>相同之處在於，兩個框架都專注於UI層，其他的功能如路由、狀態管理等都交由同伴框架進行處理。<br>而不同之處是在於它們如何關聯它們各自的配套框架。<br>Vue的核心團隊維護著<code>vue-router</code>和<code>vuex</code>，它們都是作為官方推薦的存在。<br>而React的<code>react-router</code>和<code>react-redux</code>則是由社區成員維護，它們都不是官方維護的。  </p>
-<h3 id="Virtual-DOM"><a href="#Virtual-DOM" class="headerlink" title="Virtual DOM"></a>Virtual DOM</h3><p>Vue與React的其中最大一個相似之處，就是他們都使用了<code>Virtual DOM</code>。<br>虛擬DOM，DOM樹的虛擬表現。它的誕生是基於這麼一個概念：改變真實的DOM狀態遠比改變一個JavaScript對象的花銷要大得多</p>
-<p>Virtual DOM是一個映射真實DOM的JavaScript對象，如果需要改變任何元素的狀態，那麼是先在Virtual DOM上進行改變，而不是直接改變真實的DOM。當有變化產生時，一個新的Virtual DOM對象會被創建並<strong>計算新舊Virtual DOM之間的差別</strong>。之後這些差別會應用在真實的DOM上。</p>
-<p><strong>計算差異的算法是高性能框架的秘密所在，React和Vue在實現上有點不同。</strong></p>
-<p>Vue宣稱可以更快地計算出Virtual DOM的差異，這是由於它在渲染過程中，會跟蹤每一個組件的依賴關係，<strong>不需要重新渲染整個組件樹</strong>。</p>
-<p>而對於React而言，<strong>每當應用的狀態被改變時，全部子組件都會重新渲染</strong>。當然，這可以通過shouldComponentUpdate這個生命週期方法來進行控制，但Vue將此視為默認的優化。</p>
-<h3 id="組件化"><a href="#組件化" class="headerlink" title="組件化"></a>組件化</h3><p>React與Vue都鼓勵組件化應用。這本質上說，是建議你將你的應用分拆成一個個功能明確的模塊，每個模塊之間可以通過合適的方式互相聯繫。</p>
-<p>在Vue中，如果你遵守一定的規則，你可以使用單文件組件。<br>HTML, JavaScript和CSS都寫在一個文件之中。你不再需要在.vue組件文件中引入CSS，雖然這也是可以的。<br>React也是非常相似的，JavaScript與JSX被寫入同一個組件文件中。  </p>
-<h3 id="Props"><a href="#Props" class="headerlink" title="Props"></a>Props</h3><p>我們可以看到React和Vue都有<code>props</code>的概念，這是<code>properties</code>的簡寫。<br>props在組件中是一個特殊的屬性，<strong>允許父組件往子組件傳送數據</strong>。  </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.keys(<span class="keyword">this</span>.state.pastadishes).map(<span class="function"><span class="params">key</span> =&gt;</span></span><br><span class="line">    &lt;PastaItem index=&#123;key&#125; key=&#123;key&#125; details=&#123;<span class="keyword">this</span>.state.pastadishes[key]&#125; addToOrder=&#123;<span class="keyword">this</span>.addToOrder&#125; orders=&#123;<span class="keyword">this</span>.state.orders[key]&#125; /&gt;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>上面的JSX庫組中，index, key, details, orders 與 addToOrder都是<code>props</code>，數據會被下傳到子組件<code>PastaItem</code>中去。<br>在React中，這是必須的，它依賴一個<code>單一數據源</code>作為它的<code>狀態</code>  </p>
-<p>而在Vue中，props略有不同。它們一樣是在組件中被定義，但Vue依賴於模板語法，你可以通過模板的循環函數更高效地展示傳入的數據。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;pasta-item v-<span class="keyword">for</span>=<span class="string">"(item, key) in samplePasta"</span> :item=<span class="string">"item"</span> :key=<span class="string">"key"</span> @order=<span class="string">"handleOrder(key)"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">pasta-item</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
-<p>這是模板的實現，但這代碼完全能工作，然而在React中展現相同數據會更麻煩一點。  </p>
-<h3 id="模板-vs-JSX"><a href="#模板-vs-JSX" class="headerlink" title="模板 vs JSX"></a>模板 vs JSX</h3><p>React與Vue最大的不同是模板的編寫。<br>Vue鼓勵你去寫近似常規HTML的模板。寫起來很接近標準HTML元素，只是多了一些屬性。<br>Vue鼓勵你去使用HTML模板去進行渲染，使用相似於Angular風格的方法去輸出動態的內容。因此，通過把原有的模板整合成新的Vue模板，Vue很容易提供舊的應用的升級。這也讓新來者很容易適應它的語法。  </p>
-<p>另一方面，React推薦你所有的模板通用JavaScript的語法擴展——JSX書寫。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">  &lt;pasta-item v-<span class="keyword">for</span>=<span class="string">"(item, key) in samplePasta"</span> :item=<span class="string">"item"</span> :key=<span class="string">"key"</span> @order=<span class="string">"handleOrder(key)"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">pasta-item</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul className=<span class="string">"pasta-list"</span>&gt;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">Object</span>.keys(<span class="keyword">this</span>.state.pastadishes).map(<span class="function"><span class="params">key</span> =&gt;</span></span><br><span class="line">            &lt;PastaItem index=&#123;key&#125; key=&#123;key&#125; details=&#123;<span class="keyword">this</span>.state.pastadishes[key]&#125; addToOrder=&#123;<span class="keyword">this</span>.addToOrder&#125; orders=&#123;<span class="keyword">this</span>.state.orders[key]&#125; /&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&lt;<span class="regexp">/ul&gt;</span></span><br></pre></td></tr></table></figure>
-<p>React/JSX乍看之下，覺得非常囉嗦，但使用JavaScript而不是模板來開發，賦予了開發者許多編程能力。<br>JSX只是JavaScript混合著XML語法，然而一旦你掌握了它，它使用起來會讓你感到暢快。<br>而相反的觀點是Vue的模板語法去除了往視圖/組件中添加邏輯的誘惑，保持了關注點分離。  </p>
-<h3 id="狀態管理-vs-對象屬性"><a href="#狀態管理-vs-對象屬性" class="headerlink" title="狀態管理 vs 對象屬性"></a>狀態管理 vs 對象屬性</h3><p>狀態是React關鍵的概念。也有一些配套框架被設計為管理一個大的state對象，如Redux。此外，state對象在React應用中是不可變的，意味著它不能被直接改變。在React中你需要使用<code>setState()</code>方法去更新狀態。<br>在Vue中，state對象並不是必須的，數據由data屬性在Vue對象中進行管理。<br>而在Vue中，則不需要使用如setState()之類的方法去改變它的狀態，在Vue對象中，data參數就是應用中數據的保存者。</p>
-<p>對於管理大型應用中的狀態這一話題而言，Vue.js的作者尤雨溪曾說過，Vue解決方案適用於小型應用，但對於對於大型應用而言不太適合。<br>多數情況下，框架內置的狀態管理是不足以支撐大型應用的，Redux或Vuex等狀態管理方案是必須使用的。</p>
-<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p><a href="https://deliciousbrains.com/vue-vs-react-battle-javascript" target="_blank" rel="noopener">https://deliciousbrains.com/vue-vs-react-battle-javascript</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/vue_vs_react/" data-id="cjz9iyfeg000fo4sbyeleojq5" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/vue/2019/04/18/hello-world/" class="article-date">
-  <time datetime="2019-04-18T01:57:58.577Z" itemprop="datePublished">2019-04-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/vue/2019/04/18/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/hello-world/" data-id="cjz9iyfdx0003o4sbriul4jlp" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/lifecycle/" data-id="ck07w3h3j000caosbhuqwn6lc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -540,7 +584,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/optimization/" data-id="cjz9iyfe70009o4sb48msnpw0" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/optimization/" data-id="ck07w3h3h000baosbih4qp3ap" class="article-share-link">Share</a>
       
       
     </footer>
@@ -550,9 +594,9 @@
 
 
   
-    <article id="post-pit" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/vue/2019/04/18/pit/" class="article-date">
+    <a href="/vue/2019/04/18/hello-world/" class="article-date">
   <time datetime="2019-04-18T01:57:58.577Z" itemprop="datePublished">2019-04-18</time>
 </a>
     
@@ -564,7 +608,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/vue/2019/04/18/pit/">vue的坑</a>
+      <a class="article-title" href="/vue/2019/04/18/hello-world/">Hello World</a>
     </h1>
   
 
@@ -572,98 +616,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Vue-不能檢測對象屬性的添加或刪除"><a href="#Vue-不能檢測對象屬性的添加或刪除" class="headerlink" title="Vue 不能檢測對象屬性的添加或刪除"></a>Vue 不能檢測對象屬性的添加或刪除</h2><p><a href="https://jsbin.com/mayehetobu/1/edit?html,console,output" target="_blank" rel="noopener">https://jsbin.com/mayehetobu/1/edit?html,console,output</a><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en-US"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;title&gt;My Vue.js App&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">  &lt;script src="https:/</span><span class="regexp">/cdn.jsdelivr.net/</span>vue/latest/vue.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;/head&gt;</span></span><br><span class="line"><span class="string">&lt;body&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;div id="</span>app<span class="string">"&gt;</span></span><br><span class="line"><span class="string">    &#123;&#123; message &#125;&#125;</span></span><br><span class="line"><span class="string">&lt;/div&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;script type="</span>text/javascript<span class="string">"&gt;</span></span><br><span class="line"><span class="string">    new Vue(&#123;</span></span><br><span class="line"><span class="string">      el: '#app',</span></span><br><span class="line"><span class="string">      data: &#123;</span></span><br><span class="line"><span class="string">        message: ''</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    &#125;);</span></span><br><span class="line"><span class="string">    // `vm.message` 是響應的</span></span><br><span class="line"><span class="string">    // 之後設置 `message`</span></span><br><span class="line"><span class="string">    vm.message = 'Hello!'</span></span><br><span class="line"><span class="string">    // `vm.message` 是非響應的</span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>Vue 不允許在已經創建的實例上動態添加新的根級響應式屬性 (root-level reactive property)。<br>然而它可以使用 <code>Vue.set(object, key, value)</code> 方法將響應屬性添加到嵌套的對象上：</p>
-<p><a href="https://jsbin.com/nujomojovo/edit?html,output" target="_blank" rel="noopener">https://jsbin.com/nujomojovo/edit?html,output</a><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">    &lt;p&gt;&#123;&#123;obj&#125;&#125;&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">      obj: &#123;&#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    mounted() &#123;</span><br><span class="line">      <span class="comment">//想要動態添加對象的屬性並且頁面能更新到</span></span><br><span class="line">      <span class="keyword">this</span>.obj.a = <span class="number">1111</span>  <span class="comment">//瀏覽器什麼都沒渲染出來</span></span><br><span class="line">      <span class="keyword">this</span>.$<span class="keyword">set</span>(this.obj,'a',1) // 方法一 &#123; <span class="string">"a"</span>: <span class="number">1</span> &#125;</span><br><span class="line">      <span class="keyword">this</span>.obj = <span class="built_in">Object</span>.assign(&#123;&#125;, <span class="keyword">this</span>.obj,&#123;<span class="attr">a</span>:<span class="number">2</span>&#125;)  <span class="comment">//方法二 可以添加多個屬性 //&#123; "a": 2 &#125;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p><a href="https://juejin.im/post/5aa89ab9f265da238b7db328" target="_blank" rel="noopener">https://juejin.im/post/5aa89ab9f265da238b7db328</a>  </p>
-<p><a href="https://jsbin.com/mayehetobu/1/edit?html,console,output" target="_blank" rel="noopener">https://jsbin.com/mayehetobu/1/edit?html,console,output</a></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">    &#123;&#123; message &#125;&#125;</span><br><span class="line">     dog &#123;&#123; counter.dog &#125;&#125;, cat &#123;&#123; counter.cat &#125;&#125;, penguin &#123;&#123; counter.penguin &#125;&#125;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;script type="text/</span>javascript<span class="string">"&gt;</span></span><br><span class="line"><span class="string">    new Vue(&#123;</span></span><br><span class="line"><span class="string">      el: '#app',</span></span><br><span class="line"><span class="string">      data: &#123;</span></span><br><span class="line"><span class="string">        message: '',</span></span><br><span class="line"><span class="string">        counter: &#123;</span></span><br><span class="line"><span class="string">            // 一開始沒有註冊 penguine，只註冊了 dog 和 cat</span></span><br><span class="line"><span class="string">            dog: 0,</span></span><br><span class="line"><span class="string">            cat: 0</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">      &#125;,</span></span><br><span class="line"><span class="string">      created() &#123;</span></span><br><span class="line"><span class="string">        // 在 created 的時候才建立 penguine 順便設值為 0</span></span><br><span class="line"><span class="string">        // 使用 $set 動態新增響應式組件</span></span><br><span class="line"><span class="string">        this.$set(this.counter, "</span>penguin<span class="string">", 1);</span></span><br><span class="line"><span class="string">      &#125;,</span></span><br><span class="line"><span class="string">      updated() &#123;</span></span><br><span class="line"><span class="string">        // 讓我們可以知道組件有被更新</span></span><br><span class="line"><span class="string">        console.log("</span>view updated<span class="string">");</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    &#125;);</span></span><br><span class="line"><span class="string">    //之後設置 `message`</span></span><br><span class="line"><span class="string">    vm.message = 'Hello!';</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br></pre></td></tr></table></figure>
-<p>物件部分：<a href="https://pjchender.blogspot.com/2017/05/vue-vue-reactivity.html" target="_blank" rel="noopener">一開始沒有被註冊到的物件不會響應式更新</a>  </p>
-<p>ref: <a href="https://cn.vuejs.org/v2/guide/reactivity.html" target="_blank" rel="noopener">深入響應式原理</a>  </p>
-<p>是其非侵入性的響應式系統。數據模型僅僅是普通的 JavaScript 對象。<br>而當你修改它們時，視圖會進行更新。這使得狀態管理非常簡單直接  </p>
-<p><img src="https://cn.vuejs.org/images/data.png" alt="Alt reactivity"></p>
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/pit/" data-id="cjz9iyfee000do4sbaaexwgty" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-q" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/vue/2019/04/18/q/" class="article-date">
-  <time datetime="2019-04-18T01:57:58.577Z" itemprop="datePublished">2019-04-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/vue/2019/04/18/q/">Question</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="v-show-與-v-if-區別"><a href="#v-show-與-v-if-區別" class="headerlink" title="v-show 與 v-if 區別"></a>v-show 與 v-if 區別</h3><p><code>v-show</code>是css切換，<code>v-if</code>是完整的銷毀和重新創建。<br>v-if=‘false’ v-if是條件渲染，當false的時候不會渲染<br>使用 頻繁切換時用<code>v-show</code>，運行時較少改變時用v-if</p>
-<h3 id="計算屬性-computed-和-watch-的區別"><a href="#計算屬性-computed-和-watch-的區別" class="headerlink" title="計算屬性(computed)和 watch 的區別"></a>計算屬性(computed)和 watch 的區別</h3><p>區別來源於用法，只是需要動態值，那就用計算屬性；需要知道值的改變後執行業務邏輯，才用 watch<br>當有一些數據需要隨著另外一些數據變化時，建議使用computed。<br>當有一個通用的響應數據變化的時候，要執行一些業務邏輯或異步操作的時候建議使用watcher  </p>
-<p>computed 是一個對象時，有get和set兩個選項<br>computed 和 methods 有什麼區別？ methods是一個方法，它可以接受參數，而computed不能，computed是可以緩存的，methods不會。<br>computed 是否能依賴其它組件的數據？ computed可以依賴其他computed，甚至是其他組件的data</p>
-<h3 id="組件中-data-為什麼是函數"><a href="#組件中-data-為什麼是函數" class="headerlink" title="組件中 data 為什麼是函數"></a>組件中 data 為什麼是函數</h3><p>為什麼組件中的 data 必須是一個函數，然後 return 一個對象，而 new Vue 實例裡，data 可以直接是一個對象？</p>
-<p>因為<strong>組件是用來復用的</strong>，JS 裡對象是引用關係，這樣作用域沒有隔離，而 new Vue 的實例，是不會被復用的，因此不存在引用對象的問題。</p>
-<h3 id="在動態組件上使用-keep-alive"><a href="#在動態組件上使用-keep-alive" class="headerlink" title="在動態組件上使用 keep-alive"></a>在動態組件上使用 keep-alive</h3><p>多標籤的界面中使用 is 特性來切換不同的組件</p>
-<p>當在這些組件之間切換的時候，你有時會想保持這些組件的狀態，以<strong>避免反覆重渲染導致的性能問題</strong></p>
-<p>我們更希望那些標籤的組件實例能夠被在它們<strong>第一次被創建的時候緩存下來</strong>。為瞭解決這個問題，我們可以用一個 <keep-alive> 元素將其動態組件包裹起來。</keep-alive></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 失活的組件將會被緩存！--&gt;</span><br><span class="line">&lt;keep-alive&gt;</span><br><span class="line">  &lt;component v-bind:is=<span class="string">"currentTabComponent"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">component</span>&gt;</span></span></span><br><span class="line">&lt;<span class="regexp">/keep-alive&gt;</span></span><br></pre></td></tr></table></figure>
-<p><a href="https://cn.vuejs.org/v2/guide/components-dynamic-async.html#在动态组件上使用-keep-alive" target="_blank" rel="noopener">https://cn.vuejs.org/v2/guide/components-dynamic-async.html#在动态组件上使用-keep-alive</a></p>
-<h3 id="Render函數-怎樣理解單向數據流"><a href="#Render函數-怎樣理解單向數據流" class="headerlink" title="Render函數 怎樣理解單向數據流"></a>Render函數 怎樣理解單向數據流</h3><p>這個概念出現在組件通信。<br>父組件是通過 <code>prop</code> 把數據傳遞到子組件的，但是這個 prop 只能由父組件修改，子組件不能修改，否則會報錯。<br>子組件想修改時，只能通過<code>$emit</code> 派發一個自定義事件，父組件接收到後，由父組件修改。<br>一般來說，對於子組件想要更改父組件狀態的場景，可以有兩種方案：<br>在子組件的 data 中拷貝一份 prop，data 是可以修改的，但 prop 不能</p>
-<h3 id="生命週期"><a href="#生命週期" class="headerlink" title="生命週期"></a>生命週期</h3><p><em>創建前後</em> beforeCreate/created<br>在beforeCreate 階段，vue實例的掛載元素el和數據對象data都為undefined，還未初始化。<br>在created階段，vue實例的數據對象有了，el還沒有。</p>
-<p><em>載入前後</em> beforeMount/mounted<br>在beforeMount階段，vue實例的$el和data都初始化了，但還是掛載之前未虛擬的DOM節點，data尚未替換。<br>在mounted階段，vue實例掛載完成，data成功渲染。</p>
-<p><em>更新前後</em> beforeUpdate/updated<br>當data變化時，會觸發beforeUpdate和updated方法。這兩個不常用，不推薦使用。</p>
-<p><em>銷毀前後</em> beforeDestory/destoryed<br>beforeDestory是在vue實例銷毀前觸發，一般在這裡要通過removeEventListener<strong>解除手動綁定的事件</strong>。<br>實例銷毀後，觸發的destroyed。</p>
-<h3 id="組件間的通信"><a href="#組件間的通信" class="headerlink" title="組件間的通信"></a>組件間的通信</h3><p>父子 props/event  parent/children ref provide/inject<br>兄弟 bus vuex<br>跨級 bus vuex provide.inject</p>
-<h3 id="路由的跳轉方式"><a href="#路由的跳轉方式" class="headerlink" title="路由的跳轉方式"></a>路由的跳轉方式</h3><p><router-link to="home"> router-link標籤會渲染為<a>標籤，template中的跳轉都是這種<br>另一種是編程是導航 也就是通過<code>js跳轉</code> 比如 <code>router.push(&#39;/home&#39;)</code>  </a></router-link></p>
-<h3 id="Vue-js-雙向綁定原理"><a href="#Vue-js-雙向綁定原理" class="headerlink" title="Vue.js 雙向綁定原理"></a>Vue.js 雙向綁定原理</h3><p>核心的 API 是通過 Object.defineProperty() 來劫持各個屬性的setter / getter，在數據變動時發佈消息給訂閱者，觸發相應的監聽回調<br><a href="https://cn.vuejs.org/v2/guide/reactivity.html" target="_blank" rel="noopener">https://cn.vuejs.org/v2/guide/reactivity.html</a></p>
-<h3 id="Vuex與Redux的主要區別在哪裡，兩者各有什麼優缺點？"><a href="#Vuex與Redux的主要區別在哪裡，兩者各有什麼優缺點？" class="headerlink" title="Vuex與Redux的主要區別在哪裡，兩者各有什麼優缺點？"></a>Vuex與Redux的主要區別在哪裡，兩者各有什麼優缺點？</h3><p>Vuex 其實是一個針對 Vue <strong>特化的 Flux</strong>，主要是為了配合 Vue 本身的響應式機制。當然吸取了一些 Redux 的特點，<br>比如單狀態樹和便於測試和熱重載的 API，但是也選擇性的放棄了一些在 Vue 的場景下並不契合的特性，<br>比如強制的 immutability（在保證了每一次狀態變化都能追蹤的情況下強制的 immutability 帶來的收益就很有限了）、為了同構而設計得較為繁瑣的 API、必須依賴第三方庫才能相對高效率地獲得狀態樹的局部狀態等等（相比之下 Vuex 直接用 Vue 本身的計算屬性就可以）</p>
-<p>所以 <code>Vue + Vuex</code> 會更簡潔，也不需要考慮性能問題，代價就是 Vuex 只能和 Vue 配合。<br>Vue + Redux 也不是不可以，但是 Redux 作為一個泛用的實現和 Vue 的契合度肯定不如 Vuex。</p>
-<p>作者：尤雨溪<br>链接：<a href="https://www.zhihu.com/question/38546875/answer/76970954" target="_blank" rel="noopener">https://www.zhihu.com/question/38546875/answer/76970954</a><br>来源：知乎</p>
-<h4 id="Flux"><a href="#Flux" class="headerlink" title="Flux"></a>Flux</h4><p>FLUX是一個由Facebook提出來的開發架構(FLUX 是一個 Pattern 而不是一個正式的框架)，目的是在解決所謂的MVC在大型商業網站所存在的問題，把沒有條理跟亂七八糟的架構做一個流程規範的定義。</p>
-<p>FLUX的中心思想打造<strong>單一的資料流進行方式(one-way data flow)</strong>，相對於MVC只定義了三個角色的功能與關係，FLUX更明確的定義了一個資料進行的方式，使得大家更容易遵守規則。</p>
-<p><a href="https://dotblogs.com.tw/blackie1019/2015/04/14/151049" target="_blank" rel="noopener">https://dotblogs.com.tw/blackie1019/2015/04/14/151049</a></p>
-<h4 id="Immutable"><a href="#Immutable" class="headerlink" title="Immutable"></a>Immutable</h4><p>Immutable 翻成中文就是永遠不變的，意思就是：「當一個資料被創建之後，就永遠不會變了」。那如果我需要更改資料的話怎麼辦呢？你就只能創一個新的。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  id: <span class="number">1</span>,</span><br><span class="line">  text: <span class="string">'hello'</span></span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">obj.text = <span class="string">'world'</span> <span class="comment">// 這樣不行，因為你改變了 obj 這個物件</span></span><br><span class="line">  </span><br><span class="line"><span class="comment">// 你必須要像這樣創造一個新的物件</span></span><br><span class="line"><span class="keyword">const</span> newObj = &#123;</span><br><span class="line">  ...obj,</span><br><span class="line">  text: <span class="string">'world'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>這也是為什麼我們在用setState的時候總是要產生一個新的物件，而不是直接對現有的做操作。<br>還有一個要注意的地方，那就是 spread operator 只會複製第一層的資料而已，它並不是 deep clone  </p>
-<p>在學習 React 的時候搞懂 Immutable 是很重要的，它可以讓你之後的程式減少互相干擾的機會，讓你除錯的時候邏輯清晰。</p>
-<p><a href="https://blog.techbridge.cc/2018/01/05/react-render-optimization/" target="_blank" rel="noopener">https://blog.techbridge.cc/2018/01/05/react-render-optimization/</a>  </p>
-<h3 id="nextTick"><a href="#nextTick" class="headerlink" title="nextTick()"></a>nextTick()</h3><p>Vue中的nextTick涉及到<strong>Vue中DOM的異步更新</strong></p>
-<p><a href="https://cn.vuejs.org/v2/guide/reactivity.html" target="_blank" rel="noopener">Vue 實現響應式</a>並不是數據發生變化之後 DOM 立即變化，而是按一定的策略進行 DOM 的更新。(異步更新隊列)<br>在下次 DOM 更新循環結束之後執行延遲回調。在修改數據之後，立即使用這個回調函數，獲取更新後的 DOM。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"example"</span>&gt;&#123;&#123;message&#125;&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">var vm = new Vue(&#123;</span></span><br><span class="line"><span class="regexp">  el: '#example',</span></span><br><span class="line"><span class="regexp">  data: &#123;</span></span><br><span class="line"><span class="regexp">    message: '123'</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;)</span></span><br><span class="line"><span class="regexp">vm.message = 'new message' /</span><span class="regexp">/ 更改數據</span></span><br><span class="line"><span class="regexp">vm.$el.textContent === 'new message' /</span><span class="regexp">/ false</span></span><br><span class="line"><span class="regexp">Vue.nextTick(function () &#123;</span></span><br><span class="line"><span class="regexp">  vm.$el.textContent === 'new message' /</span><span class="regexp">/ true</span></span><br><span class="line"><span class="regexp">&#125;)</span></span><br></pre></td></tr></table></figure></p>
-<p><a href="https://jsbin.com/xafilatoka/edit?html,output" target="_blank" rel="noopener">https://jsbin.com/xafilatoka/edit?html,output</a></p>
-<p>看完這個示例，也許有人會問，我在 Vue 實例方法中修改了數據，<br>然後再在 $nextTick 回調中獲取該數據在相應 DOM 元素所綁定的內容（或屬性）殊無必要，我為什麼需要這樣的 API 呢？</p>
-<p>考慮這樣一種場景，<strong>你有一個 jQuery 插件，希望在 DOM 元素中某些屬性發生變化之後重新應用該插件，這時候就需要在 $nextTick 的回調函數中執行重新應用插件的方法。</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 修改數據</span></span><br><span class="line">vm.msg = <span class="string">'Hello'</span></span><br><span class="line"><span class="comment">// DOM 還未更新</span></span><br><span class="line">Vue.nextTick(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// DOM 更新</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>其根本原因是因為Vue中DOM更新是異步的</p>
-<p>在Vue生命週期的<code>created()</code>鉤子函數進行的DOM操作一定要放在<code>Vue.nextTick()</code>的回調函數中</p>
-<p>在created()鉤子函數執行的時候DOM 其實並未進行任何渲染，而此時進行DOM操作無異於徒勞，<br>所以此處一定要將DOM操作的js代碼放進<code>Vue.nextTick()</code>的回調函數中。</p>
-<p>與之對應的就是mounted()鉤子函數，因為該鉤子函數執行時所有的DOM掛載和渲染都已完成，<br>此時在該鉤子函數中進行任何DOM操作都不會有問題 。</p>
-<p>在數據變化後要執行的某個操作，而這個操作需要使用隨數據改變而改變的DOM結構的時候，這個操作都應該放進Vue.nextTick()的回調函數中。</p>
-<p><a href="https://juejin.im/post/5c97002b6fb9a070aa5cf60b" target="_blank" rel="noopener">https://juejin.im/post/5c97002b6fb9a070aa5cf60b</a><br><a href="https://zhuanlan.zhihu.com/p/26724001" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/26724001</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/q/" data-id="cjz9iyfep000jo4sbkp6yaqq3" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/hello-world/" data-id="ck07w3h340004aosbrozcc22j" class="article-share-link">Share</a>
       
       
     </footer>
