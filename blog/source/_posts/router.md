@@ -38,3 +38,15 @@ Vue-Router 官網裡如此描述：
 ### 小結
 
 結合自身例子，對於一般的 `Vue + Vue-Router + Webpack + XXX` 形式的 Web 開發場景，用 `history` 模式即可，只需在後端（`Apache 或 Nginx`）進行簡單的路由配置，同時搭配前端路由的 404 頁面支持。
+
+
+# stackoverflow
+
+[Optional param in vuejs router](https://stackoverflow.com/questions/47824660/optional-param-in-vuejs-router)  
+Just adding a question mark `?` will make it optional.  
+```js
+{
+    path: '/offers/:member?',
+    ...
+},
+```
