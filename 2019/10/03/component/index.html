@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>组件（component）的使用 | Vue.js</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="vue 提供了组件功能，组件又可以分为全局组件和非全局组件。区别是全局组件你可以直接在 .vue 文件中直接使用自定义的 html 即可。非全局组件必须在 Vue 的对象中定义 components 引入这个组件 局部组件引用方式12345import A from &apos;@/component/A&apos;export default &amp;#123;    data () &amp;#123;&amp;#125;,    c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="组件（component）的使用">
+<meta property="og:url" content="https://github.com/JacobHsu/vue/2019/10/03/component/index.html">
+<meta property="og:site_name" content="Vue.js">
+<meta property="og:description" content="vue 提供了组件功能，组件又可以分为全局组件和非全局组件。区别是全局组件你可以直接在 .vue 文件中直接使用自定义的 html 即可。非全局组件必须在 Vue 的对象中定义 components 引入这个组件 局部组件引用方式12345import A from &apos;@/component/A&apos;export default &amp;#123;    data () &amp;#123;&amp;#125;,    c">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-10-03T02:09:18.790Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="组件（component）的使用">
+<meta name="twitter:description" content="vue 提供了组件功能，组件又可以分为全局组件和非全局组件。区别是全局组件你可以直接在 .vue 文件中直接使用自定义的 html 即可。非全局组件必须在 Vue 的对象中定义 components 引入这个组件 局部组件引用方式12345import A from &apos;@/component/A&apos;export default &amp;#123;    data () &amp;#123;&amp;#125;,    c">
+  
+    <link rel="alternate" href="/vue/atom.xml" title="Vue.js" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/vue/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/vue/" id="logo">Vue.js</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/vue/">Home</a>
+        
+          <a class="main-nav-link" href="/vue/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/vue/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/JacobHsu/vue"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-component" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/vue/2019/10/03/component/" class="article-date">
+  <time datetime="2019-10-03T01:59:34.993Z" itemprop="datePublished">2019-10-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      组件（component）的使用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>vue 提供了组件功能，组件又可以分为全局组件和非全局组件。区别是全局组件你可以直接在 .vue 文件中直接使用自定义的 html 即可。非全局组件必须在 Vue 的对象中定义 components 引入这个组件</p>
+<p>局部组件引用方式<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> A <span class="keyword">from</span> <span class="string">'@/component/A'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    data () &#123;&#125;,</span><br><span class="line">    components: &#123; A &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>全局组件引用方式<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.js 文件</span></span><br><span class="line"><span class="keyword">import</span> A <span class="keyword">from</span> <span class="string">'@/component/A'</span></span><br><span class="line">A.install = <span class="function"><span class="keyword">function</span> (<span class="params">Vue</span>) </span>&#123;</span><br><span class="line">  Vue.component(A.name, A)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">    A</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// main.js 文件</span></span><br><span class="line"><span class="keyword">import</span> &#123; A &#125; <span class="keyword">from</span> <span class="string">'./components/index'</span></span><br><span class="line">Vue.use(A)</span><br></pre></td></tr></table></figure></p>
+<p>引入全局組件有一個優化小技巧，上面的方式引入全局組件需要同時維護 index.js 文件和 main.js 文件很麻煩。<br>採用下面InstallAll的代碼可以只維護 index.js 文件即可</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.js 文件</span></span><br><span class="line"><span class="keyword">import</span> A <span class="keyword">from</span> <span class="string">'@/component/A'</span></span><br><span class="line">A.install = <span class="function"><span class="keyword">function</span> (<span class="params">Vue</span>) </span>&#123;</span><br><span class="line">  Vue.component(A.name, A)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//將 main.js Vue.use 改集中放置 index.js   </span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">InstallAll</span>(<span class="params">Vue</span>) </span>&#123;</span><br><span class="line">    Vue.use(A)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">    A,</span><br><span class="line">    InstallAll</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// main.js 文件</span></span><br><span class="line"><span class="keyword">import</span> &#123; InstallAll &#125; <span class="keyword">from</span> <span class="string">'./components/index'</span></span><br><span class="line">InstallAll(Vue)</span><br></pre></td></tr></table></figure>
+<p>參考：<a href="https://juejin.im/post/5d8f0475f265da5b9d1ee503" target="_blank" rel="noopener">https://juejin.im/post/5d8f0475f265da5b9d1ee503</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/JacobHsu/vue/2019/10/03/component/" data-id="ck1a2c2ms0000kosbby7ynj7k" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/vue/2019/08/13/passing-props/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">路由組件傳參</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/vue/archives/2019/04/">April 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/vue/2019/10/03/component/">组件（component）的使用</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/08/13/passing-props/">路由組件傳參</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/08/05/input/">Input</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/07/23/image/">Image</a>
+          </li>
+        
+          <li>
+            <a href="/vue/2019/07/22/err/">Error</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Jacob Hsu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/vue/" class="mobile-nav-link">Home</a>
+  
+    <a href="/vue/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/vue/fancybox/jquery.fancybox.css">
+  <script src="/vue/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/vue/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
