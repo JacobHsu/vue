@@ -129,7 +129,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/q/" data-id="ck1a1lpxv000kx4sbmpy7fj0l" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/q/" data-id="ck1ace4l7000lcgsbpus22xfw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -139,9 +139,9 @@
 
 
   
-    <article id="post-optimization" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-lifecycle" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/vue/2019/04/18/optimization/" class="article-date">
+    <a href="/vue/2019/04/18/lifecycle/" class="article-date">
   <time datetime="2019-04-18T01:57:58.577Z" itemprop="datePublished">2019-04-18</time>
 </a>
     
@@ -153,7 +153,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/vue/2019/04/18/optimization/">Optimization</a>
+      <a class="article-title" href="/vue/2019/04/18/lifecycle/">Vue生命週期</a>
     </h1>
   
 
@@ -161,27 +161,124 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="公用CDN"><a href="#公用CDN" class="headerlink" title="公用CDN"></a>公用CDN</h3><p>使用公用的CDN資源，可以起到緩存作用，並減少打包體積</p>
-<h3 id="使用v-if代替v-show"><a href="#使用v-if代替v-show" class="headerlink" title="使用v-if代替v-show"></a>使用v-if代替v-show</h3><p>v-if不渲染DOM，v-show會預渲染DOM<br>需要頻繁切換顯示狀態 用  <code>v-if</code></p>
-<h3 id="v-for必須加上key，並避免同時使用v-if"><a href="#v-for必須加上key，並避免同時使用v-if" class="headerlink" title="v-for必須加上key，並避免同時使用v-if"></a>v-for必須加上key，並避免同時使用v-if</h3><p>為了避免渲染本應該被隱藏的列表 比如 <code>v-for=&quot;user in users&quot; v-if=&quot;shouldShowUsers&quot;</code>。<br>這種情形下，請將 v-if 移動至容器元素上 (比如 ul, ol)</p>
-<h3 id="事件及時銷毀"><a href="#事件及時銷毀" class="headerlink" title="事件及時銷毀"></a>事件及時銷毀</h3><p>Vue組件銷毀時，會自動清理它與其它實例的連接，解綁它的全部指令及事件監聽器，但是僅限於組件本身的事件。<br>也就是說，在js內使用addEventListener等方式是不會自動銷毀的，我們需要在組件銷毀時手動移除這些事件的監聽，以免造成內存洩露，如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">created() &#123;</span><br><span class="line">  addEventListener(<span class="string">'touchmove'</span>, <span class="keyword">this</span>.touchmove, <span class="literal">false</span>)</span><br><span class="line">&#125;,</span><br><span class="line">beforeDestroy() &#123;</span><br><span class="line">  removeEventListener(<span class="string">'touchmove'</span>, <span class="keyword">this</span>.touchmove, <span class="literal">false</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="資源提前請求"><a href="#資源提前請求" class="headerlink" title="資源提前請求"></a>資源提前請求</h2><p>Vue項目中各文件的加載順序為：router.js、main.js、App.vue、[page].vue<br>其中，router的加載時間相比於page.vue快近100ms，如果page.vue的文件較多，時間差異會更大<br>所以，可以在頁面掛載、渲染的同時去請求接口數據，如在router.js中請求數據：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import Router from &apos;vue-router&apos;</span><br><span class="line">import store from &apos;./store&apos;</span><br><span class="line"></span><br><span class="line">store.dispatch(&apos;initAjax&apos;)</span><br></pre></td></tr></table></figure></p>
-<h2 id="異步路由"><a href="#異步路由" class="headerlink" title="異步路由"></a>異步路由</h2><p>使用異步路由可以根據URL自動加載所需頁面的資源，並且不會造成頁面阻塞，較適用於移動端頁面<br>建議主頁面直接import，非主頁面使用異步路由<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  path: <span class="string">'/order'</span>,</span><br><span class="line">  component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'./views/order.vue'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="異步組件"><a href="#異步組件" class="headerlink" title="異步組件"></a>異步組件</h2><p>不需要首屏加載的組件都使用異步組件的方式來加載（如多tab），包括需要觸發條件的動作也使用異步組件（如彈窗） 使用方式為：v-if來控制顯示時機，引入組件的Promise即可<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;HellowWorld v-<span class="keyword">if</span>=<span class="string">"showHello"</span> /&gt;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  components: &#123; <span class="attr">HellowWorld</span>: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'../components/HelloWorld.vue'</span>) &#125;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      showHello: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    initAsync() &#123;</span><br><span class="line">      addEventListener(<span class="string">'scroll'</span>, (e) =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span> (scrollY &gt; <span class="number">100</span>) &#123;</span><br><span class="line">          <span class="keyword">this</span>.showHello = <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="異步插件"><a href="#異步插件" class="headerlink" title="異步插件"></a>異步插件</h2><p>首屏用不到的插件、或只在特定場景才會用到的插件使用異步加載（如定位插件，部分情況可以通過URL傳遞經緯度；或生成畫報插件，需要在點擊時觸發）；插件第一次加載後緩存在本地，使用方式為：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 以定位插件為例</span></span><br><span class="line"><span class="keyword">const</span> latitude = getUrlParam(<span class="string">'latitude'</span>)</span><br><span class="line"><span class="keyword">const</span> longitude = getUrlParam(<span class="string">'longitude'</span>)</span><br><span class="line"><span class="comment">// 如果沒有經緯度參數，則使用定位插件來獲取經緯度</span></span><br><span class="line"><span class="keyword">if</span> (!latitude || !longitude) &#123;</span><br><span class="line">  <span class="comment">// 首次加載定位插件</span></span><br><span class="line">  <span class="comment">// webpack4寫法，若使用webpack3及以下，則await import('locationPlugin')即可</span></span><br><span class="line">  <span class="keyword">if</span> (!<span class="keyword">this</span>.WhereAmI) <span class="keyword">this</span>.WhereAmI = (<span class="keyword">await</span> <span class="keyword">import</span>(<span class="string">'locationPlugin'</span>)).default</span><br><span class="line">  <span class="comment">// do sth...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="減少網路請求"><a href="#減少網路請求" class="headerlink" title="減少網路請求"></a>減少網路請求</h3><p>瀏覽器對同一時間針對同一域名下的請求有一定數量限制（一般是6個），超過限制數目的請求會被阻塞</p>
-<h3 id="打包優化-升級Vue-Cli-3"><a href="#打包優化-升級Vue-Cli-3" class="headerlink" title="打包優化　升級Vue-Cli-3"></a>打包優化　升級Vue-Cli-3</h3><p>vue-cli-3採用webpack4+babel7，對編譯打包方面做了很多優化（成倍的提升），使用yarn作為包管理工具，並且對很多優化的最佳實踐做了默認配置</p>
-<h3 id="SSR-Server-Side-Rendering"><a href="#SSR-Server-Side-Rendering" class="headerlink" title="SSR (Server Side Rendering)"></a>SSR (Server Side Rendering)</h3><p>對加載性能要求較高的項目建議升級SSR</p>
-<blockquote>
-<p>SSR就是因為要解決SPA的SEO問題而出現的解法。 第一個頁面由Server side render，之後的操作還是由Client side render</p>
-</blockquote>
-<p>ref：<a href="https://juejin.im/post/5c4e6d7951882522c03ea809" target="_blank" rel="noopener">https://juejin.im/post/5c4e6d7951882522c03ea809</a></p>
+        <p>Vue執行了一連串工作，包含在原始資料加料、建立Vue Instance、編譯樣板、綁定資料等，隨著資料新增修改，週而復始直到刪除，稱為生命週期(Lifecycle)。</p>
+<p>從開始創建、初始化數據、編譯模板、掛載Dom→渲染、更新→渲染、卸載等一系列過程</p>
+<p>在他做這些工作的時機點前後，提供你客製化的空間，稱為<code>Hook</code>(如圖上白底紅字的部分)。</p>
+<p><img src="https://cn.vuejs.org/images/lifecycle.png" alt="lifecycle"></p>
+<table>
+<thead>
+<tr>
+<th>生命週期鉤子</th>
+<th style="text-align:center">組件狀態</th>
+<th style="text-align:right">最佳實踐</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>beforeCreate</td>
+<td style="text-align:center">實例初始化之後，數據與事件配置之前</td>
+<td style="text-align:right">初始化非響應式變量</td>
+</tr>
+<tr>
+<td>created</td>
+<td style="text-align:center">已將data和methods掛載vue到實例上，未掛載到DOM</td>
+<td style="text-align:right">可初始化ajax請求，頁面的初始化</td>
+</tr>
+<tr>
+<td>beforeMount</td>
+<td style="text-align:center">模板編譯完成，但未掛載，無法讀取DOM</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>mounted</td>
+<td style="text-align:center">實例掛載到DOM上，此時可以通過DOM API獲取到DOM節點</td>
+<td style="text-align:right">常用於獲取VNode信息和操作，ajax請求</td>
+</tr>
+<tr>
+<td>beforeupdate</td>
+<td style="text-align:center">響應式數據更新時調用</td>
+<td style="text-align:right">適合在更新之前訪問現有的DOM，比如手動移除已添加的事件監聽器</td>
+</tr>
+<tr>
+<td>updated</td>
+<td style="text-align:center">當組件響應式變量變更時調用，可執行依賴於DOM的操作</td>
+<td style="text-align:right">避免在這個鉤子函數中操作數據，可能陷入死循環</td>
+</tr>
+<tr>
+<td>beforeDestroy</td>
+<td style="text-align:center">實例銷毀之前調用</td>
+<td style="text-align:right">常用於銷毀定時器、解綁全局事件、銷毀插件對象等操作</td>
+</tr>
+<tr>
+<td>destroyed</td>
+<td style="text-align:center">實例銷毀後調用，調用後，Vue 實例指示的所有東西都會解綁定，所有的事件監聽器會被移除，所有的子實例也會被銷毀</td>
+</tr>
+</tbody>
+</table>
+<p>資料在created以後才存取得到(意味別把資料初始化跟ajax寫在beforeCreate)<br>created階段的ajax請求與mounted請求的區別：<br>前者頁面視圖未出現，如果請求信息過多，頁面會長時間處於白屏狀態<br>如果要對 DOM 做動作，記得要在 mounted 掛鉤中，它如同 onload 事件，或是 jQuery 中的 ready()  </p>
+<table>
+<thead>
+<tr>
+<th>生命週期鉤子</th>
+<th style="text-align:center">組件狀態</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>beforeCreate</td>
+<td style="text-align:center">不能訪問到data、computed、watch、methods上的方法和數據</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>created</td>
+<td style="text-align:center">可訪問方法和數據，不能訪問到$el屬性，$ref屬性內容為空數組</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>beforeMount</td>
+<td style="text-align:center">在掛載開始之前被調用`，找到對應的template，並編譯成render函數</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>mounted</td>
+<td style="text-align:center">$ref屬性可以訪問</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>beforeupdate</td>
+<td style="text-align:center">發生在虛擬DOM打補丁之前</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>updated</td>
+<td style="text-align:center">虛擬 DOM 重新渲染和打補丁之後調用</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>beforeDestroy</td>
+<td style="text-align:center">這一步，實例仍然完全可用，this仍能獲取到實例</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>destroyed</td>
+<td style="text-align:center">所有的子實例會被銷毀</td>
+</tr>
+</tbody>
+</table>
+<p>初始化組件時，僅執行了beforeCreate/Created/beforeMount/mounted四個鉤子函數</p>
+<p>當改變data中定義的變量（響應式變量）時，會執行beforeUpdate/updated鉤子函數</p>
+<p>當切換組件（當前組件未緩存）時，會執行beforeDestory/destroyed鉤子函數</p>
+<p>初始化和銷毀時的生命鉤子函數均只會執行一次，  beforeUpdate/updated可多次執行</p>
+<p><a href="https://jsbin.com/melanen/edit?html,js,console,output" target="_blank" rel="noopener">https://jsbin.com/melanen/edit?html,js,console,output</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    a: <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">== beforeCreate ==</span><br><span class="line"><span class="keyword">this</span>.a: <span class="literal">undefined</span></span><br><span class="line"><span class="keyword">this</span>.$el: <span class="literal">undefined</span></span><br><span class="line"></span><br><span class="line">== created ==</span><br><span class="line"><span class="keyword">this</span>.a: <span class="number">1</span></span><br><span class="line"><span class="keyword">this</span>.$el: <span class="literal">undefined</span></span><br><span class="line"></span><br><span class="line">== mounted ==</span><br><span class="line"><span class="keyword">this</span>.a: <span class="number">1</span></span><br><span class="line"><span class="keyword">this</span>.$el: [object HTMLDivElement]</span><br></pre></td></tr></table></figure>
+<p><code>beforeCreate</code>時，資料和元素掛載都還沒被建立<br><code>created</code>時，資料已經可以取得了，但元素掛載還沒<br><code>mounted</code>時，全部都被建立了，如果你想改變 DOM 或資料，可以在這裡做，因為它還沒被瀏覽器「畫」出來，必須直到<br><code>updated</code> 執行時，才會把最終的結果畫在瀏覽器上被看到。</p>
+<h3 id="父子組件的生命週期"><a href="#父子組件的生命週期" class="headerlink" title="父子組件的生命週期"></a>父子組件的生命週期</h3><p>1.僅當子組件完成掛載後，父組件才會掛載<br>2.當子組件完成掛載後，父組件會主動執行一次  3.beforeUpdate/updated鉤子函數（僅首次）<br>4.父子組件在data變化中是分別監控的，但是在更新props中的數據是關聯的（可實踐）<br>銷毀父組件時，先將子組件銷毀後才會銷毀父組件  </p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p><a href="https://vuejs.org/v2/guide/instance.html#Lifecycle-Diagram" target="_blank" rel="noopener">Lifecycle Diagram</a><br><a href="https://juejin.im/entry/5aee8fbb518825671952308c" target="_blank" rel="noopener">https://juejin.im/entry/5aee8fbb518825671952308c</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/optimization/" data-id="ck1a1lpx5000bx4sb60k6qod5" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/18/lifecycle/" data-id="ck1ace4kp000bcgsbf1pu50yj" class="article-share-link">Share</a>
       
       
     </footer>

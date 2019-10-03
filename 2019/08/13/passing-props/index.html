@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Vue.js">
 <meta property="og:description" content="路由組件傳參 如果 props 被設置為 true，route.params 將會被設置為組件屬性 router/index.js12345678910name: &apos;User&apos;component: User,redirect: &amp;#123; name: &apos;UserMain&apos; &amp;#125;,children: [&amp;#123;    path: &apos;user/:userID?/:userType?&apos;,">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-13T08:08:52.394Z">
+<meta property="og:updated_time" content="2019-10-03T06:49:42.889Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="路由組件傳參">
 <meta name="twitter:description" content="路由組件傳參 如果 props 被設置為 true，route.params 將會被設置為組件屬性 router/index.js12345678910name: &apos;User&apos;component: User,redirect: &amp;#123; name: &apos;UserMain&apos; &amp;#125;,children: [&amp;#123;    path: &apos;user/:userID?/:userType?&apos;,">
@@ -89,11 +89,18 @@
         <p><a href="https://router.vuejs.org/zh/guide/essentials/passing-props.html#布尔模式" target="_blank" rel="noopener">路由組件傳參</a></p>
 <p>如果 <code>props</code> 被設置為 <code>true</code>，<code>route.params</code> 將會被設置為組件屬性</p>
 <p>router/index.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">name: <span class="string">'User'</span></span><br><span class="line">component: User,</span><br><span class="line">redirect: &#123; <span class="attr">name</span>: <span class="string">'UserMain'</span> &#125;,</span><br><span class="line">children: [</span><br><span class="line">&#123;</span><br><span class="line">    path: <span class="string">'user/:userID?/:userType?'</span>,</span><br><span class="line">    name: <span class="string">'UserMain'</span>,</span><br><span class="line">    component: UserMain,</span><br><span class="line">    props: <span class="literal">true</span> <span class="comment">// 可用 `this.$route.params.userID` </span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<h2 id="vue的router-view如何传递props"><a href="#vue的router-view如何传递props" class="headerlink" title="vue的router-view如何传递props"></a>vue的<a href="https://segmentfault.com/q/1010000005362842" target="_blank" rel="noopener">router-view如何传递props</a></h2><p>多級路由，所以問題就在這了，從最外層的<router-view>設置props，<br>想在下面的某一級sub-router接收，那麻煩點，你得在中間路過的每一級都把props透傳下去，直至你最裡層的那個組件。</router-view></p>
+<p>一個三級的<a href="http://jsfiddle.net/leftstick/L50pdx95/" target="_blank" rel="noopener">jsfiddle範例</a>，最外層放:room，中間透傳，三層組件Bar接收。  </p>
+<p>App 一開始設定 data <code>room</code>  </p>
+<p><code>&lt;router-view :room=&quot;room&quot;&gt;&lt;/router-view&gt;</code>  </p>
+<p>app.vue<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a v-link=<span class="string">"&#123; path: '/foo/bar' &#125;"</span>&gt;Go to /foo/bar&lt;<span class="regexp">/a&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>router.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">subRoutes: &#123;</span><br><span class="line">    <span class="string">'/bar'</span>: &#123;</span><br><span class="line">         component: Bar</span><br><span class="line">     &#125;,</span><br></pre></td></tr></table></figure></p>
+<p>app.vue<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Bar = Vue.extend(&#123;</span><br><span class="line">    props: &#123;</span><br><span class="line">        room: &#123;</span><br><span class="line">            type: <span class="built_in">Array</span>,</span><br><span class="line">            <span class="keyword">default</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                <span class="keyword">return</span> [];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    template: <span class="string">'&lt;p v-for="v of room" track-by="$index"&gt;This is bar!&#123;&#123; v &#125;&#125; &lt;/p&gt;'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/08/13/passing-props/" data-id="ck1a1lpx20009x4sbvwaks05y" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/08/13/passing-props/" data-id="ck1ace4kk0007cgsbgob9qxd6" class="article-share-link">Share</a>
       
       
     </footer>
