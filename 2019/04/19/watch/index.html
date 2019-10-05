@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Vue.js">
 <meta property="og:description" content="Watch 可讓我們監視某個值，當這個值變動的時候，就去做某些事情。 例，如果 userName 發生變化，就去執行 _valid 這個 method。使用者輸入了合法的字串。 https://jsbin.com/zesijokaju/edit?html,output 12345&amp;lt;div id=&quot;app&quot;&amp;gt;   &amp;lt;p&amp;gt;請輸入使用者名稱。&amp;lt;/p&amp;gt;   &amp;lt;in">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-09-06T09:00:14.316Z">
+<meta property="og:updated_time" content="2019-10-05T07:20:03.106Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Watch">
 <meta name="twitter:description" content="Watch 可讓我們監視某個值，當這個值變動的時候，就去做某些事情。 例，如果 userName 發生變化，就去執行 _valid 這個 method。使用者輸入了合法的字串。 https://jsbin.com/zesijokaju/edit?html,output 12345&amp;lt;div id=&quot;app&quot;&amp;gt;   &amp;lt;p&amp;gt;請輸入使用者名稱。&amp;lt;/p&amp;gt;   &amp;lt;in">
@@ -96,12 +96,17 @@
 <h3 id="computed和watch用法異同"><a href="#computed和watch用法異同" class="headerlink" title="computed和watch用法異同"></a>computed和watch用法異同</h3><p>相同：<code>computed</code>和<code>watch</code>都起到監聽/依賴一個數據，並進行處理的作用</p>
 <p>異同：它們其實都是vue對監聽器的實現，只不過<br><code>computed</code>主要用於對同步數據的處理，<br><code>watch</code>則主要用於觀測某個值的變化去完成一段開銷較大的複雜業務邏輯。  </p>
 <p>能用computed的時候優先用computed，避免了多個數據影響其中某個數據時多次調用watch的尷尬情況。</p>
+<h2 id="watch-的高级用法"><a href="#watch-的高级用法" class="headerlink" title="watch 的高级用法"></a>watch 的高级用法</h2><p><a href="https://juejin.im/post/5ae91fa76fb9a07aa7677543" target="_blank" rel="noopener">Vue.js中 watch 的高级用法</a></p>
+<p>handler方法和immediate属性</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">watch: &#123;</span><br><span class="line">  firstName: &#123;</span><br><span class="line">    handler(newName, oldName) &#123;</span><br><span class="line">      <span class="keyword">this</span>.fullName = newName + <span class="string">' '</span> + <span class="keyword">this</span>.lastName;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 代表在wacth里声明了firstName这个方法之后立即先去执行handler方法</span></span><br><span class="line">    immediate: <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>watch 里面还有一个属性 deep，默认值是 false，代表是否深度监听，<br>如果我们需要监听obj里的属性a的值呢？这时候deep属性就派上用场了<br>deep的意思就是深入观察，监听器会一层层的往下遍历，给对象的所有属性都加上这个监听器，但是这样性能开销就会非常大了，任何修改obj里面任何一个属性都会触发这个监听器里的 handler。<br>优化，我们可以是使用字符串形式监听。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">watch: &#123;</span><br><span class="line">  <span class="string">'obj.a'</span>: &#123;</span><br><span class="line">    handler(newName, oldName) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'obj.a changed'</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    immediate: <span class="literal">true</span>,</span><br><span class="line">    <span class="comment">// deep: true</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="References"><a href="#References" class="headerlink" title="References"></a>References</h4><p><a href="https://cythilya.github.io/2017/04/15/vue-watch/" target="_blank" rel="noopener">Vue.js: Watch</a><br><a href="https://vuejs.org/v2/guide/computed.html" target="_blank" rel="noopener">Computed Properties and Watchers</a>  </p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/JacobHsu/vue/2019/04/19/watch/" data-id="ck1ace4kz000kcgsbxwd4333e" class="article-share-link">Share</a>
+      <a data-url="https://github.com/JacobHsu/vue/2019/04/19/watch/" data-id="ck1d8a7ao000geosbz4cld68n" class="article-share-link">Share</a>
       
       
     </footer>
