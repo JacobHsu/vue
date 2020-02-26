@@ -4,6 +4,11 @@
   * [定制导航栏](zh-cn/custom-navbar.md)
   * [封面](zh-cn/cover.md)
 
+* 视频教程
+  * [DCloud 视频教程](https://learning.dcloud.io/#/)
+  * [Vue Mastery (英文)](https://www.vuemastery.com/courses/)
+  * [Vue School (英文)](https://vueschool.io/?friend=vuejs&utm_source=Vuejs.org&utm_medium=Link&utm_content=Navbar%20Dropdown)
+
 * 配置
   * [配置项](zh-cn/configuration.md)
   * [主题](zh-cn/themes.md)
