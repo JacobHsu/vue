@@ -65,3 +65,33 @@ CSS（层叠样式表）[opacity](https://developer.mozilla.org/zh-CN/docs/Web/C
   opacity: 0;
 }
 ```
+
+当插入或删除包含在 `transition` 组件中的元素时，Vue 将会做以下处理：  
+
+1. 自动嗅探目标元素是否应用了 CSS 过渡或动画，如果是，在恰当的时机添加/删除 CSS 类名。
+
+2. 如果过渡组件提供了 [JavaScript 钩子函数]((https://cn.vuejs.org/v2/guide/transitions.html#JavaScript-钩子))，这些钩子函数将在恰当的时机被调用。
+
+3. 如果没有找到 JavaScript 钩子并且也没有检测到 CSS 过渡/动画，DOM 操作 (插入/删除) 在下一帧中立即执行。(注意：此指浏览器逐帧动画机制，和 Vue 的 nextTick 概念不同)
+
+## 过渡的类名
+
+在进入/离开的过渡中，会有 6 个 class 切换。
+
+1. `v-enter`：定义进入过渡的开始状态。在元素被插入之前生效，在元素被插入之后的下一帧移除。
+
+2. `v-enter-active`：定义进入过渡生效时的状态。在整个进入过渡的阶段中应用，在元素被插入之前生效，在过渡/动画完成之后移除。这个类可以被用来定义进入过渡的过程时间，延迟和曲线函数。
+
+3. `v-enter-to`: 2.1.8版及以上 定义进入过渡的结束状态。在元素被插入之后下一帧生效 (与此同时 v-enter 被移除)，在过渡/动画完成之后移除。
+
+4. `v-leave`: 定义离开过渡的开始状态。在离开过渡被触发时立刻生效，下一帧被移除。
+
+5. `v-leave-active`：定义离开过渡生效时的状态。在整个离开过渡的阶段中应用，在离开过渡被触发时立刻生效，在过渡/动画完成之后移除。这个类可以被用来定义离开过渡的过程时间，延迟和曲线函数。
+
+6. `v-leave-to`: 2.1.8版及以上 定义离开过渡的结束状态。在离开过渡被触发之后下一帧生效 (与此同时 v-leave 被删除)，在过渡/动画完成之后移除。
+
+![alt transition](https://cn.vuejs.org/images/transition.png "过渡的类名")
+
+对于这些在过渡中切换的类名来说，如果你使用一个没有名字的 `<transition>`，则 `v-` 是这些类名的默认前缀。如果你使用了 `<transition name="my-transition">`，那么 `v-enter` 会替换为 `my-transition-enter`。
+
+`v-enter-active` 和 `v-leave-active` 可以控制进入/离开过渡的不同的缓和曲线。
