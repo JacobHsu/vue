@@ -28,6 +28,12 @@ var app = new Vue({
 [Vue CLI](https://cli.vuejs.org/zh/guide/) 是一个基于 Vue.js 进行快速开发的完整系统，提供：
 * 通过 @vue/cli 搭建交互式的项目脚手架。
 
+创建一个项目 vue create
+
+```sh
+vue create hello-world
+```
+
 <iframe
     src="https://codesandbox.io/embed/still-darkness-l7id6?fontsize=14&hidenavigation=1&theme=dark"
     style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"

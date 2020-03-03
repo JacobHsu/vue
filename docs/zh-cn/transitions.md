@@ -95,3 +95,25 @@ CSS（层叠样式表）[opacity](https://developer.mozilla.org/zh-CN/docs/Web/C
 对于这些在过渡中切换的类名来说，如果你使用一个没有名字的 `<transition>`，则 `v-` 是这些类名的默认前缀。如果你使用了 `<transition name="my-transition">`，那么 `v-enter` 会替换为 `my-transition-enter`。
 
 `v-enter-active` 和 `v-leave-active` 可以控制进入/离开过渡的不同的缓和曲线。
+
+## Animate.css
+
+[animate.css](https://daneden.github.io/animate.css/)
+
+<iframe width="100%" height="300" src="//jsfiddle.net/JacobHsu/gen98yao/7/embedded/result,js,html/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
+```html
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+</head>
+<div id="app">
+  <button v-on:click="show = !show">
+    Toggle
+  </button>
+  <transition name="fade"
+    enter-active-class="animated swing"
+    leave-active-class="animated shake">
+    <p v-if="show">hello</p>
+  </transition>
+</div>
+```
