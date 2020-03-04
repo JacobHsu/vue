@@ -117,3 +117,29 @@ CSS（层叠样式表）[opacity](https://developer.mozilla.org/zh-CN/docs/Web/C
   </transition>
 </div>
 ```
+
+## 同时使用过渡和动画
+
+<iframe width="100%" height="300" src="//jsfiddle.net/JacobHsu/bp7h0c3s/11/embedded/result,js,html,css/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
+```html
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+</head>
+<div id="app">
+  <button v-on:click="show = !show">
+    Toggle
+  </button>
+  <!-- type="transition" 告知以transition時長為準 3秒而不是1秒-->
+  <!-- :duration="5000" 自定義動畫時長-->
+  <!-- :duration="{enter: 5000, leave: 10000}" 自定義動畫時長-->
+  <transition :duration="{enter: 5000, leave:10000}"
+    name="fade"
+    appear
+    enter-active-class="animated swing fade-enter-active"
+    leave-active-class="animated shake fade-leave-active"
+    appear-active-class="animated swing">
+    <p v-if="show">hello</p>
+  </transition>
+</div>
+```
