@@ -143,3 +143,11 @@ CSS（层叠样式表）[opacity](https://developer.mozilla.org/zh-CN/docs/Web/C
   </transition>
 </div>
 ```
+
+## Velocity.js
+
+[Velocity.js](http://velocityjs.org/): An incredibly fast animation engine for motion designers.
+
+Option [#beginAndComplete](http://velocityjs.org/#beginAndComplete)
+
+<iframe width="100%" height="300" src="//jsfiddle.net/JacobHsu/e7kaj5sg/22/embedded/result,js,html,css/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
