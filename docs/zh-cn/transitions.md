@@ -151,3 +151,15 @@ CSS（层叠样式表）[opacity](https://developer.mozilla.org/zh-CN/docs/Web/C
 Option [#beginAndComplete](http://velocityjs.org/#beginAndComplete)
 
 <iframe width="100%" height="300" src="//jsfiddle.net/JacobHsu/e7kaj5sg/22/embedded/result,js,html,css/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
+## 多个元素的过渡
+
+利用 `key` 判断多个 使用 `mode` 调适先后
+
+<iframe width="100%" height="300" src="//jsfiddle.net/JacobHsu/7of46ghz/5/embedded/result,js,html,css/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
+## 多个组件的过渡
+
+`<component :is="type"></component>`
+
+<iframe width="100%" height="300" src="//jsfiddle.net/JacobHsu/yumbczx8/11/embedded/result,js,html,css/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
