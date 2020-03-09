@@ -163,3 +163,43 @@ Option [#beginAndComplete](http://velocityjs.org/#beginAndComplete)
 `<component :is="type"></component>`
 
 <iframe width="100%" height="300" src="//jsfiddle.net/JacobHsu/yumbczx8/11/embedded/result,js,html,css/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
+## 列表过渡
+
+在这种场景中，使用 `<transition-group>` 组件。在我们深入例子之前，先了解关于这个组件的几个特点：
+
+* 不同于 `<transition>`，它会以一个真实元素呈现：默认为一个 `<span>`。你也可以通过 tag attribute 更换为其他元素。
+* 过渡模式不可用，因为我们不再相互切换特有的元素。
+* 内部元素 总是需要 提供唯一的 key 属性值。
+* CSS 过渡的类将会应用在内部的元素中，而不是这个组/容器本身。
+
+<iframe width="100%" height="300" src="//jsfiddle.net/JacobHsu/kfsc5yjg/11/embedded/result,js,html,css/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
+```html
+  <transition-group>
+    <div v-for="item of list" :key="item.id">
+      {{item.title}}
+    </div>
+  </transition-group>
+```
+
+```html
+  <transition>
+    <div>hello world</div>
+  </transition>
+  <transition>
+    <div>hello world</div>
+  </transition>
+  <transition>
+    <div>hello world</div>
+  </transition>
+```
+
+## 列表的进入/离开过渡
+
+现在让我们由一个简单的例子深入，进入和离开的过渡使用之前一样的 CSS 类名。
+
+<iframe width="100%" height="300" src="//jsfiddle.net/JacobHsu/vnq3jr1s/2/embedded/result,js,html,css/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
+这个例子有个问题，当添加和移除元素的时候，周围的元素会瞬间移动到他们的新布局的位置，而不是平滑的过渡，我们下面会解决这个问题。
+
