@@ -203,3 +203,39 @@ Option [#beginAndComplete](http://velocityjs.org/#beginAndComplete)
 
 这个例子有个问题，当添加和移除元素的时候，周围的元素会瞬间移动到他们的新布局的位置，而不是平滑的过渡，我们下面会解决这个问题。
 
+## 动画封装
+
+<iframe width="100%" height="300" src="//jsfiddle.net/JacobHsu/t83qocw6/16/embedded/result,js,html,css/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+
+```html
+  <fade :show="show">
+    <div>hello</div>
+  </fade>
+   <fade :show="show">
+    <h1>world</h1>
+  </fade>
+```
+
+```js
+Vue.component('fade', {
+	props:['show'],
+	template: `
+  	<transition name="fade" 
+    	@before-enter="handleBeforeEnter"
+      @enter="handleEnter">
+    	<slot v-if="show"></slot>
+    </transition>`,
+  methods: {
+   	handleBeforeEnter: function(el) {
+ 			el.style.color = 'red'
+    },
+    handleEnter: function(el, done) {
+ 			setTimeout( () =>{
+      	el.style.color = 'green'
+        done()
+      } ,2000)
+    },
+  }
+})
+```
+
