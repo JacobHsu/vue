@@ -21,3 +21,59 @@ mutations: commit + track state changes
 ## Vuex in Motion
 
 ![alt Motion](https://firebasestorage.googleapis.com/v0/b/vue-mastery.appspot.com/o/flamelink%2Fmedia%2F1578371900954_6.gif?alt=media&token=a92f02df-8800-4f4a-ac63-6690f9453e66 "Vuex in Motion")
+
+## mutations
+
+Mutations can update/mutate Vuex State
+
+store.js
+
+```js
+ state: {
+      count: 0
+    }
+
+mutations: {
+      INCREMENT_COUNT(state) {
+        state.count += 1
+      }
+    }
+```
+
+component
+
+click on it to trigger this Mutation
+
+```html
+ <button @click="incrementCount">Increment</button>
+```
+
+```js
+
+incrementCount() {
+      this.$store.commit('INCREMENT_COUNT')
+    },
+```
+
+![alt mutations](https://i.imgur.com/hE9cB9L.png)
+
+## actions
+
+![alt actions](https://i.imgur.com/eSE8uHo.png)
+
+## Actions and Mutations
+
+Mutations are `synchronous`
+synchronous A,B,C,D,E
+
+Actions are `asynchronous`
+asynchronous A,C,E,D,B
+
+Actions can wrap business logic around mutations
+
+![alt metaphor](https://i.imgur.com/Io9SxCe.png)
+
+metaphor: `ask(Actions)` sb. to `do(Mutations)` sth  
+
+Actions don't always commit their mutations  
+Always put Mutations within Actions
